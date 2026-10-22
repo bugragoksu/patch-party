@@ -1,6 +1,7 @@
 import 'package:baglanti_agi/app/theme/tokens.dart';
 import 'package:baglanti_agi/core/ui/feedback.dart';
 import 'package:baglanti_agi/features/admin/admin_page.dart' deferred as admin;
+import 'package:baglanti_agi/features/play/presentation/camera_test_page.dart';
 import 'package:baglanti_agi/features/play/presentation/player_root.dart';
 import 'package:baglanti_agi/features/projector/projector_page.dart'
     deferred as projector;
@@ -21,6 +22,10 @@ GoRouter buildRouter() => GoRouter(
       path: '/c/:payload',
       builder: (context, state) =>
           PlayerRoot(scannedPayload: state.pathParameters['payload']),
+    ),
+    GoRoute(
+      path: '/kamera',
+      builder: (context, state) => const CameraTestPage(),
     ),
     GoRoute(
       path: '/screen',

@@ -2,6 +2,9 @@
 .env
 .env.*
 !.env.example
+# Non-secret Cloud Functions params (firebase-functions dotenv)
+!functions/.env
+!functions/.env.baglanti-agi-*
 # Uygulamaya giden, APP_ anahtarlarından üretilen dosya
 app/.env.app*
 *service-account*.json

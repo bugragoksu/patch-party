@@ -96,15 +96,12 @@ export async function requestConnection(request: CallableRequest<unknown>): Prom
         const open = await tx.get(paths.request(data.eventId, me.outgoingRequest.requestId));
         if (open.get('status') === 'pending') throw new GameError('request_limit', { which: 'outgoing' });
       }
-      const incoming = await tx.get(
-        paths
-          .requests(data.eventId)
-          .where('toUid', '==', targetUid)
-          .where('status', '==', 'pending')
-          .where('expiresAt', '>', now)
-          .limit(MAX_INCOMING),
-      );
-      if (incoming.size >= MAX_INCOMING) throw new GameError('request_limit', { which: 'incoming' });
+      // The incoming cap is checked outside the transaction (below): a query
+      // inside it would lock the target's whole request range and serialise
+      // everyone scanning the same person. It is spam protection, not a rule.
+      if (await incomingFull(data.eventId, targetUid, now)) {
+        throw new GameError('request_limit', { which: 'incoming' });
+      }
 
       const expiresAt = now + event.settings.requestTtlSec * 1000;
       const doc: ConnectionRequestDoc = {
@@ -249,6 +246,17 @@ function acceptInTx(
 
 function clearOutgoing(tx: Transaction, eventId: string, uid: string, player: PlayerDoc, requestId: string): void {
   if (player.outgoingRequest?.requestId === requestId) tx.update(paths.player(eventId, uid), { outgoingRequest: null });
+}
+
+async function incomingFull(eventId: string, targetUid: string, now: number): Promise<boolean> {
+  const incoming = await paths
+    .requests(eventId)
+    .where('toUid', '==', targetUid)
+    .where('status', '==', 'pending')
+    .where('expiresAt', '>', now)
+    .limit(MAX_INCOMING)
+    .get();
+  return incoming.size >= MAX_INCOMING;
 }
 
 async function getPlayer(tx: Transaction, eventId: string, uid: string): Promise<PlayerDoc> {

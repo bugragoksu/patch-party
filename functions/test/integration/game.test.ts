@@ -246,8 +246,8 @@ describe('ranks and admin', () => {
     const sent = await requestConnection(req({ eventId, code: qrOf(eventId, c) }, as(eventId, a)));
     await respondToRequest(req({ eventId, requestId: sent.requestId, accept: true }, as(eventId, c)));
     await rankEvent(eventId);
-    expect((await player(a.uid)).rank).toBe(1);
-    expect((await player(c.uid)).rank).toBe(2);
+    // a and c share the top score and the same connection time; uid breaks the tie.
+    expect([(await player(a.uid)).rank, (await player(c.uid)).rank].sort()).toEqual([1, 2]);
     expect((await player(b.uid)).rank).toBe(3);
     expect((await player(b.uid)).rankTotal).toBe(3);
 
