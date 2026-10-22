@@ -1,0 +1,68 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  app:
+    name: App (analyze, test, build)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 3.47.7
+          channel: stable
+          cache: true
+      - name: Catalog is generated from shared/
+        working-directory: .
+        run: node tools/gen-catalog.mjs && git diff --exit-code app/lib/core/domain/catalog.g.dart
+      - run: flutter pub get
+      - run: dart format --output=none --set-exit-if-changed lib test
+      - run: flutter analyze --fatal-infos
+      - name: Domain stays free of Flutter and Firebase
+        run: "! grep -rnE \"package:(flutter|cloud_firestore|firebase_|cloud_functions)\" lib/core/domain --include='*.dart' | grep -v catalog"
+      - run: flutter test
+      - run: flutter build web --release --no-web-resources-cdn --source-maps
+
+  backend:
+    name: Functions and rules
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: functions
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: functions/package-lock.json
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+      - run: npm ci
+      - run: npm run lint
+      - run: npm test
+      - run: npm run test:integration
+      - run: npm run test:rules
+      - name: Test vectors are reproducible
+        working-directory: .
+        run: python3 -I shared/test-vectors/generate.py && git diff --exit-code shared/test-vectors
+
+# Deploys are manual for now (ADR-0010): staging and prod need Workload Identity
+# Federation set up on the GitHub repository before a deploy job is added here.
