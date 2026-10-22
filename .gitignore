@@ -1,0 +1,29 @@
+# Ortam ve gizli bilgiler: repoya girmez
+.env
+.env.*
+app/env/*.json
+!app/env/example.json
+*service-account*.json
+*-key.json
+sentry.properties
+
+# Firebase
+.firebase/
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+
+# Node
+node_modules/
+
+# Flutter / Dart
+.dart_tool/
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+.fvm/flutter_sdk
+
+# OS / IDE
+.DS_Store
+.idea/
+*.iml
