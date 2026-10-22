@@ -1,0 +1,68 @@
+rules_version = '2';
+
+// ADR-0002: clients never write. Every write goes through Cloud Functions,
+// so these rules only decide who may read what, and how much (SEC-01, SEC-20).
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+    function isAdmin() {
+      return signedIn() && request.auth.token.admin == true;
+    }
+    function isStaff() {
+      return signedIn() && (request.auth.token.admin == true || request.auth.token.projector == true);
+    }
+    function isPlayerOf(eventId) {
+      return signedIn() && request.auth.token.eventId == eventId;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    match /events/{eventId} {
+      // Name, state and public settings are needed on the join screen before sign-in.
+      allow get: if true;
+      allow list: if isStaff();
+
+      match /private/joinSecret {
+        allow get: if isStaff();
+      }
+
+      match /players/{uid} {
+        allow get: if isPlayerOf(eventId) || isStaff();
+        allow list: if isStaff() || (isPlayerOf(eventId) && request.query.limit <= 20);
+      }
+
+      match /playerSecrets/{uid} {
+        allow get: if isPlayerOf(eventId) && request.auth.uid == uid;
+      }
+
+      match /connections/{id} {
+        allow get: if isStaff() || (isPlayerOf(eventId) && request.auth.uid in resource.data.participants);
+        allow list: if isStaff()
+          || (isPlayerOf(eventId) && request.auth.uid in resource.data.participants && request.query.limit <= 100);
+      }
+
+      match /connectionRequests/{id} {
+        allow get: if isStaff()
+          || (isPlayerOf(eventId) && (request.auth.uid == resource.data.fromUid || request.auth.uid == resource.data.toUid));
+        allow list: if isStaff()
+          || (isPlayerOf(eventId)
+              && (request.auth.uid == resource.data.fromUid || request.auth.uid == resource.data.toUid)
+              && request.query.limit <= 10);
+      }
+
+      match /rateLimits/{uid} {
+        allow get, list: if isAdmin();
+      }
+      match /joinAudit/{uid} {
+        allow get, list: if isAdmin();
+      }
+      match /auditLog/{id} {
+        allow get, list: if isAdmin();
+      }
+    }
+  }
+}

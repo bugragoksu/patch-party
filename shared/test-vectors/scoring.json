@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "cases": [
+    {
+      "a": [
+        "flutter",
+        "ai"
+      ],
+      "b": [
+        "flutter",
+        "design"
+      ],
+      "base": 10,
+      "bonus": 0,
+      "total": 10
+    },
+    {
+      "a": [
+        "flutter",
+        "ai"
+      ],
+      "b": [
+        "design",
+        "security"
+      ],
+      "base": 10,
+      "bonus": 5,
+      "total": 15
+    },
+    {
+      "a": [
+        "web",
+        "data",
+        "devops"
+      ],
+      "b": [
+        "devops"
+      ],
+      "base": 10,
+      "bonus": 0,
+      "total": 10
+    },
+    {
+      "a": [
+        "product",
+        "community"
+      ],
+      "b": [
+        "backend",
+        "gamedev",
+        "opensource"
+      ],
+      "base": 10,
+      "bonus": 5,
+      "total": 15
+    }
+  ]
+}

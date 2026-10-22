@@ -1,0 +1,125 @@
+{
+  "version": 1,
+  "cases": [
+    {
+      "input": "Deniz",
+      "clean": "Deniz",
+      "key": "deniz",
+      "valid": true
+    },
+    {
+      "input": "  deniz  ",
+      "clean": "deniz",
+      "key": "deniz",
+      "valid": true
+    },
+    {
+      "input": "DENİZ",
+      "clean": "DENİZ",
+      "key": "deniz",
+      "valid": true
+    },
+    {
+      "input": "Işıl",
+      "clean": "Işıl",
+      "key": "isil",
+      "valid": true
+    },
+    {
+      "input": "ISIL",
+      "clean": "ISIL",
+      "key": "isil",
+      "valid": true
+    },
+    {
+      "input": "ışıl",
+      "clean": "ışıl",
+      "key": "isil",
+      "valid": true
+    },
+    {
+      "input": "Çağrı Öz",
+      "clean": "Çağrı Öz",
+      "key": "cagri-oz",
+      "valid": true
+    },
+    {
+      "input": "çağrı   öz",
+      "clean": "çağrı öz",
+      "key": "cagri-oz",
+      "valid": true
+    },
+    {
+      "input": "Şule-Gül",
+      "clean": "Şule-Gül",
+      "key": "sule-gul",
+      "valid": true
+    },
+    {
+      "input": "José",
+      "clean": "José",
+      "key": "jose",
+      "valid": true
+    },
+    {
+      "input": "Ümit 2",
+      "clean": "Ümit 2",
+      "key": "umit-2",
+      "valid": true
+    },
+    {
+      "input": "Ahmet.K",
+      "clean": "Ahmet.K",
+      "key": "ahmet-k",
+      "valid": true
+    },
+    {
+      "input": "A",
+      "clean": "A",
+      "key": "a",
+      "valid": false
+    },
+    {
+      "input": "Bu isim kesinlikle çok uzun bir isim",
+      "clean": "Bu isim kesinlikle çok uzun bir isim",
+      "key": "bu-isim-kesinlikle-cok-uzun-bir-isim",
+      "valid": false
+    },
+    {
+      "input": "😀😀",
+      "clean": "😀😀",
+      "key": "",
+      "valid": false
+    },
+    {
+      "input": "Ali'",
+      "clean": "Ali'",
+      "key": "ali",
+      "valid": true
+    },
+    {
+      "input": "  ",
+      "clean": "",
+      "key": "",
+      "valid": false
+    },
+    {
+      "input": "İlknur",
+      "clean": "İlknur",
+      "key": "ilknur",
+      "valid": true
+    },
+    {
+      "input": "ilknur",
+      "clean": "ilknur",
+      "key": "ilknur",
+      "valid": true
+    },
+    {
+      "input": "Deniz K.",
+      "clean": "Deniz K.",
+      "key": "deniz-k",
+      "valid": true
+    }
+  ]
+}

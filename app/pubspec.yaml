@@ -1,0 +1,29 @@
+name: baglanti_agi
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0+1
+
+environment:
+  sdk: ^3.13.5
+
+dependencies:
+  cloud_firestore: 7.0.0
+  cloud_functions: 7.0.0
+  crypto: 3.0.7
+  firebase_auth: 7.0.0
+  firebase_core: 5.0.0
+  flutter:
+    sdk: flutter
+  flutter_riverpod: 3.4.3
+  go_router: 18.1.1
+  qr_flutter: 4.1.0
+  sentry_flutter: 10.2.0
+  web: 1.1.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  very_good_analysis: 11.0.0
+
+flutter:
+  uses-material-design: true

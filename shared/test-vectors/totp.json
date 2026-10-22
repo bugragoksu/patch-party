@@ -1,0 +1,114 @@
+{
+  "version": 1,
+  "alphabet": "0123456789ABCDEFGHJKMNPQRSTVWXYZ",
+  "cases": [
+    {
+      "seed": "q8Jz0wq3m1sV0b4w6m3n2r8yZt5uQe1fWv9kLp0xYcA",
+      "eventId": "gdg-adana-2026-10",
+      "unixMs": 1792900800000,
+      "windowSec": 30,
+      "window": 59763360,
+      "qr": "SMW3VDRMVC",
+      "digits": "2861"
+    },
+    {
+      "seed": "q8Jz0wq3m1sV0b4w6m3n2r8yZt5uQe1fWv9kLp0xYcA",
+      "eventId": "gdg-adana-2026-10",
+      "unixMs": 1792900829999,
+      "windowSec": 30,
+      "window": 59763360,
+      "qr": "SMW3VDRMVC",
+      "digits": "2861"
+    },
+    {
+      "seed": "q8Jz0wq3m1sV0b4w6m3n2r8yZt5uQe1fWv9kLp0xYcA",
+      "eventId": "gdg-adana-2026-10",
+      "unixMs": 1792900830000,
+      "windowSec": 30,
+      "window": 59763361,
+      "qr": "GH2K1MKTN0",
+      "digits": "1559"
+    },
+    {
+      "seed": "q8Jz0wq3m1sV0b4w6m3n2r8yZt5uQe1fWv9kLp0xYcA",
+      "eventId": "rehearsal",
+      "unixMs": 1792900815500,
+      "windowSec": 30,
+      "window": 59763360,
+      "qr": "A5NFGS89GM",
+      "digits": "2732"
+    },
+    {
+      "seed": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "eventId": "gdg-adana-2026-10",
+      "unixMs": 1792900800000,
+      "windowSec": 30,
+      "window": 59763360,
+      "qr": "9Q27W5R4WR",
+      "digits": "1190"
+    },
+    {
+      "seed": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "eventId": "gdg-adana-2026-10",
+      "unixMs": 1792900829999,
+      "windowSec": 30,
+      "window": 59763360,
+      "qr": "9Q27W5R4WR",
+      "digits": "1190"
+    },
+    {
+      "seed": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "eventId": "gdg-adana-2026-10",
+      "unixMs": 1792900830000,
+      "windowSec": 30,
+      "window": 59763361,
+      "qr": "SXPHWZCTJP",
+      "digits": "6447"
+    },
+    {
+      "seed": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "eventId": "rehearsal",
+      "unixMs": 1792900815500,
+      "windowSec": 30,
+      "window": 59763360,
+      "qr": "XR5NKMKVJA",
+      "digits": "7648"
+    },
+    {
+      "seed": "_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-8",
+      "eventId": "gdg-adana-2026-10",
+      "unixMs": 1792900800000,
+      "windowSec": 30,
+      "window": 59763360,
+      "qr": "CM66WCR0D6",
+      "digits": "9392"
+    },
+    {
+      "seed": "_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-8",
+      "eventId": "gdg-adana-2026-10",
+      "unixMs": 1792900829999,
+      "windowSec": 30,
+      "window": 59763360,
+      "qr": "CM66WCR0D6",
+      "digits": "9392"
+    },
+    {
+      "seed": "_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-8",
+      "eventId": "gdg-adana-2026-10",
+      "unixMs": 1792900830000,
+      "windowSec": 30,
+      "window": 59763361,
+      "qr": "T4V428VP01",
+      "digits": "3851"
+    },
+    {
+      "seed": "_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-8",
+      "eventId": "rehearsal",
+      "unixMs": 1792900815500,
+      "windowSec": 30,
+      "window": 59763360,
+      "qr": "BRCSF6NXRS",
+      "digits": "7533"
+    }
+  ]
+}

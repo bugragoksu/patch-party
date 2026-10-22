@@ -22,9 +22,11 @@ node_modules/
 build/
 .flutter-plugins
 .flutter-plugins-dependencies
-.fvm/flutter_sdk
 
 # OS / IDE
 .DS_Store
 .idea/
 *.iml
+
+# FVM Version Cache
+.fvm/
