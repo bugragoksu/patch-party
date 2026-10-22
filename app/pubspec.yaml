@@ -7,6 +7,7 @@ environment:
   sdk: ^3.13.5
 
 dependencies:
+  characters: 1.4.1
   cloud_firestore: 7.0.0
   cloud_functions: 7.0.0
   crypto: 3.0.7
