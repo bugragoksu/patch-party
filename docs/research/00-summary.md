@@ -65,7 +65,7 @@
 |---|---|---|
 | D1 | Flutter 3.47.7'ye geçiş | **Onaylandı (2026-10-22).** S2'ye bağlı yedek: 3.38.10 |
 | D2 | Yalnızca dart2js derleme | **Onaylandı (2026-10-22)** |
-| D3 | Rive Cadet planı (kişi başı aylık 9 $) | **Onaylandı (2026-10-22).** Rive'ı yapacak kişi için 1 koltuk |
+| D3 | Rive Cadet planı (kişi başı aylık 9 $) | **Ertelendi (2026-10-22).** İlk sürüm Rive'sız. Rive dönünce yeniden değerlendirilecek |
 | D4 | Sanat yönü | **Onaylandı (2026-10-22):** A, "Çıkartma Atölyesi" (bkz. R4 §7) |
 | D5 | Ayrı staging ve prod Firebase projeleri | **Onaylandı (2026-10-22)** |
 | D6 | Sentry hesabı (ücretsiz plan, AB bölgesi) | **Onaylandı (2026-10-22).** Crashlytics web'i desteklemiyor (`firebase_crashlytics` 6.0.0: android, ios, macos). Google Cloud Error Reporting değerlendirildi, okunur stack trace olmadığı için elendi. Hata raporlama `ErrorReporter` arayüzü arkasında, sağlayıcı değiştirmek tek dosya |

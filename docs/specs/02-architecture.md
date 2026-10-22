@@ -91,7 +91,7 @@ app/lib/
   features/
     join/                      presentation/, application/, data/
     play/                      kendi QR'ım, okutma, elle kod, bağlantı listesi, ortak soru
-    badges/                    (P1) rozet modeli, Rive/Flutter sunumu
+    badges/                    (P1) rozet modeli, Flutter animasyonlu sunum
     summary/                   (P1) oyun sonu özeti
     projector/   (deferred)    graph/, leaderboard/, lobby/, winners/
     admin/       (deferred)    state_control/, health/, review/, archive/
@@ -162,7 +162,7 @@ Girdi doğrulaması `zod` şemalarıyla yapılır. Şemayı geçmeyen istek `inv
 ```
 events/{eventId}                         okuma: herkes (giriş yapmış) | yazma: yok
   name, state, liveStartAt?, liveEndAt?, settings{ cooldownSec, tokenWindowSec,
-  requestTtlSec, maxConnPerPlayer, maxPlayers, features{badges, rive, playerRank},
+  requestTtlSec, maxConnPerPlayer, maxPlayers, features{badges, playerRank},
   appCheckEnforce, displayName, prizes[] }, updatedAt
   (displayName: ürün/etkinlik adı, koda gömülmez · prizes: organizasyonun onayladığı ödül metinleri)
 
@@ -326,7 +326,7 @@ sequenceDiagram
 | Ağ | Bağlantı durumu provider'ı. Çevrimdışıyken okutma butonu "bağlantı bekleniyor" durumuna geçer | Net durum, sessiz hata yok |
 | Beklenen hatalar | `GameFailure` → yerelleştirilmiş mesaj + bir sonraki adım (ör. `tokenExpired` → "Kod yenilendi, tekrar okut") | Ne olduğu ve ne yapacağı |
 | Kamera | İzin reddi, cihaz yok, 10 sn okunamama → elle kod ekranı | Her zaman bir çıkış yolu |
-| Ertelenmiş yükleme | `deferred` yükleme veya Rive indirmesi başarısız → sade Flutter sürümü | Oyun devam eder |
+| Ertelenmiş yükleme | `deferred` yükleme başarısız → yeniden dene, olmazsa yüzeyi yenile kartı | Oyun devam eder |
 
 - `ErrorReporter` arayüzü: `report(error, stack, {surface, eventState})`, `breadcrumb(AppEvent)`. Sentry sürümü bir implementasyon. Testte sahte reporter, hata akışlarının raporlandığını doğrular.
 - PII temizliği (`beforeSend`): görünen ad, kısa kod, jeton, katılım kodu ve URL fragment'ı silinir. Kullanıcı kimliği `sha256(uid + eventSalt)` değerinin ilk 16 karakteri.
@@ -368,7 +368,7 @@ Etkinlik sırasında ikinci bir ekranda Sentry ve Firebase konsolu açık durur.
 1. `index.html`: satır içi açılış ekranı + uygulama içi tarayıcı uyarısı (Flutter'dan önce, düz HTML).
 2. Flutter motoru (CanvasKit) + `main.dart.js` + 2 alt kümelenmiş font.
 3. Katılım ekranı etkileşime hazır.
-4. Katılımdan sonra arka planda: soru havuzu JSON, Rive çalışma zamanı ve `.riv` dosyaları (bayrak açıksa), iOS'ta zxing-wasm.
+4. Katılımdan sonra arka planda: soru havuzu JSON, iOS'ta zxing-wasm. (Rive ilk sürümde yok, ADR-0009.)
 5. `/screen` ve `/admin`: yalnızca o rotada `deferred` yükleme.
 
 Her şey kendi alan adımızdan servis edilir (`--no-web-resources-cdn`, `RIVE_NATIVE_WASM_HOST`, zxing self-host). Tek istisna: FlutterFire'ın gstatic'ten yüklediği Firebase JS SDK.
@@ -407,7 +407,10 @@ Her şey kendi alan adımızdan servis edilir (`--no-web-resources-cdn`, `RIVE_N
 | `staging` | `baglanti-agi-staging` projesi | PR önizlemeleri, yük testi, prova |
 | `prod` | `baglanti-agi-prod` projesi | Etkinlik günü |
 
-- **Derleme yapılandırması:** `--dart-define-from-file=env/<ortam>.json`: `ENV`, `SENTRY_DSN`, `USE_EMULATOR`, `APP_VERSION`, `EVENT_ID`. Firebase web yapılandırması gizli değildir, ortam başına `firebase_options_<ortam>.dart`.
+- **Tek yapılandırma kaynağı:** Repo kökündeki `.env.<ortam>` (`.env.staging`, `.env.prod`), şablonu `.env.example`. E-postalar, Firebase ve Sentry ayarları, etkinlik adı, ödüller ve oyun varsayılanları hep burada. Gerçek dosyalar git'e girmez. CI'da aynı anahtarlar GitHub Environment değişkenleri ve secret'ları olarak tanımlanır.
+- **Uygulamaya giden kısım:** Yalnızca `APP_` ile başlayan anahtarlar. `tools/env` script'i bunları `app/.env.app.<ortam>` dosyasına süzer, derleme `--dart-define-from-file=app/.env.app.<ortam>` ile yapılır (Flutter `.env` biçimini doğrudan kabul ediyor, 3.38'de doğrulandı). Böylece yönetici e-postaları veya Gemini anahtarı yanlışlıkla uygulama paketine giremez. Firebase web yapılandırması da `APP_FIREBASE_*` anahtarlarından okunur, `firebase_options` dosyası commit edilmez.
+- **Sunucu ve script'ler:** `tools/` script'leri `.env.<ortam>` dosyasını doğrudan okur. Fonksiyonlara gereken değerler (ör. uyarı e-postaları) `firebase functions:config` yerine deploy sırasında parametre olarak verilir.
+- **Eksik değer kontrolü:** `tools/env check <ortam>` zorunlu anahtarları listeler, boş olanlarda deploy durur.
 - **Çalışma zamanı ayarları:** `events/{eventId}.settings`. Yönetici panelinden değişir, deploy gerekmez. Remote Config yok.
 - **CI (GitHub Actions):**
   - `check`: format, `flutter analyze --fatal-infos`, `flutter test`, domain import kontrolü.
@@ -466,6 +469,6 @@ Golden testler ve web entegrasyon testleri bilinçli olarak yok (R3 §4).
 |---|---|---|
 | S1 custom token per-IP | §6.1 | Mobil veri yönlendirmesi, girişleri lobiye yayma |
 | S2 iPhone kamera | §11, Flutter sürümü | 3.38.10 + aynı katman, olmazsa mobile_scanner fork'u |
-| S4 Rive | §10 adım 4 | `features.rive = false` |
+| ~~S4 Rive~~ | Rive ertelendiği için gerekmiyor | |
 | S5 `requestConnection`/`respondToRequest` gecikmesi | §10 | `minInstances`, iyimser animasyon süresi |
 | S7 Sentry source map | §8 | Sembolize olmayan stack trace ile yaşanır |

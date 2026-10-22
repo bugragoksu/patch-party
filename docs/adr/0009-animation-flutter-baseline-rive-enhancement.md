@@ -1,6 +1,6 @@
 # ADR-0009: Animasyonlar önce sade Flutter, Rive üstüne yükseltme
 
-- **Durum:** Kabul edildi (S4 spike sonucuna bağlı)
+- **Durum:** Kabul edildi. **Güncelleme (2026-10-22):** İlk sürüm tamamen Rive'sız yapılacak. Rive bir sonraki sürüme ertelendi. Aşağıdaki "sade Flutter" katmanı artık tek uygulama. S4 spike'ı ve Rive Cadet planı şimdilik gerekmiyor
 - **Tarih:** 2026-10-22
 - **İlgili:** FR-12, NFR-02, NFR-11, NFR-16, R4, D3, D4
 

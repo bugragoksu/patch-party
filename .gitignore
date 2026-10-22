@@ -1,8 +1,9 @@
 # Ortam ve gizli bilgiler: repoya girmez
 .env
 .env.*
-app/env/*.json
-!app/env/example.json
+!.env.example
+# Uygulamaya giden, APP_ anahtarlarından üretilen dosya
+app/.env.app*
 *service-account*.json
 *-key.json
 sentry.properties

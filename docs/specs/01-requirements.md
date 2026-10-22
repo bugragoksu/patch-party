@@ -72,7 +72,7 @@ draft ──▶ lobby ──▶ live ──▶ ended ──▶ archived
 | FR-24 | P1 | Oyuncu sırası: sunucu `live` süresince dakikada bir tüm oyuncuların sırasını hesaplar ve her oyuncunun kendi belgesine yazar | Oyuncu global sıralamayı dinlemez. Diskalifiye oyuncular sıralamaya girmez |
 | FR-10 | P1 | Oyun sonu özeti: kimlerle tanıştım, sıram, rozetlerim | `ended` durumunda otomatik açılır |
 | FR-11 | P0 | Puanlama: yeni bağlantı +10, ortak ilgi alanı olmayan biriyle +5 bonus. Puan iki tarafa da yazılır | Puan sunucu tarafında türetilir veya kurallarla doğrulanır. İstemci puanı serbestçe yazamaz |
-| FR-12 | P1 | Rozetler (örn. İlk Bağlantı, Köprü, Kaşif, Sosyal Kelebek), Rive animasyonlu | Rozet kazanılınca animasyonlu bildirim |
+| FR-12 | P1 | Rozetler (örn. İlk Bağlantı, Köprü, Kaşif, Sosyal Kelebek), Flutter animasyonlarıyla. Rive sonraki sürümde (ADR-0009) | Rozet kazanılınca animasyonlu bildirim |
 
 ### Projeksiyon
 
@@ -138,7 +138,7 @@ Sabit liste, 12 alan, projeksiyondaki 4 renkli kümeye dağılır. Katalog tek b
 
 - Bir web sitesi değil, bir oyun: sayfa kaydırma, form ve link görünümü yerine oyun ekranları, sahneler ve geçişler.
 - Hareket bir amaca hizmet eder: geri bildirim (bağlantı kuruldu), ödül (rozet), ortak an (projeksiyondaki ağ).
-- Animasyonlar Rive ile, durum makinesi tabanlı. Hazır şablon ve "AI slop" görünüm yok. Asset üretim yolu araştırma R4'te.
+- İlk sürümde animasyonlar Flutter'ın kendi araçlarıyla (implicit/explicit animasyonlar, `CustomPainter`). Rive sonraki sürüme ertelendi (ADR-0009). Hazır şablon ve "AI slop" görünüm yok. Asset üretim yolu araştırma R4'te.
 - Telefonda tek elle kullanım: QR ve okut butonu her zaman ulaşılabilir.
 
 ## 9. Riskler
