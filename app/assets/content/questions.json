@@ -1,0 +1,13 @@
+{
+  "version": 0,
+  "note": "Placeholder pool. tools/question-gen replaces this file with the reviewed Gemini pool.",
+  "pools": {
+    "general": [
+      "Bugün buraya gelmeden önce en son neyle uğraşıyordun?",
+      "Son zamanlarda öğrendiğin ve seni şaşırtan bir şey ne oldu?",
+      "Bir hafta boyunca tek bir şeye odaklanabilsen ne yapardın?",
+      "Kariyerinde en çok işine yarayan tavsiye neydi?",
+      "Son çalıştığın projede seni en çok ne zorladı?"
+    ]
+  }
+}

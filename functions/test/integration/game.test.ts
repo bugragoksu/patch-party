@@ -286,3 +286,14 @@ describe('ranks and admin', () => {
     expect((await paths.event(eventId).get()).get('summary.playerCount')).toBe(1);
   });
 });
+
+describe('reopening', () => {
+  it('ended -> live reopens the time window', async () => {
+    const boss = { uid: 'boss', admin: true };
+    await setEventState(req({ eventId, state: 'ended' }, boss));
+    await setEventState(req({ eventId, state: 'live' }, boss));
+    const a = await joinAs(eventId, 'Ada', ['flutter', 'ai']);
+    const b = await joinAs(eventId, 'Bora', ['web', 'ai']);
+    expect((await requestConnection(req({ eventId, code: qrOf(eventId, b) }, as(eventId, a)))).status).toBe('pending');
+  });
+});

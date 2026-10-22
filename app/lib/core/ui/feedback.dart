@@ -27,6 +27,7 @@ String failureMessage(GameFailure f) => switch (f) {
   RequestExpired() => 'İsteğin süresi doldu.',
   NotAllowed() => 'Bu işlem için yetkin yok.',
   NotFound() => 'Aranan kayıt bulunamadı.',
+  Declined() => 'Şu an olmadı. Başka biriyle tanışmaya devam et.',
   Offline() =>
     'Bağlantı yok gibi görünüyor. İnternetini kontrol edip tekrar dene.',
   Unknown() => 'Bir şeyler ters gitti. Tekrar dene.',

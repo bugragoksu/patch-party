@@ -345,7 +345,7 @@ Yönetici panelindeki **Sağlık** kartı, ek altyapı olmadan:
 
 | Gösterge | Kaynak |
 |---|---|
-| Katılan oyuncu, son 2 dk'da aktif | `players` üzerinde `count()` (15 sn'de bir) |
+| Katılan oyuncu, son 5 dk'da bağlantı kuran | `players` üzerinde `count()` (15 sn'de bir) |
 | Bağlantı/dakika | `connections` üzerinde `count()` farkı |
 | Reddedilen denemeler ve nedenleri | `rateLimits` üzerinde `sum()` |
 | İstemci hataları | Sentry Issues (ikinci sekme), e-posta alarmı |

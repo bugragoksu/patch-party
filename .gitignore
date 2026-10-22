@@ -29,4 +29,6 @@ build/
 *.iml
 
 # FVM Version Cache
+.fvm/.claude/
+.claude/
 .fvm/

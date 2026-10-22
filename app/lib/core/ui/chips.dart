@@ -37,14 +37,18 @@ class InterestChip extends StatelessWidget {
             ? const [BoxShadow(color: Palette.paper, offset: Offset(3, 3))]
             : null,
       ),
-      alignment: Alignment.center,
-      child: Text(
-        label,
-        style: TextStyles.ui.copyWith(
-          fontWeight: FontWeight.w700,
-          fontSize: compact ? 12 : 14,
-          color: selected ? Palette.ink : Palette.paper,
-        ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            label,
+            style: TextStyles.ui.copyWith(
+              fontWeight: FontWeight.w700,
+              fontSize: compact ? 12 : 14,
+              color: selected ? Palette.ink : Palette.paper,
+            ),
+          ),
+        ],
       ),
     );
     if (onTap == null) return chip;

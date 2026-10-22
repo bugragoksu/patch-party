@@ -49,9 +49,10 @@ abstract final class TextStyles {
     letterSpacing: -0.4,
     height: 1.05,
   );
+  // Only the 800 weight of the display face ships (font budget, NFR-02).
   static const title = TextStyle(
     fontFamily: Fonts.display,
-    fontWeight: FontWeight.w600,
+    fontWeight: FontWeight.w800,
     height: 1.25,
   );
   static const ui = TextStyle(fontFamily: Fonts.ui, height: 1.4);

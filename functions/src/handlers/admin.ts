@@ -31,9 +31,14 @@ export async function setEventState(request: CallableRequest<unknown>): Promise<
     const event = readEvent((await tx.get(ref)).data());
     if (!canTransition(event.state, data.state)) throw new GameError('invalid_transition', { from: event.state });
     const patch: Record<string, unknown> = { state: data.state, updatedAt: now };
-    if (data.state === 'live' && event.state === 'lobby' && data.liveDurationMin) {
-      patch.liveStartAt = now;
-      patch.liveEndAt = now + data.liveDurationMin * 60_000;
+    if (data.state === 'live') {
+      // Reopening an ended game must also reopen its time window.
+      if (data.liveDurationMin) {
+        patch.liveStartAt = now;
+        patch.liveEndAt = now + data.liveDurationMin * 60_000;
+      } else if (event.state === 'ended') {
+        patch.liveEndAt = null;
+      }
     }
     if (data.state === 'ended') patch.liveEndAt = Math.min(event.liveEndAt ?? now, now);
     tx.update(ref, patch);

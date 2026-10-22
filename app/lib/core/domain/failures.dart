@@ -116,6 +116,11 @@ class NotFound extends GameFailure {
   const new();
 }
 
+/// The other player said "not now" (client-side only, no server reason).
+class Declined extends GameFailure {
+  const new();
+}
+
 class Offline extends GameFailure {
   const new();
 }

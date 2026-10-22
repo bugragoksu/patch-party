@@ -28,3 +28,20 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/content/
+  fonts:
+    - family: Unbounded
+      fonts:
+        - asset: assets/fonts/Unbounded-800.ttf
+          weight: 800
+    - family: GoogleSansFlex
+      fonts:
+        - asset: assets/fonts/GoogleSansFlex-400.ttf
+          weight: 400
+        - asset: assets/fonts/GoogleSansFlex-700.ttf
+          weight: 700
+    - family: GoogleSansCode
+      fonts:
+        - asset: assets/fonts/GoogleSansCode-700.ttf
+          weight: 700
