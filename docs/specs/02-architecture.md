@@ -38,7 +38,8 @@ baglanti-agi/
   app/                      Flutter web uygulaması (tek uygulama, üç yüzey)
   functions/                Cloud Functions (TypeScript, Node 22)
   firebase/                 firestore.rules, firestore.indexes.json, rules-tests/
-  shared/                   test-vectors/ (Dart ve TS'in birlikte koştuğu jeton/puan vektörleri)
+  shared/                   catalog/interests.json (ilgi alanı kataloğu: kimlik, ad, küme, renk)
+                            test-vectors/ (Dart ve TS'in birlikte koştuğu jeton/puan/ad normalizasyonu vektörleri)
   tools/                    question-gen/, set-claims/, purge-event/, loadtest/
   docs/                     spesifikasyonlar, araştırma, ADR'lar
   .github/workflows/        CI/CD
@@ -112,7 +113,8 @@ sealed class Result<T> { ... }      // Ok<T> | Err<T>(GameFailure)
 sealed class GameFailure {
   // Beklenen, kullanıcıya anlamlı mesajla gösterilen durumlar
   tokenExpired | tokenInvalid | alreadyConnected | selfScan | notLive |
-  rateLimited | joinCodeInvalid | eventFull | offline | unknown
+  rateLimited | joinCodeInvalid | eventFull | nameTaken(suggestion) |
+  invalidInterests | requestLimit | requestExpired | offline | unknown
 }
 ```
 
@@ -127,7 +129,7 @@ Callable'lar 2nd gen, `region: europe-west3`, `timeoutSeconds: 10`, `memory: 256
 
 | Fonksiyon | Çağıran | Girdi | Çıktı | Notlar |
 |---|---|---|---|---|
-| `join` | Herkes | `{eventId, joinCode, displayName, interests[]}` | `{customToken, playerCode, totpSeed, serverTime}` | Katılım kodunu doğrular, adı temizler, oyuncu ve gizli belgeleri yazar, custom token üretir |
+| `join` | Herkes | `{eventId, joinCode, displayName, interests[]}` | `{customToken, playerCode, totpSeed, serverTime}` | Katılım kodunu doğrular, adı temizler, ilgi alanlarını katalogla doğrular, adı rezerve eder (FR-17), oyuncu ve gizli belgeleri yazar, custom token üretir. Ad alınmışsa `name_taken` + `details.suggestion` |
 | `requestConnection` | Oyuncu | `{eventId, code}` (QR veya elle) | `{requestId, expiresAt, target: {name, interests}}` | Jetonu doğrular, bekleyen istek oluşturur (§6.2) |
 | `respondToRequest` | İsteğin hedefi | `{eventId, requestId, accept: bool}` | `{connectionId?, points?, bonus?, questionId?}` | Onayda bağlantıyı ve puanları tek transaction'da yazar (§6.2) |
 | `cancelRequest` | İsteği gönderen | `{eventId, requestId}` | `{}` | Okutan vazgeçerse |
@@ -180,6 +182,9 @@ events/{eventId}/playerSecrets/{uid}     okuma: yalnızca sahibi | yazma: yok
 
 events/{eventId}/playerCodes/{code}      okuma/yazma: yok (yalnızca fonksiyonlar)
   uid
+
+events/{eventId}/displayNames/{nameKey}  okuma/yazma: yok (yalnızca fonksiyonlar)
+  uid                                     (nameKey: normalizeName(displayName), §6.1)
 
 events/{eventId}/connections/{a_b}       okuma: katılımcılar (limit ≤ 100) veya staff | yazma: yok
   participants[a,b], scannerUid, targetUid, points, bonus, questionId, createdAt
@@ -234,6 +239,8 @@ sequenceDiagram
 ```
 
 - Aynı tarayıcıdaki ikinci `join` çağrısı yeni oyuncu yaratmaz: istemci önce mevcut oturumu kontrol eder (FR-02).
+- **Ad benzersizliği (FR-17):** `normalizeName` sırasıyla baştaki/sondaki boşlukları siler, iç boşlukları teke indirir, Türkçe kurallarıyla küçük harfe çevirir (`İ→i`, `I→ı`), aksanları ve Türkçe harfleri ASCII karşılığına indirir (`ı→i`, `ş→s`, `ğ→g`, `ü→u`, `ö→o`, `ç→c`) ve noktalama işaretlerini atar. `join` transaction'ı `displayNames/{nameKey}` belgesini oluşturmaya çalışır. Belge varsa ad yazılmaz, `name_taken` döner. Sunucu soyadını bilmediği için önerisi ilk boş numaralı varyanttır (`"Deniz 2"`, `"Deniz 3"`…). Arayüz bunun yanında soyadının baş harfini eklemeyi de önerir ("Deniz K."). Kullanıcı öneriyi seçer veya başka bir ad yazar, her durumda `join` yeniden denenir. Algoritma Dart ve TS'te aynıdır, ortak test vektörleriyle (`shared/test-vectors/names.json`) korunur. Yönetici adı değiştirirse (`moderatePlayer: rename`) eski anahtar silinir, yenisi aynı kuralla rezerve edilir.
+- **İlgi alanları:** `interests[]` 2-3 eleman, tekrarsız ve tamamı `shared/catalog/interests.json` içindeki kimliklerden olmalı. Aksi halde `invalid_interests`.
 - `join` hız sınırı: aynı `ipHash` için dakikada ≤ 30 katılım. Salon NAT'ı düşünülerek gevşek tutuldu, şüpheli işaretleme için kullanılır.
 
 ### 6.2 Bağlantı: istek ve onay (ADR-0013)
@@ -429,7 +436,7 @@ Golden testler ve web entegrasyon testleri bilinçli olarak yok (R3 §4).
 
 | Gereksinim | Bileşen |
 |---|---|
-| FR-01, 02 | `features/join`, `join()` |
+| FR-01, 02, 17 | `features/join`, `join()`, `domain/names` (Dart ve TS), `shared/catalog/interests.json` |
 | FR-03 | `core/domain/token.dart`, `functions/domain/totp.ts` |
 | FR-04, 05 | `core/platform/camera_scanner`, `features/play` |
 | FR-06, 07, 11, 15 | `requestConnection()`, `respondToRequest()`, istek ve bağlantı dinleyicileri |

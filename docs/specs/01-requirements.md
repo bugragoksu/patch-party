@@ -57,7 +57,8 @@ draft ──▶ lobby ──▶ live ──▶ ended ──▶ archived
 
 | Kimlik | Öncelik | Gereksinim | Kabul kriteri |
 |---|---|---|---|
-| FR-01 | P0 | Katılım: isim (2-24 karakter) ve sabit listeden 2-3 ilgi alanı seçimi | Kurulum veya hesap gerekmez. Katılım akışı ≤ 30 sn |
+| FR-01 | P0 | Katılım: isim (2-24 karakter) ve sabit listeden (§6.1) 2-3 ilgi alanı seçimi. Serbest metinle ilgi alanı girilemez | Kurulum veya hesap gerekmez. Katılım akışı ≤ 30 sn. Listede olmayan değer sunucuda reddedilir |
+| FR-17 | P0 | Görünen ad etkinlik içinde benzersiz. Karşılaştırma büyük/küçük harf, Türkçe harf (İ/i, I/ı) ve boşluk farklarından bağımsız. Ad alınmışsa katılım engellenmez, ayırt edici bir öneri sunulur ("Deniz K.") | Eşzamanlı iki katılımda bile aynı ad iki kişiye verilmez (sunucu transaction'ı, testle kanıtlı). Öneri kabul edilebilir veya başka ad yazılabilir |
 | FR-02 | P0 | Oturum sayfa yenilense de korunur | Yenileme, sekme kapatıp açma sonrası aynı oyuncu ve puan |
 | FR-03 | P0 | Kişisel QR, belirli aralıklarla (varsayılan 30 sn) değişir. Altında aynı jetonun kısa kodu görünür | Süresi geçmiş jeton (bir önceki pencere hariç) reddedilir |
 | FR-04 | P0 | Kamera ile başka oyuncunun QR'ını okutma | Kamera izni reddedilirse kullanıcı FR-05'e yönlendirilir |
@@ -95,7 +96,22 @@ draft ──▶ lobby ──▶ live ──▶ ended ──▶ archived
 
 | Kimlik | Öncelik | Gereksinim | Kabul kriteri |
 |---|---|---|---|
-| FR-40 | P0 | Soru havuzu etkinlik öncesinde bir script ile Gemini'den üretilir, insan tarafından gözden geçirilir ve veritabanına yüklenir | Her ilgi alanı ikilisi için ≥ 3 soru + ≥ 20 genel soru |
+| FR-40 | P0 | Soru havuzu etkinlik öncesinde bir script ile Gemini'den üretilir, insan tarafından gözden geçirilir ve yayınlanır | 12 alanla 78 ikili: her ikili (aynı alan dahil) için ≥ 2 soru + ≥ 30 genel soru, toplam ~190 |
+
+### 6.1 İlgi alanı kataloğu
+
+Sabit liste, 12 alan, projeksiyondaki 4 renkli kümeye dağılır. Katalog tek bir dosyada tutulur ve istemci, sunucu ve soru üretimi aynı dosyayı kullanır.
+
+| Küme (renk) | İlgi alanları |
+|---|---|
+| Mobil & Web (mavi) | Flutter & Mobil · Web & Frontend · Oyun Geliştirme |
+| Yapay Zekâ & Veri (yeşil) | Yapay Zekâ & LLM · Veri & Analitik · Açık Kaynak |
+| Tasarım & Ürün (sarı) | UI/UX & Tasarım · Ürün & Girişimcilik · Topluluk & Etkinlik |
+| Altyapı & Güvenlik (kırmızı) | Backend & Cloud · DevOps · Siber Güvenlik |
+
+- İlgi alanları uzmanlık beyanı değil, sohbet başlatıcıdır. Listede kendini bulamayan en yakın alanı seçer.
+- Teknoloji dışı alanlar (kahve, spor) yok: "ortak alan yok" bonusunu anlamsızlaştırır.
+- Bir oyuncunun avatar rengi ilk seçtiği alanın kümesinden gelir.
 
 ## 7. Fonksiyonel olmayan gereksinimler
 
