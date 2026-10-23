@@ -1,4 +1,4 @@
-import catalog from '../generated/interests.json' with { type: 'json' };
+import { catalog } from '../generated/catalog.js';
 
 // Pure game rules shared by the handlers. No Firebase imports in this folder.
 

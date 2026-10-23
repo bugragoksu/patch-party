@@ -1,7 +1,6 @@
 {
   "name": "baglanti-agi-functions",
   "private": true,
-  "type": "module",
   "main": "lib/index.js",
   "engines": {
     "node": "22"
