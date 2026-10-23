@@ -25,8 +25,8 @@ const eventId = args.event ?? 'gdg-adana-2026-10';
 const players = Number(args.players ?? 150);
 const minutes = Number(args.minutes ?? 3);
 const joinSeed = args.joinSeed;
-if (!projectId || (!emulator && !joinSeed)) {
-  console.error('usage: --emulator | --project <id> --joinSeed <seed>  [--event id] [--players n] [--minutes m]');
+if (!projectId) {
+  console.error('usage: --emulator | --project <id> [--joinSeed seed] [--event id] [--players n] [--minutes m]');
   process.exit(2);
 }
 
@@ -36,13 +36,13 @@ const latencies = { join: [], request: [], respond: [] };
 const reasons = {};
 let connections = 0;
 
-async function seedFromEmulator() {
+/** Reads the join seed with the Admin SDK (emulator, or ADC for a real project). */
+async function readJoinSeed() {
   if (joinSeed) return joinSeed;
-  const { initializeApp: adminInit } = require('firebase-admin/app');
+  const { initializeApp: adminInit, getApp } = require('firebase-admin/app');
   const { getFirestore } = require('firebase-admin/firestore');
-  process.env.FIRESTORE_EMULATOR_HOST ??= '127.0.0.1:8080';
+  if (emulator) process.env.FIRESTORE_EMULATOR_HOST ??= '127.0.0.1:8080';
   adminInit({ projectId }, 'loadtest-admin');
-  const { getApp } = require('firebase-admin/app');
   const db = getFirestore(getApp('loadtest-admin'));
   return (await db.doc(`events/${eventId}/private/joinSecret`).get()).get('joinSeed');
 }
@@ -76,7 +76,7 @@ const pct = (xs, p) => {
 };
 
 const run = Math.random().toString(36).slice(2, 6);
-const seed = await seedFromEmulator();
+const seed = await readJoinSeed();
 const code = joinCodeFor(seed, eventId, windowOf(Date.now(), 300));
 console.log(`joining ${players} players…`);
 const crowd = [];
