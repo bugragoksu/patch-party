@@ -6,6 +6,7 @@
 // state; never against prod during the event.
 import { createRequire } from 'node:module';
 import { performance } from 'node:perf_hooks';
+import { loadEnv } from '../env.mjs';
 
 const require = createRequire(new URL('../../functions/package.json', import.meta.url));
 const { initializeApp } = require('firebase/app');
@@ -25,6 +26,10 @@ const eventId = args.event ?? 'gdg-adana-2026-10';
 const players = Number(args.players ?? 150);
 const minutes = Number(args.minutes ?? 3);
 const joinSeed = args.joinSeed;
+// Real projects need their web API key; it comes from .env.<env> (not secret).
+const webEnv = emulator ? {} : loadEnv(args.env ?? (projectId?.endsWith('-prod') ? 'prod' : 'staging'));
+const apiKey = webEnv.APP_FIREBASE_API_KEY ?? 'demo-key';
+const appId = webEnv.APP_FIREBASE_APP_ID ?? '1:1:web:1';
 if (!projectId) {
   console.error('usage: --emulator | --project <id> [--joinSeed seed] [--event id] [--players n] [--minutes m]');
   process.exit(2);
@@ -48,7 +53,7 @@ async function readJoinSeed() {
 }
 
 function client(i) {
-  const app = initializeApp({ apiKey: 'demo-key', projectId, appId: '1:1:web:1' }, `p${i}`);
+  const app = initializeApp({ apiKey, projectId, appId, authDomain: webEnv.APP_FIREBASE_AUTH_DOMAIN }, `p${i}`);
   const auth = getAuth(app);
   const functions = getFunctions(app, 'europe-west3');
   if (emulator) {
