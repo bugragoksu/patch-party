@@ -11,9 +11,26 @@ class PlayerSession {
   final String seed;
 }
 
+/// The session handed back by `join` in this tab. It lets the game start
+/// without re-reading claims and the seed from Firestore (NFR-02).
+final joinedSessionProvider = NotifierProvider<JoinedSession, PlayerSession?>(
+  JoinedSession.new,
+);
+
+class JoinedSession extends Notifier<PlayerSession?> {
+  @override
+  PlayerSession? build() => null;
+
+  // A method, not a setter: it reads as an action at the call site.
+  // ignore: use_setters_to_change_properties
+  void set(PlayerSession session) => state = session;
+}
+
 final playerSessionProvider = FutureProvider<PlayerSession?>((ref) async {
   final user = ref.watch(authUserProvider).value;
   if (user == null) return null;
+  final joined = ref.watch(joinedSessionProvider);
+  if (joined != null && joined.uid == user.uid) return joined;
   final claims = await ref.watch(claimsProvider.future);
   final eventId = ref.watch(eventIdProvider);
   if (claims['eventId'] != eventId) return null;

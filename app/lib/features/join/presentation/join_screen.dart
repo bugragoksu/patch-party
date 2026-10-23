@@ -10,6 +10,7 @@ import 'package:baglanti_agi/core/ui/buttons.dart';
 import 'package:baglanti_agi/core/ui/chips.dart';
 import 'package:baglanti_agi/core/ui/feedback.dart';
 import 'package:baglanti_agi/core/ui/sticker.dart';
+import 'package:baglanti_agi/features/play/application/session.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -86,6 +87,15 @@ class _JoinScreenState extends ConsumerState<JoinScreen> {
       case Ok(:final value):
         reporter.breadcrumb(AppEvent.joined);
         ref.read(clockOffsetProvider.notifier).learn(value.serverTime);
+        ref
+            .read(joinedSessionProvider.notifier)
+            .set(
+              PlayerSession(
+                uid: value.uid,
+                eventId: ref.read(eventIdProvider),
+                seed: value.totpSeed,
+              ),
+            );
       // The auth state change moves PlayerRoot on to the game.
       case Err(:final failure):
         reporter.breadcrumb(

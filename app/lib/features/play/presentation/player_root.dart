@@ -8,6 +8,7 @@ import 'package:baglanti_agi/core/ui/feedback.dart';
 import 'package:baglanti_agi/features/join/presentation/join_screen.dart';
 import 'package:baglanti_agi/features/play/application/session.dart';
 import 'package:baglanti_agi/features/play/presentation/game_screen.dart';
+import 'package:baglanti_agi/features/play/presentation/how_to_play.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -21,10 +22,13 @@ class PlayerRoot extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final session = ref.watch(playerSessionProvider);
+    final seenHowTo = ref.watch(howToPlaySeenProvider);
     final body = session.when(
       data: (s) => s == null
           ? JoinScreen(joinCode: joinCode)
-          : GameScreen(scannedPayload: scannedPayload),
+          : seenHowTo
+          ? GameScreen(scannedPayload: scannedPayload)
+          : const HowToPlay(),
       loading: () => const Scaffold(
         body: Center(child: CircularProgressIndicator(color: Palette.yellow)),
       ),

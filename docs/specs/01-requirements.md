@@ -97,6 +97,7 @@ draft ──▶ lobby ──▶ live ──▶ ended ──▶ archived
 | Kimlik | Öncelik | Gereksinim | Kabul kriteri |
 |---|---|---|---|
 | FR-40 | P0 | Soru havuzu etkinlik öncesinde bir script ile Gemini'den üretilir, insan tarafından gözden geçirilir ve yayınlanır | 12 alanla 78 ikili: her ikili (aynı alan dahil) için ≥ 2 soru + ≥ 30 genel soru, toplam ~190 |
+| FR-41 | P1 | Katılımdan sonra bir kez 3 kartlık "Nasıl oynanır" gösterilir; açılış ekranında oyun ipuçları döner | Kartlar atlanabilir, aynı tarayıcıda tekrar çıkmaz. Kartlar oyunu bekletmez: oyun verisi arkada yüklenir |
 
 ### 6.1 İlgi alanı kataloğu
 
