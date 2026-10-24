@@ -22,6 +22,9 @@ class HowToPlaySeen extends Notifier<bool> {
     Browser.write(_key, '1');
     state = true;
   }
+
+  /// Opens the cards again (from the lobby); finishing them marks seen.
+  void showAgain() => state = false;
 }
 
 class _Step {

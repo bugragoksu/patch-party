@@ -10,6 +10,7 @@ import 'package:baglanti_agi/features/play/application/play_controller.dart';
 import 'package:baglanti_agi/features/play/application/questions.dart';
 import 'package:baglanti_agi/features/play/application/session.dart';
 import 'package:baglanti_agi/features/play/presentation/widgets/connections_list.dart';
+import 'package:baglanti_agi/features/play/presentation/widgets/lobby_view.dart';
 import 'package:baglanti_agi/features/play/presentation/widgets/manual_entry.dart';
 import 'package:baglanti_agi/features/play/presentation/widgets/qr_view.dart';
 import 'package:baglanti_agi/features/play/presentation/widgets/request_views.dart';
@@ -195,7 +196,9 @@ class _GameScreenState extends ConsumerState<GameScreen> {
       scene = const ScanView();
       showDock = true;
     } else {
-      scene = QrView(player: me, event: event);
+      scene = live
+          ? QrView(player: me, event: event)
+          : LobbyView(player: me, paused: event.state == EventState.live);
       showDock = true;
     }
 
@@ -255,6 +258,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                             label: 'Tara',
                             icon: Icons.qr_code_scanner,
                             active: play.mode == PlayMode.scan,
+                            enabled: live,
                             onPressed: live
                                 ? controller.showScan
                                 : () => showFailure(context, const NotLive()),

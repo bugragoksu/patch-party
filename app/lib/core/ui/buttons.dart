@@ -146,6 +146,7 @@ class DockButton extends StatelessWidget {
     required this.active,
     required this.onPressed,
     super.key,
+    this.enabled = true,
   });
 
   final String label;
@@ -153,12 +154,20 @@ class DockButton extends StatelessWidget {
   final bool active;
   final VoidCallback onPressed;
 
+  /// Looks unavailable but still takes taps, so the screen can say why.
+  final bool enabled;
+
   @override
   Widget build(BuildContext context) {
-    final fg = active ? Palette.ink : Palette.paper;
+    final fg = active
+        ? Palette.ink
+        : enabled
+        ? Palette.paper
+        : Palette.inkMuted;
     return Semantics(
       button: true,
       selected: active,
+      enabled: enabled,
       label: label,
       child: _Pressable(
         onTap: onPressed,
@@ -169,7 +178,11 @@ class DockButton extends StatelessWidget {
             color: active ? Palette.yellow : Palette.asphaltRaised,
             borderRadius: BorderRadius.circular(18),
             border: Border.all(
-              color: active ? Palette.ink : Palette.inkMuted,
+              color: active
+                  ? Palette.ink
+                  : enabled
+                  ? Palette.inkMuted
+                  : Palette.line,
               width: active ? Stroke.width : 2,
             ),
             boxShadow: active && !pressed
