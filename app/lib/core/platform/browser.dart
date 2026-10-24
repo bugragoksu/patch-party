@@ -20,6 +20,24 @@ abstract final class Browser {
     web.window.open('${l.origin}${l.pathname}#$route', '_blank', 'noopener');
   }
 
+  static bool get canFullscreen => web.document.fullscreenEnabled;
+  static bool get isFullscreen => web.document.fullscreenElement != null;
+
+  /// Emits on entering or leaving fullscreen (button, Esc or F11).
+  static Stream<bool> get fullscreenChanges => web
+      .EventStreamProviders
+      .fullscreenChangeEvent
+      .forTarget(web.document)
+      .map((_) => isFullscreen);
+
+  static Future<void> enterFullscreen() async {
+    try {
+      await web.document.documentElement?.requestFullscreen().toDart;
+    } on Object {
+      // Refused (no user gesture, or blocked): the button stays visible.
+    }
+  }
+
   static String? read(String key) {
     try {
       return web.window.localStorage.getItem(key);

@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:baglanti_agi/app/providers.dart';
 import 'package:baglanti_agi/app/theme/tokens.dart';
 import 'package:baglanti_agi/core/domain/models.dart';
+import 'package:baglanti_agi/core/platform/browser.dart';
 import 'package:baglanti_agi/core/ui/feedback.dart';
 import 'package:baglanti_agi/features/projector/presentation/archived_scene.dart';
 import 'package:baglanti_agi/features/projector/presentation/live_scene.dart';
@@ -20,8 +23,64 @@ class ProjectorPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => const Scaffold(
     backgroundColor: Palette.asphalt,
-    body: StaffGate(child: ProjectorStage()),
+    body: Stack(
+      children: [
+        Positioned.fill(child: StaffGate(child: ProjectorStage())),
+        Positioned(right: 16, bottom: 16, child: _FullscreenButton()),
+      ],
+    ),
   );
+}
+
+/// Shown only outside fullscreen; Esc leaves fullscreen and brings it back.
+class _FullscreenButton extends StatefulWidget {
+  const new();
+
+  @override
+  State<_FullscreenButton> createState() => _FullscreenButtonState();
+}
+
+class _FullscreenButtonState extends State<_FullscreenButton> {
+  late final StreamSubscription<bool> _sub;
+  bool _fullscreen = Browser.isFullscreen;
+
+  @override
+  void initState() {
+    super.initState();
+    _sub = Browser.fullscreenChanges.listen(
+      (v) => setState(() => _fullscreen = v),
+    );
+  }
+
+  @override
+  void dispose() {
+    unawaited(_sub.cancel());
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (_fullscreen || !Browser.canFullscreen) return const SizedBox.shrink();
+    return Tooltip(
+      message: 'Çıkmak için Esc',
+      child: TextButton.icon(
+        onPressed: () => unawaited(Browser.enterFullscreen()),
+        icon: const Icon(Icons.fullscreen, size: 22),
+        label: const Text('Tam ekran'),
+        style: TextButton.styleFrom(
+          foregroundColor: Palette.ink,
+          backgroundColor: Palette.yellow,
+          minimumSize: const Size(44, 44),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          textStyle: TextStyles.ui.copyWith(fontWeight: FontWeight.w700),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(Radii.button),
+            side: const BorderSide(color: Palette.ink, width: Stroke.width),
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 /// Picks the scene for the current event state.
