@@ -4,6 +4,7 @@ import 'package:baglanti_agi/core/ui/buttons.dart';
 import 'package:baglanti_agi/core/ui/feedback.dart';
 import 'package:baglanti_agi/core/ui/sticker.dart';
 import 'package:baglanti_agi/features/projector/application/projector_providers.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -111,17 +112,19 @@ class _SignInCard extends ConsumerStatefulWidget {
 
 class _SignInCardState extends ConsumerState<_SignInCard> {
   bool _busy = false;
-  bool _failed = false;
+  String? _failed;
 
   Future<void> _signIn() async {
     setState(() {
       _busy = true;
-      _failed = false;
+      _failed = null;
     });
     try {
       await ref.read(staffAuthProvider).signInWithGoogle();
+    } on FirebaseAuthException catch (e) {
+      if (mounted) setState(() => _failed = e.code);
     } on Exception {
-      if (mounted) setState(() => _failed = true);
+      if (mounted) setState(() => _failed = 'unknown');
     } finally {
       if (mounted) setState(() => _busy = false);
     }
@@ -131,8 +134,9 @@ class _SignInCardState extends ConsumerState<_SignInCard> {
   Widget build(BuildContext context) {
     return _GateCard(
       title: 'Projeksiyon',
-      body: _failed
-          ? 'Giriş tamamlanamadı. Açılan pencereyi kapatmadan tekrar dene.'
+      body: _failed != null
+          ? 'Giriş tamamlanamadı ($_failed). '
+                'Açılan pencereyi kapatmadan tekrar dene.'
           : 'Görevli Google hesabınla giriş yap.',
       action: PrimaryButton(
         label: 'Google ile giriş yap',

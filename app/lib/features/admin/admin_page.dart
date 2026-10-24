@@ -63,7 +63,8 @@ class _SignInState extends ConsumerState<_SignIn> {
       setState(
         () => _error = e.code == 'popup-closed-by-user'
             ? 'Giriş penceresi kapatıldı.'
-            : 'Giriş yapılamadı. Açılır pencerelere izin verip tekrar dene.',
+            : 'Giriş yapılamadı (${e.code}). '
+                  'Açılır pencerelere izin verip tekrar dene.',
       );
     } finally {
       if (mounted) setState(() => _busy = false);

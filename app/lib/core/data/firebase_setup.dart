@@ -11,6 +11,10 @@ Future<void> initFirebase() async {
     options: const FirebaseOptions(
       apiKey: Env.firebaseApiKey == '' ? 'demo-key' : Env.firebaseApiKey,
       appId: Env.firebaseAppId == '' ? 'demo-app' : Env.firebaseAppId,
+      // Staff Google sign-in (popup) fails without it. The value is set at
+      // build time, so the analyzer sees only the empty default.
+      // ignore: avoid_redundant_argument_values
+      authDomain: Env.firebaseAuthDomain == '' ? null : Env.firebaseAuthDomain,
       messagingSenderId: Env.firebaseMessagingSenderId,
       projectId: Env.firebaseProjectId,
     ),
