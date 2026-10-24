@@ -45,7 +45,7 @@ const settings = {
   maxConnPerPlayer: num('GAME_MAX_CONNECTIONS_PER_PLAYER', 60),
   maxPlayers: num('GAME_MAX_PLAYERS', 200),
   appCheckEnforce: env.GAME_APP_CHECK_ENFORCE === 'true',
-  displayName: env.EVENT_DISPLAY_NAME || 'Bağlantı Ağı',
+  displayName: env.EVENT_DISPLAY_NAME || 'Patch Party',
   subtitle: env.EVENT_SUBTITLE || '',
   prizes: [env.EVENT_PRIZE_1, env.EVENT_PRIZE_2, env.EVENT_PRIZE_3].filter(Boolean),
   features: { badges: true, playerRank: true },

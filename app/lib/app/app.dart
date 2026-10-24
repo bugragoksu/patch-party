@@ -17,7 +17,7 @@ class _BaglantiAppState extends State<BaglantiApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'Bağlantı Ağı',
+      title: 'Patch Party',
       debugShowCheckedModeBanner: false,
       theme: buildTheme(),
       routerConfig: _router,

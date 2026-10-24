@@ -154,7 +154,7 @@ void main() {
   group('SettingsDraft', () {
     const current = EventSettings(prizes: ['Kulaklık']);
     SettingsDraft draft({
-      String displayName = 'Bağlantı Ağı',
+      String displayName = 'Patch Party',
       String subtitle = '',
       List<String> prizes = const ['Kulaklık', '', ''],
       String cooldownSec = '15',

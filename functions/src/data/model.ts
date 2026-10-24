@@ -25,7 +25,7 @@ export const DEFAULT_SETTINGS: EventSettings = {
   maxConnPerPlayer: 60,
   maxPlayers: 200,
   appCheckEnforce: false,
-  displayName: 'Bağlantı Ağı',
+  displayName: 'Patch Party',
   subtitle: '',
   prizes: [],
   features: { badges: true, playerRank: true },

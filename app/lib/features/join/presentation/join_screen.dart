@@ -151,7 +151,7 @@ class _JoinScreenState extends ConsumerState<JoinScreen> {
                 ),
                 const SizedBox(height: 14),
                 Text(
-                  event?.settings.displayName ?? 'Bağlantı Ağı',
+                  event?.settings.displayName ?? 'Patch Party',
                   style: TextStyles.display.copyWith(
                     fontSize: 30,
                     color: Palette.paper,

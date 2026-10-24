@@ -14,7 +14,7 @@ enum EventState {
 
 class EventSettings {
   const new({
-    this.displayName = 'Bağlantı Ağı',
+    this.displayName = 'Patch Party',
     this.subtitle = '',
     this.prizes = const [],
     this.tokenWindowSec = 30,
@@ -31,7 +31,7 @@ class EventSettings {
   factory fromJson(Map<String, Object?> j) {
     final features = (j['features'] as Map?)?.cast<String, Object?>() ?? {};
     return EventSettings(
-      displayName: j['displayName'] as String? ?? 'Bağlantı Ağı',
+      displayName: j['displayName'] as String? ?? 'Patch Party',
       subtitle: j['subtitle'] as String? ?? '',
       prizes: (j['prizes'] as List?)?.cast<String>() ?? const [],
       tokenWindowSec: _int(j['tokenWindowSec'], 30),
