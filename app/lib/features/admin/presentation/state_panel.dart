@@ -1,3 +1,4 @@
+import 'package:baglanti_agi/app/providers.dart';
 import 'package:baglanti_agi/app/theme/tokens.dart';
 import 'package:baglanti_agi/core/domain/failures.dart';
 import 'package:baglanti_agi/core/domain/models.dart';
@@ -69,7 +70,13 @@ class _StatePanelState extends ConsumerState<StatePanel> {
   Widget build(BuildContext context) {
     final event = widget.event;
     final from = event.state;
-    final options = allowedTransitions(from);
+    final now =
+        ref.watch(nowProvider).value ?? DateTime.now().millisecondsSinceEpoch;
+    final expired = liveExpired(event, now);
+    final options = [
+      if (canExtend(from)) EventState.live,
+      ...allowedTransitions(from),
+    ];
     final target = _target;
     return AdminSection(
       title: 'Oyun durumu',
@@ -81,10 +88,11 @@ class _StatePanelState extends ConsumerState<StatePanel> {
             runSpacing: 8,
             crossAxisAlignment: WrapCrossAlignment.center,
             children: [
-              _StateBadge(state: from),
+              _StateBadge(state: from, expired: expired),
               if (from == EventState.live && event.liveEndAt != null)
                 Text(
-                  'Bitiş ${formatClock(event.liveEndAt!)}',
+                  '${expired ? 'Bitti' : 'Bitiş'} '
+                  '${formatClock(event.liveEndAt!)}',
                   style: TextStyles.ui.copyWith(
                     color: Palette.inkMuted,
                     fontWeight: FontWeight.w600,
@@ -92,6 +100,13 @@ class _StatePanelState extends ConsumerState<StatePanel> {
                 ),
             ],
           ),
+          if (expired)
+            const StatusNote(
+              text:
+                  'Süre doldu: oyuncular okutma yapamıyor. '
+                  'Süreyi uzat ya da oyunu bitir.',
+              error: true,
+            ),
           const SizedBox(height: 14),
           if (options.isEmpty)
             Text(
@@ -165,6 +180,8 @@ class _StatePanelState extends ConsumerState<StatePanel> {
           'kendiliğinden durur.',
     (EventState.lobby, EventState.draft) =>
       'Yeni katılım kapanır. Katılmış oyuncular kalır.',
+    (EventState.live, EventState.live) =>
+      'Oyun şu andan itibaren girilen süre kadar açık kalır.',
     (EventState.live, EventState.lobby) =>
       'Oyun duraklar; bağlantı kurulamaz, katılım açık kalır.',
     (EventState.live, EventState.ended) =>
@@ -176,21 +193,25 @@ class _StatePanelState extends ConsumerState<StatePanel> {
 }
 
 class _StateBadge extends StatelessWidget {
-  const new({required this.state});
+  const new({required this.state, required this.expired});
 
   final EventState state;
+  final bool expired;
 
   @override
   Widget build(BuildContext context) {
-    final color = switch (state) {
-      EventState.draft => Palette.textMuted,
-      EventState.lobby => Palette.blue,
-      EventState.live => Palette.green,
-      EventState.ended => Palette.yellow,
-      EventState.archived => Palette.textMuted,
-    };
+    final label = expired ? 'Süre doldu' : stateLabel(state);
+    final color = expired
+        ? Palette.red
+        : switch (state) {
+            EventState.draft => Palette.textMuted,
+            EventState.lobby => Palette.blue,
+            EventState.live => Palette.green,
+            EventState.ended => Palette.yellow,
+            EventState.archived => Palette.textMuted,
+          };
     return Semantics(
-      label: 'Şu anki durum: ${stateLabel(state)}',
+      label: 'Şu anki durum: $label',
       excludeSemantics: true,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
@@ -202,12 +223,12 @@ class _StateBadge extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            if (state == EventState.live) ...[
+            if (state == EventState.live && !expired) ...[
               const Icon(Icons.circle, size: 10, color: Palette.ink),
               const SizedBox(width: 6),
             ],
             Text(
-              stateLabel(state),
+              label,
               style: TextStyles.display.copyWith(
                 fontSize: 18,
                 color: Palette.ink,

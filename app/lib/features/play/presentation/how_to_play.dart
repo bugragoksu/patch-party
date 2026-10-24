@@ -126,9 +126,8 @@ class _HowToPlayState extends ConsumerState<HowToPlay> {
                       ),
                       LinkButton(
                         label: 'Atla',
-                        onPressed: () => ref
-                            .read(howToPlaySeenProvider.notifier)
-                            .markSeen(),
+                        onPressed: () =>
+                            ref.read(howToPlaySeenProvider.notifier).markSeen(),
                       ),
                     ],
                   ),

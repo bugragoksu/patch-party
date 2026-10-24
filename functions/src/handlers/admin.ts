@@ -29,9 +29,15 @@ export async function setEventState(request: CallableRequest<unknown>): Promise<
   await db.runTransaction(async (tx) => {
     const ref = paths.event(data.eventId);
     const event = readEvent((await tx.get(ref)).data());
-    if (!canTransition(event.state, data.state)) throw new GameError('invalid_transition', { from: event.state });
+    // live -> live with a duration extends (or revives) the time window.
+    const extending = event.state === 'live' && data.state === 'live';
+    if (extending ? !data.liveDurationMin : !canTransition(event.state, data.state)) {
+      throw new GameError('invalid_transition', { from: event.state });
+    }
     const patch: Record<string, unknown> = { state: data.state, updatedAt: now };
-    if (data.state === 'live') {
+    if (extending) {
+      patch.liveEndAt = now + data.liveDurationMin! * 60_000;
+    } else if (data.state === 'live') {
       // Reopening an ended game must also reopen its time window.
       if (data.liveDurationMin) {
         patch.liveStartAt = now;
@@ -44,7 +50,8 @@ export async function setEventState(request: CallableRequest<unknown>): Promise<
     tx.update(ref, patch);
   });
   if (data.state === 'ended') await rankEvent(data.eventId, now);
-  await audit(data.eventId, uid, `state:${data.state}`, null);
+  const action = data.state === 'live' && data.liveDurationMin ? `state:live:${data.liveDurationMin}m` : `state:${data.state}`;
+  await audit(data.eventId, uid, action, null);
   return { state: data.state };
 }
 

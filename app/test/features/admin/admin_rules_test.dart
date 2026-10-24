@@ -26,10 +26,22 @@ void main() {
       }
     });
 
-    test('only lobby -> live asks for a duration', () {
+    test('starting and extending a game ask for a duration', () {
       expect(needsDuration(EventState.lobby, EventState.live), isTrue);
+      expect(needsDuration(EventState.live, EventState.live), isTrue);
       expect(needsDuration(EventState.ended, EventState.live), isFalse);
       expect(needsDuration(EventState.live, EventState.ended), isFalse);
+    });
+
+    test('a live game past its end counts as expired', () {
+      EventInfo at(EventState state, int? end) =>
+          EventInfo.fromJson('e', {'state': state.name, 'liveEndAt': end});
+      expect(liveExpired(at(EventState.live, 1000), 999), isFalse);
+      expect(liveExpired(at(EventState.live, 1000), 1000), isTrue);
+      expect(liveExpired(at(EventState.live, null), 5000), isFalse);
+      expect(liveExpired(at(EventState.ended, 1000), 5000), isFalse);
+      expect(canExtend(EventState.live), isTrue);
+      expect(canExtend(EventState.lobby), isFalse);
     });
 
     test('live duration must be 1..120 whole minutes', () {

@@ -16,9 +16,20 @@ const Map<EventState, List<EventState>> adminTransitions = {
 List<EventState> allowedTransitions(EventState from) =>
     adminTransitions[from] ?? const [];
 
-/// Only `lobby -> live` opens a timed window on the server.
+/// `lobby -> live` opens a timed window; `live -> live` (extend) resets its
+/// end to now + duration.
 bool needsDuration(EventState from, EventState to) =>
-    from == EventState.lobby && to == EventState.live;
+    (from == EventState.lobby || from == EventState.live) &&
+    to == EventState.live;
+
+/// A live game can always get more time, also after its window ran out.
+bool canExtend(EventState state) => state == EventState.live;
+
+/// State says live but the window is over: players cannot scan.
+bool liveExpired(EventInfo event, int nowMs) =>
+    event.state == EventState.live &&
+    event.liveEndAt != null &&
+    nowMs >= event.liveEndAt!;
 
 const defaultLiveDurationMin = 15;
 const minLiveDurationMin = 1;
@@ -46,6 +57,7 @@ String transitionLabel(EventState from, EventState to) => switch ((from, to)) {
   (EventState.draft, EventState.lobby) => 'Lobiyi aç',
   (EventState.lobby, EventState.live) => 'Oyunu başlat',
   (EventState.lobby, EventState.draft) => 'Taslağa geri al',
+  (EventState.live, EventState.live) => 'Süreyi uzat',
   (EventState.live, EventState.lobby) => 'Lobiye döndür',
   (EventState.live, EventState.ended) => 'Oyunu bitir',
   (EventState.ended, EventState.live) => 'Oyunu yeniden aç',

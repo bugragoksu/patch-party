@@ -296,4 +296,18 @@ describe('reopening', () => {
     const b = await joinAs(eventId, 'Bora', ['web', 'ai']);
     expect((await requestConnection(req({ eventId, code: qrOf(eventId, b) }, as(eventId, a)))).status).toBe('pending');
   });
+
+  it('live -> live with a duration revives an expired window', async () => {
+    const boss = { uid: 'boss', admin: true };
+    await paths.event(eventId).update({ liveStartAt: Date.now() - 120_000, liveEndAt: Date.now() - 60_000 });
+    const a = await joinAs(eventId, 'Ada', ['flutter', 'ai']);
+    const b = await joinAs(eventId, 'Bora', ['web', 'ai']);
+    expect(await reasonOf(requestConnection(req({ eventId, code: qrOf(eventId, b) }, as(eventId, a))))).toBe('not_live');
+    expect(await reasonOf(setEventState(req({ eventId, state: 'live' }, boss)))).toBe('invalid_transition');
+    await setEventState(req({ eventId, state: 'live', liveDurationMin: 10 }, boss));
+    const event = (await paths.event(eventId).get()).data()!;
+    expect(event.liveEndAt).toBeGreaterThan(Date.now() + 9 * 60_000);
+    expect(event.liveStartAt).toBeLessThan(Date.now() - 100_000);
+    expect((await requestConnection(req({ eventId, code: qrOf(eventId, b) }, as(eventId, a)))).status).toBe('pending');
+  });
 });

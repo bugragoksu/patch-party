@@ -32,6 +32,7 @@ class PrimaryButton extends StatelessWidget {
         builder: ({required pressed}) => AnimatedContainer(
           duration: const Duration(milliseconds: 90),
           height: height,
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           transform: Matrix4.translationValues(
             pressed ? 3 : 0,
             pressed ? 3 : 0,
