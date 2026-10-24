@@ -59,13 +59,16 @@ class _HealthCardState extends ConsumerState<HealthCard> {
   Future<void> _refresh() async {
     if (_loading) return;
     setState(() => _loading = true);
+    // Read providers before the await: the card can be unmounted meanwhile
+    // (e.g. the staff session ends), and `ref` is unusable after that.
+    final repo = ref.read(adminRepositoryProvider);
+    final reporter = ref.read(errorReporterProvider);
+    final eventId = ref.read(eventIdProvider);
     try {
-      final next = await ref
-          .read(adminRepositoryProvider)
-          .readHealth(
-            ref.read(eventIdProvider),
-            nowMs: DateTime.now().millisecondsSinceEpoch,
-          );
+      final next = await repo.readHealth(
+        eventId,
+        nowMs: DateTime.now().millisecondsSinceEpoch,
+      );
       if (!mounted) return;
       final prev = _sample;
       setState(() {
@@ -79,9 +82,7 @@ class _HealthCardState extends ConsumerState<HealthCard> {
         _failed = false;
       });
     } on Object catch (e, st) {
-      unawaited(
-        ref.read(errorReporterProvider).report(e, st, surface: 'admin'),
-      );
+      unawaited(reporter.report(e, st, surface: 'admin'));
       if (mounted) setState(() => _failed = true);
     } finally {
       if (mounted) setState(() => _loading = false);

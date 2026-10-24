@@ -64,8 +64,11 @@ class _ScanViewState extends ConsumerState<ScanView>
     setState(() => _error = null);
     await _scanner.start(
       rect.deflate(6),
-      onCode: (code) =>
-          unawaited(ref.read(playControllerProvider.notifier).submitCode(code)),
+      onCode: (code) {
+        // The camera can report one last code after this view is gone.
+        if (!mounted) return;
+        unawaited(ref.read(playControllerProvider.notifier).submitCode(code));
+      },
       onError: (error) {
         if (!mounted) return;
         ref
