@@ -6,12 +6,16 @@ import 'package:baglanti_agi/features/play/application/questions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-const badgeLabels = {
-  'first_connection': 'İlk Bağlantı',
-  'bridge': 'Zıt Kutuplar',
-  'explorer': 'Her Telden',
-  'social_butterfly': 'Sosyal Kelebek',
+/// Badge name and why it was earned (FR-12). Ids come from the server.
+const badgeInfo = {
+  'first_connection': ('Buz Kırıcı', 'İlk bağlantını kurdun.'),
+  'bridge': ('Zıt Kutuplar', 'Ortak ilgi alanın olmayan biriyle tanıştın.'),
+  'explorer': ('Her Telden', 'Dört farklı alandan insanlarla tanıştın.'),
+  'social_butterfly': ('Sosyal Kelebek', '10 kişiyle tanıştın.'),
 };
+
+String badgeTitle(String id) => badgeInfo[id]?.$1 ?? id;
+String badgeReason(String id) => badgeInfo[id]?.$2 ?? '';
 
 /// "Bağlandınız!": points, the shared question, a new badge if any (FR-07/08/12).
 class SuccessView extends ConsumerWidget {
@@ -140,11 +144,12 @@ class SuccessView extends ConsumerWidget {
               child: Text.rich(
                 TextSpan(
                   children: [
+                    const TextSpan(text: 'Yeni rozet: '),
                     TextSpan(
-                      text: badgeLabels[badge] ?? badge,
+                      text: badgeTitle(badge),
                       style: const TextStyle(fontWeight: FontWeight.w700),
                     ),
-                    const TextSpan(text: ' rozetini açtın'),
+                    TextSpan(text: '\n${badgeReason(badge)}'),
                   ],
                 ),
                 style: TextStyles.ui.copyWith(

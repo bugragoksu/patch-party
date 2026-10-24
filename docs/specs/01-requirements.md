@@ -72,7 +72,7 @@ draft ──▶ lobby ──▶ live ──▶ ended ──▶ archived
 | FR-24 | P1 | Oyuncu sırası: sunucu `live` süresince dakikada bir tüm oyuncuların sırasını hesaplar ve her oyuncunun kendi belgesine yazar | Oyuncu global sıralamayı dinlemez. Diskalifiye oyuncular sıralamaya girmez |
 | FR-10 | P1 | Oyun sonu özeti: kimlerle tanıştım, sıram, rozetlerim | `ended` durumunda otomatik açılır |
 | FR-11 | P0 | Puanlama: yeni bağlantı +10, ortak ilgi alanı olmayan biriyle +5 bonus. Puan iki tarafa da yazılır | Puan sunucu tarafında türetilir veya kurallarla doğrulanır. İstemci puanı serbestçe yazamaz |
-| FR-12 | P1 | Rozetler (örn. İlk Bağlantı, Zıt Kutuplar (ortak ilgi alanı olmayan biriyle bağlantı), Her Telden (4 alan grubunun hepsinden biriyle), Sosyal Kelebek (10 bağlantı)), Flutter animasyonlarıyla. Rive sonraki sürümde (ADR-0009) | Rozet kazanılınca animasyonlu bildirim |
+| FR-12 | P1 | Rozetler (örn. Buz Kırıcı (ilk bağlantı), Zıt Kutuplar (ortak ilgi alanı olmayan biriyle bağlantı), Her Telden (4 alan grubunun hepsinden biriyle), Sosyal Kelebek (10 bağlantı)), Flutter animasyonlarıyla. Rive sonraki sürümde (ADR-0009) | Rozet kazanılınca animasyonlu bildirim |
 
 ### Projeksiyon
 

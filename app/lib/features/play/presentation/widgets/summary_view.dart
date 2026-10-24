@@ -66,17 +66,30 @@ class SummaryView extends StatelessWidget {
                       Sticker(
                         color: Palette.asphaltRaised,
                         outline: Palette.yellow,
-                        radius: 999,
+                        radius: 14,
                         padding: const EdgeInsets.symmetric(
                           horizontal: 12,
-                          vertical: 6,
+                          vertical: 8,
                         ),
-                        child: Text(
-                          badgeLabels[b] ?? b,
-                          style: TextStyles.ui.copyWith(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w700,
-                          ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              badgeTitle(b),
+                              style: TextStyles.ui.copyWith(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                            Text(
+                              badgeReason(b),
+                              style: TextStyles.ui.copyWith(
+                                fontSize: 12,
+                                color: Palette.textMuted,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                   ],
