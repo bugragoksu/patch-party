@@ -24,6 +24,9 @@ const projectId = emulator ? 'demo-baglanti' : env.FIREBASE_PROJECT_ID;
 if (emulator) {
   process.env.FIRESTORE_EMULATOR_HOST ??= '127.0.0.1:8080';
   process.env.FIREBASE_AUTH_EMULATOR_HOST ??= '127.0.0.1:9099';
+} else {
+  // User ADC needs a quota project for the Auth admin API.
+  process.env.GOOGLE_CLOUD_QUOTA_PROJECT ??= projectId;
 }
 const eventId = env.APP_EVENT_ID;
 if (!eventId) throw new Error('APP_EVENT_ID is empty');
@@ -67,8 +70,13 @@ for (const [key, claim] of [['ADMIN_EMAILS', { admin: true }], ['PROJECTOR_EMAIL
       const user = await getAuth().getUserByEmail(email);
       await getAuth().setCustomUserClaims(user.uid, { ...(user.customClaims ?? {}), ...claim });
       console.log(`claim ${Object.keys(claim)[0]} set for one ${key === 'ADMIN_EMAILS' ? 'admin' : 'projector'} account`);
-    } catch {
-      console.warn(`${key}: an account has not signed in yet; ask it to sign in once, then rerun`);
+    } catch (e) {
+      if (e?.code === 'auth/user-not-found') {
+        console.warn(`${key}: an account has not signed in yet; ask it to sign in once, then rerun`);
+      } else {
+        console.error(`${key}: ${e?.code ?? e}`);
+        process.exitCode = 1;
+      }
     }
   }
 }
