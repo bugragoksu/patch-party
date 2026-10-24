@@ -14,6 +14,12 @@ abstract final class Browser {
     return RegExp('Instagram|FBAN|FBAV|WhatsApp|LinkedInApp').hasMatch(ua);
   }
 
+  /// Opens an app route such as `/screen` in a new tab.
+  static void openRoute(String route) {
+    final l = web.window.location;
+    web.window.open('${l.origin}${l.pathname}#$route', '_blank', 'noopener');
+  }
+
   static String? read(String key) {
     try {
       return web.window.localStorage.getItem(key);
