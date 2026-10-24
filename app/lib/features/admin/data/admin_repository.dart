@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:baglanti_agi/app/env.dart';
+import 'package:baglanti_agi/core/data/firebase_setup.dart';
 import 'package:baglanti_agi/core/domain/failures.dart';
 import 'package:baglanti_agi/core/domain/models.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -90,10 +91,13 @@ class AdminErr<T> extends Err<T> {
 /// admins by firestore.rules.
 class AdminRepository {
   new({FirebaseFirestore? firestore, FirebaseFunctions? functions})
-    : _db = firestore ?? FirebaseFirestore.instance,
+    : _db = firestore ?? FirebaseFirestore.instanceFor(app: staffApp),
       _functions =
           functions ??
-          FirebaseFunctions.instanceFor(region: Env.functionsRegion);
+          FirebaseFunctions.instanceFor(
+            app: staffApp,
+            region: Env.functionsRegion,
+          );
 
   final FirebaseFirestore _db;
   final FirebaseFunctions _functions;

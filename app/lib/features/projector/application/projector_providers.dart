@@ -17,7 +17,7 @@ enum ProjectorAccess { signedOut, denied, granted }
 /// Keyed on the uid only: `claims()` refreshes the ID token, which must not
 /// re-trigger this provider through `idTokenChanges`.
 final projectorAccessProvider = FutureProvider<ProjectorAccess>((ref) async {
-  final uid = ref.watch(authUserProvider.select((a) => a.value?.uid));
+  final uid = ref.watch(staffUserProvider.select((a) => a.value?.uid));
   if (uid == null) return ProjectorAccess.signedOut;
   final claims = await ref.watch(staffAuthProvider).claims();
   final ok = claims['projector'] == true || claims['admin'] == true;

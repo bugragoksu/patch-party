@@ -16,7 +16,7 @@ enum AdminAccess { signedOut, notAdmin, admin }
 /// granted role shows up without signing out.
 final adminAccessProvider = FutureProvider<AdminAccess>((ref) async {
   // Keyed on uid: token refreshes must not re-run (and re-refresh) this.
-  final uid = await ref.watch(authUserProvider.selectAsync((u) => u?.uid));
+  final uid = await ref.watch(staffUserProvider.selectAsync((u) => u?.uid));
   if (uid == null) return AdminAccess.signedOut;
   final claims = await ref.read(staffAuthProvider).claims();
   return claims['admin'] == true ? AdminAccess.admin : AdminAccess.notAdmin;

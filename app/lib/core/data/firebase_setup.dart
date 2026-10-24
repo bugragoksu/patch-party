@@ -27,3 +27,28 @@ Future<void> initFirebase() async {
         .useFunctionsEmulator(host, 5001);
   }
 }
+
+/// Staff (admin / projector) use their own Firebase app, so their Google
+/// session is stored apart from a player's custom-token session: joining as
+/// a player in another tab no longer signs the admin out.
+const staffAppName = 'staff';
+
+FirebaseApp get staffApp => Firebase.app(staffAppName);
+
+/// Called before a staff surface loads; safe to call more than once.
+Future<void> initStaffFirebase() async {
+  if (Firebase.apps.any((a) => a.name == staffAppName)) return;
+  final app = await Firebase.initializeApp(
+    name: staffAppName,
+    options: Firebase.app().options,
+  );
+  if (Env.useEmulator) {
+    const host = '127.0.0.1';
+    FirebaseFirestore.instanceFor(app: app).useFirestoreEmulator(host, 8080);
+    await FirebaseAuth.instanceFor(app: app).useAuthEmulator(host, 9099);
+    FirebaseFunctions.instanceFor(
+      app: app,
+      region: Env.functionsRegion,
+    ).useFunctionsEmulator(host, 5001);
+  }
+}

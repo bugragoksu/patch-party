@@ -1,4 +1,5 @@
 import 'package:baglanti_agi/app/theme/tokens.dart';
+import 'package:baglanti_agi/core/data/firebase_setup.dart';
 import 'package:baglanti_agi/core/ui/feedback.dart';
 import 'package:baglanti_agi/features/admin/admin_page.dart' deferred as admin;
 import 'package:baglanti_agi/features/play/presentation/camera_test_page.dart';
@@ -30,14 +31,16 @@ GoRouter buildRouter() => GoRouter(
     GoRoute(
       path: '/screen',
       builder: (context, state) => _Deferred(
-        load: projector.loadLibrary,
+        load: () => Future.wait([projector.loadLibrary(), initStaffFirebase()]),
         build: () => projector.ProjectorPage(),
       ),
     ),
     GoRoute(
       path: '/admin',
-      builder: (context, state) =>
-          _Deferred(load: admin.loadLibrary, build: () => admin.AdminPage()),
+      builder: (context, state) => _Deferred(
+        load: () => Future.wait([admin.loadLibrary(), initStaffFirebase()]),
+        build: () => admin.AdminPage(),
+      ),
     ),
   ],
   errorBuilder: (context, state) => const PlayerRoot(),

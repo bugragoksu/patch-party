@@ -17,13 +17,13 @@ class StaffGate extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final auth = ref.watch(authUserProvider);
+    final auth = ref.watch(staffUserProvider);
     if (!auth.hasValue) {
       if (auth.hasError) {
         return ErrorCard(
           message: 'Oturum bilgisi okunamadı. Sayfayı yenileyip tekrar dene.',
           actionLabel: 'Tekrar dene',
-          onAction: () => ref.invalidate(authUserProvider),
+          onAction: () => ref.invalidate(staffUserProvider),
         );
       }
       return const _Spinner();

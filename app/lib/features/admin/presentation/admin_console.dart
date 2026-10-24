@@ -103,7 +103,7 @@ class _Header extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final email = ref.watch(authUserProvider).value?.email;
+    final email = ref.watch(staffUserProvider).value?.email;
     return Wrap(
       spacing: 16,
       runSpacing: 12,

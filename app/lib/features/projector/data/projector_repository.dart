@@ -1,3 +1,4 @@
+import 'package:baglanti_agi/core/data/firebase_setup.dart';
 import 'package:baglanti_agi/core/domain/models.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -6,7 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 /// ranking and counters are derived on the client (ADR-0011).
 class ProjectorRepository {
   new({FirebaseFirestore? firestore})
-    : _db = firestore ?? FirebaseFirestore.instance;
+    : _db = firestore ?? FirebaseFirestore.instanceFor(app: staffApp);
 
   final FirebaseFirestore _db;
 

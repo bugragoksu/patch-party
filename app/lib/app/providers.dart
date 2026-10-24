@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:baglanti_agi/app/env.dart';
 import 'package:baglanti_agi/core/data/game_repository.dart';
+import 'package:baglanti_agi/core/data/staff_auth.dart';
 import 'package:baglanti_agi/core/domain/models.dart';
 import 'package:baglanti_agi/core/observability/error_reporter.dart';
 import 'package:baglanti_agi/core/platform/browser.dart';
@@ -57,6 +58,12 @@ int readNow(Ref ref) =>
 
 final authUserProvider = StreamProvider<User?>(
   (ref) => FirebaseAuth.instance.idTokenChanges(),
+);
+
+/// The staff (Google) account on the staff Firebase app. Only read on the
+/// admin and projector surfaces, after `initStaffFirebase`.
+final staffUserProvider = StreamProvider<User?>(
+  (ref) => StaffAuth().userChanges(),
 );
 
 /// Custom claims of the signed-in user: `eventId` for players, `admin` /
