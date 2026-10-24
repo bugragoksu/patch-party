@@ -6,6 +6,7 @@ import 'package:baglanti_agi/core/domain/failures.dart';
 import 'package:baglanti_agi/core/domain/names.dart';
 import 'package:baglanti_agi/core/observability/error_reporter.dart';
 import 'package:baglanti_agi/core/ui/avatar.dart';
+import 'package:baglanti_agi/core/ui/brand_mark.dart';
 import 'package:baglanti_agi/core/ui/buttons.dart';
 import 'package:baglanti_agi/core/ui/chips.dart';
 import 'package:baglanti_agi/core/ui/feedback.dart';
@@ -150,12 +151,20 @@ class _JoinScreenState extends ConsumerState<JoinScreen> {
                   ],
                 ),
                 const SizedBox(height: 14),
-                Text(
-                  event?.settings.displayName ?? 'Patch Party',
-                  style: TextStyles.display.copyWith(
-                    fontSize: 30,
-                    color: Palette.paper,
-                  ),
+                Row(
+                  children: [
+                    const BrandMark(size: 44),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Text(
+                        event?.settings.displayName ?? 'Patch Party',
+                        style: TextStyles.display.copyWith(
+                          fontSize: 30,
+                          color: Palette.paper,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 8),
                 Text(

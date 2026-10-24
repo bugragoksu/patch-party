@@ -1,5 +1,6 @@
 import 'package:baglanti_agi/app/theme/tokens.dart';
 import 'package:baglanti_agi/core/domain/models.dart';
+import 'package:baglanti_agi/core/ui/brand_mark.dart';
 import 'package:baglanti_agi/core/ui/feedback.dart';
 import 'package:baglanti_agi/features/projector/presentation/projector_widgets.dart';
 import 'package:flutter/material.dart';
@@ -96,7 +97,7 @@ class EventTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final subtitle = event.settings.subtitle;
-    return Column(
+    final title = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -121,6 +122,14 @@ class EventTitle extends StatelessWidget {
             ),
           ),
         ],
+      ],
+    );
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        BrandMark(size: size * 1.5),
+        SizedBox(width: size * 0.3),
+        Flexible(child: title),
       ],
     );
   }
