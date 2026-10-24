@@ -35,482 +35,505 @@ Bulunan hata türleri:
 | design\|design | İçinize çok sinen ama kullanıcı testinde tamamen çuvallayan bir tasarımınız oldu mu? | İçinize çok sinip kullanıcı testinde çuvallayan bir tasarımınızın hikâyesi ne? |
 | general | Gece geç saatte çözülen inatçı bir sorunun ardından hissettiğiniz o duygu neye benziyordu? | Gece yarısına kadar uğraşıp sonunda çözdüğünüz en inatçı sorun neydi? |
 
+## Başlangıç seviyesi turu
+
+Kitle çoğunlukla üniversite öğrencileri ve sektöre yeni girenler (~100 kişi). İlk turdan sonra soruların çoğu iş deneyimi varsayıyordu: canlı ortam, PR, deploy, müşteri, MVP, teknik borç, on-call gibi. Bu turda **221 soru yeniden yazıldı**. Havuz anahtarları ve boyutları değişmedi.
+
+İlkeler:
+
+- Hiçbir soru iş deneyimi gerektirmiyor. "Hiç yapmadım" diyen biri de cevaplayabiliyor.
+- Sorular alanla bağlantılı ama giriş seviyesinde: ilgi nasıl başladı, ilk denenen araç, nereden yardım alınıyor, şu an ne öğreniliyor, hayal edilen proje.
+- Deneyim yerine kullanıcı gözlemi ("telefonunuzdaki", "gördüğünüz", "oynadığınız") ve "siz olsanız…" kurgusu kullanıldı.
+- Teknik terimler en yaygın olanlarla sınırlı: uygulama, web sitesi, oyun, yapay zekâ, kod, tasarım.
+- Zaten temel olan 48 soruya (çoğu `general` havuzunda) dokunulmadı.
+
+| Havuz | Önce | Sonra |
+|---|---|---|
+| opensource\|opensource | Bir projeye ilk PR'ınızı gönderirken sizi en çok ne tedirgin etti? | Açık kaynak kavramıyla ilk nerede karşılaştınız? |
+| backend\|backend | Canlı ortamda veritabanını kitleyen veya sunucuları yere seren en unutulmaz sorgunuz neydi? | Backend'e nasıl ilgi duydunuz, sizi bu alana çeken ne oldu? |
+| backend\|product | MVP'yi yetiştirmek için backend'de bilerek bıraktığınız en büyük teknik borç neydi? | Sizce bir uygulamayı milyonlarca kişinin kullanabilmesi için ne gerekir? |
+| devops\|flutter | Store'a sürüm gönderirken pipeline son anda patladığında ne yaptınız? | Yaptığınız bir uygulama Play Store'da olsa ilk kime gönderirdiniz? |
+| design\|devops | Bozuk bir deploy yüzünden kullanıcıların gördüğü en garip ekran neydi? | Sevdiğiniz bir uygulamanın güncellemeden sonra tamamen değişmesi size ne hissettiriyor? |
+| ai\|data | RAG ya da model eğitiminde veri kalitesinin her şeyi değiştirdiğini gördüğünüz an hangisiydi? | Bir yapay zekâ modelini kendiniz eğitebilseniz ona hangi verileri verirdiniz? |
+| security\|security | Logları incelerken tesadüfen yakaladığınız en ciddi saldırı girişimi neydi? | Film ve dizilerdeki hacker sahneleri size ne kadar gerçekçi geliyor? |
+| product\|product | Kullanıcıların çok sevdiği ama şirkete hiçbir fayda sağlamayan bir özelliği yayından nasıl kaldırırsınız? | Bir girişim kursanız hangi sorunu çözmek isterdiniz? |
+
 ## Havuzlar
 
 ## Yapay Zekâ & LLM × Yapay Zekâ & LLM
 
 - Prompt yazarken modelin saçmalayıp sizi en çok şaşırttığı an neydi?
-- LLM'li bir özelliği canlıya aldıktan sonra sizi en çok hayal kırıklığına uğratan ne oldu?
+- Yapay zekâ araçlarını en çok ne için kullanıyorsunuz?
 - Hangi yapay zekâ aracının abartıldığını, hangisinin hakkının yendiğini düşünüyorsunuz?
 
 ## Yapay Zekâ & LLM × Backend & Cloud
 
-- LLM API'sinden gelen yanıtları hızlandırmak için denediğiniz en yaratıcı yol neydi?
-- Model yanıtlarını backend tarafında cache'lerken karşılaştığınız en zorlu problem neydi?
-- Canlıda token limitine takıldığınızda ya da sunucu çöktüğünde ilk ne yaptınız?
+- Bir yapay zekâ uygulamasının arka planda nasıl çalıştığını ilk ne zaman merak ettiniz?
+- Kendi kodunuzdan bir yapay zekâya soru sorabilseniz ona ilk ne yaptırırdınız?
+- Yapay zekâ kod öğrenmenizi nasıl etkiledi, kolaylaştırdı mı tembelleştirdi mi?
 
 ## Yapay Zekâ & LLM × Topluluk & Etkinlik
 
-- Bir yapay zekâ aracını topluluğa ilk kez anlatırken dinleyicileri en çok büyüleyen demo neydi?
-- Etkinlik düzenlerken ya da içerik üretirken yapay zekâyı en yaratıcı biçimde nasıl kullandınız?
+- İzlediğiniz bir yapay zekâ demosunda sizi en çok etkileyen şey neydi?
+- Yapay zekâyı okulda ya da günlük hayatta en yaratıcı nasıl kullandınız?
 - İnsanların yapay zekâ hakkında en sık yanlış bildiği ve düzeltmek istediğiniz şey ne?
 
 ## Yapay Zekâ & LLM × Veri & Analitik
 
-- Temizlemediğiniz bir veriyi modele verdiğinizde çıkan en komik ya da öğretici sonuç neydi?
-- RAG ya da model eğitiminde veri kalitesinin her şeyi değiştirdiğini gördüğünüz an hangisiydi?
-- Vektör veritabanı seçerken ya da veri hattı kurarken başınızı en çok ağrıtan detay neydi?
+- Yapay zekânın size verdiği en komik yanlış bilgi neydi?
+- Bir yapay zekâ modelini kendiniz eğitebilseniz ona hangi verileri verirdiniz?
+- Veri ve yapay zekâ öğrenmeye nereden başladınız, ya da nereden başlardınız?
 
 ## Yapay Zekâ & LLM × UI/UX & Tasarım
 
-- Yapay zekâ araçlarının ürettiği bir arayüz tasarımını koda dökerken yaşadığınız en ilginç an neydi?
-- Model yanıt üretirken kullanıcıyı bekletmenin gördüğünüz en iyi yolu hangisi?
-- Bir yapay zekâ özelliğini kullanıcıya karmaşık gelmeyecek şekilde tasarlamanın en zor yanı neydi?
+- Yapay zekâya ürettirdiğiniz en güzel ya da en tuhaf görsel neydi?
+- Kullandığınız yapay zekâ uygulamalarından hangisinin tasarımını en çok beğeniyorsunuz?
+- Yapay zekâ tasarımcıların işini nasıl değiştirecek sizce?
 
 ## Yapay Zekâ & LLM × DevOps
 
-- Büyük bir modeli production ortamında scale etmeye çalışırken patlayan ilk şey neydi?
-- GPU kaynaklarını optimize ederken veya CI/CD hattına model eklerken aldığınız en tuhaf hata neydi?
-- Bir model sunucusunu ayakta tutmak için uykusuz kaldığınız gece ne olmuştu?
+- Bilgisayarınızda çalıştırmayı denediğiniz ya da denemek istediğiniz yapay zekâ modeli hangisi?
+- Yapay zekâyla bir işi otomatik hale getirebilseniz ilk neyi seçerdiniz?
+- Takıldığınız bir hatayı yapay zekâya sorduğunuzda aldığınız en iyi ya da en kötü cevap neydi?
 
 ## Yapay Zekâ & LLM × Flutter & Mobil
 
-- Bir mobil uygulamaya yerel veya bulut tabanlı bir yapay zekâ özelliği eklerken en çok ne zorladı?
-- Telefonda çalışan küçük bir yapay zekâ modeli denerken karşılaştığınız performans engeli neydi?
-- Kullanıcının cihazında çevrimdışı model çalıştırmayı denerken batarya veya bellek tarafında ne oldu?
+- Telefonunuzdaki hangi uygulamaya bir yapay zekâ özelliği eklemek isterdiniz?
+- Telefonunuzda en sık kullandığınız yapay zekâ uygulaması hangisi, ne için?
+- Yapay zekâ destekli bir mobil uygulama yapsanız ne işe yarardı?
 
 ## Yapay Zekâ & LLM × Oyun Geliştirme
 
 - Yapay zekâ destekli NPC'lerin oyunları nasıl değiştireceğini düşünüyorsunuz?
-- Prosedürel içerik ya da yapay zekâlı bir oyun mekaniği denerken karşılaştığınız en eğlenceli hata neydi?
-- Bir oyunda yapay zekânın oyunu kırmadan oyuncuyu şaşırtmasını sağlamanın en zor yanı neydi?
+- Bir oyunda karşılaştığınız en akıllı ya da en aptal düşman hangisiydi?
+- Yapay zekâyla bir oyun tasarlasanız konusu ne olurdu?
 
 ## Yapay Zekâ & LLM × Açık Kaynak
 
-- Açık kaynak bir modeli lokalde çalıştırırken sizi pes etme noktasına getiren ne oldu?
-- Açık kaynak bir AI kütüphanesinde bir bug çözmeye çalışırken öğrendiğiniz en değerli şey neydi?
-- Hugging Face ya da GitHub'da keşfedip projelerinizi değiştiren, az bilinen bir repo hangisi?
+- Ücretsiz ve açık kaynak yapay zekâ araçlarından hangilerini duydunuz ya da denediniz?
+- Herkesin ücretsiz kullanabileceği bir yapay zekâ aracı yapsanız ne işe yarardı?
+- GitHub'da gördüğünüz en ilginç ya da en eğlenceli proje hangisiydi?
 
 ## Yapay Zekâ & LLM × Ürün & Girişimcilik
 
-- Yapay zekâlı bir fikri gerçek bir ürüne dönüştürürken karşılaştığınız en büyük engel neydi?
-- Müşterinin ya da kullanıcının yapay zekâdan imkansız bir şey beklediği en unutulmaz anınız neydi?
-- Kullanıcıların bir AI özelliğini hiç beklemediğiniz bir amaçla kullandığı en ilginç örnek neydi?
+- Yapay zekâyla bir girişim kursanız hangi sorunu çözerdiniz?
+- Yapay zekâdan beklediğiniz ama henüz yapamadığı şey ne?
+- Sizce yapay zekâyla yapılmış en işe yarar uygulama hangisi?
 
 ## Yapay Zekâ & LLM × Siber Güvenlik
 
-- Bir modele prompt injection yaptığınızda veya sistemin açık verdiğini gördüğünüzde ilk hissiniz neydi?
-- Hassas kurumsal verilerin bir LLM servisine sızmasını önlemek için aldığınız en katı önlem neydi?
-- Yapay zekânın bir güvenlik açığı yakaladığı ya da yarattığı en çarpıcı örnek hangisi?
+- Yapay zekâya kurallarını aştırmak için gördüğünüz en yaratıcı numara neydi?
+- Yapay zekâya hangi bilgilerinizi asla vermezsiniz?
+- Yapay zekâyla yapılan sahte ses ve videolar sizi ne kadar endişelendiriyor?
 
 ## Yapay Zekâ & LLM × Web & Frontend
 
-- Web sayfasına streaming LLM yanıtı entegre ederken DOM veya state yönetiminde yaşadığınız zorluk neydi?
-- Yapay zekâ yanıtı yavaş gelirken kullanıcıya beklemeyi hissettirmemek için bulduğunuz en iyi numara ne?
-- Bir web projesinde AI destekli arama veya sohbet bileşeni yaparken tasarımı en çok bozan durum neydi?
+- Yapay zekâya bir web sitesi yaptırsanız nasıl bir site isterdiniz?
+- Sitelerde gördüğünüz en işe yarar ya da en sinir bozucu sohbet botu hangisiydi?
+- Yapay zekâ web geliştirmeyi öğrenmenizi nasıl etkiledi?
 
 ## Backend & Cloud × Backend & Cloud
 
-- Canlı ortamda veritabanını kitleyen veya sunucuları yere seren en unutulmaz sorgunuz neydi?
-- Bir mikroservis krizinde loglarda kaybolup sorunu saatler sonra bulduğunuz o an nasıldı?
-- Bulut faturasının beklenmedik biçimde uçuşa geçtiğini fark ettiğiniz ilk an ne hissettiniz?
+- Backend'e nasıl ilgi duydunuz, sizi bu alana çeken ne oldu?
+- Bir uygulamanın arka planında nelerin döndüğünü ilk ne zaman merak ettiniz?
+- İlk öğrendiğiniz ya da öğrenmek istediğiniz backend dili hangisi, neden?
 
 ## Backend & Cloud × Topluluk & Etkinlik
 
 - Bir etkinlikte dinleyip eve dönünce hemen denemek istediğiniz backend fikri neydi?
-- Topluluk için geliştirilen bir projede sunucu çöktüğünde yaşanan en komik kriz anı neydi?
-- Bir geliştirici etkinliğinin backend altyapısını kuracak olsanız hangi servisi kesin kullanırdınız?
+- Backend öğrenirken takıldığınızda en çok nereden yardım alıyorsunuz?
+- Bu oyunun arka planında sizce neler oluyor, nasıl çalışıyor olabilir?
 
 ## Backend & Cloud × Veri & Analitik
 
-- Beklediğinizden çok yavaş çalışan bir sorguyu hızlandırmak için yaptığınız en etkili şey neydi?
-- Analitik verileri backend'de işlerken karşılaştığınız en büyük darboğaz neydi?
-- Canlı bir veri akışı sistemi çökerttiğinde durumu nasıl kurtardınız?
+- En sık kullandığınız uygulama sizce hakkınızda hangi verileri tutuyor?
+- İlk kurduğunuz ya da kurmak istediğiniz veritabanında ne saklardınız?
+- Elinizde bir şehrin tüm verileri olsa hangi soruya cevap arardınız?
 
 ## Backend & Cloud × UI/UX & Tasarım
 
-- Tasarımdaki karmaşık bir özelliği backend'e uydururken tasarımcıyla en çok neyi tartıştınız?
-- API yanıt sürelerinin uzaması kullanıcı deneyimini bozduğunda çözümü nerede buldunuz?
-- Backend'den gelen hataları kullanıcıya anlaşılır mesajlara çevirmek için nasıl bir yol buldunuz?
+- Bir uygulamanın görünen yüzü mü, arka planı mı sizi daha çok çekiyor, neden?
+- Yavaş açılan bir uygulamayı ne kadar beklersiniz, ne zaman kapatırsınız?
+- Gördüğünüz en komik ya da en anlaşılmaz hata mesajı neydi?
 
 ## Backend & Cloud × DevOps
 
-- Canlıya çıkış sırasında sunucu yapılandırması yüzünden yaşanan en unutulmaz kriz neydi?
-- Mikroservisleri konteynerize ederken deployment sürecinde en çok zorlandığınız an neydi?
-- Sunucudan gelen ilk ciddi alarmda ne yaptınız, sonradan ne öğrendiniz?
+- Yaptığınız bir projeyi internete koysanız ilk kime gösterirdiniz?
+- Programlama ortamını kurarken yaşadığınız en sinir bozucu an neydi?
+- Bir site ya da uygulama çöktüğünde aklınıza ilk ne geliyor?
 
 ## Backend & Cloud × Flutter & Mobil
 
-- Uygulama çevrimdışıyken biriken verileri API ile nasıl senkronize ettiniz?
-- Backend yanıt formatı habersiz değişip uygulama patladığında ne yaptınız?
-- Sunucudan mobile anlık bildirim gönderirken karşılaştığınız en ilginç sorun neydi?
+- İnternet yokken de kullanabildiğiniz uygulamalar hangileri, sizce bunu nasıl yapıyorlar?
+- Mobil uygulama mı, arkasındaki sunucu mu yapmak size daha cazip geliyor?
+- Bir uygulamadan aldığınız en sinir bozucu ya da en işe yarar bildirim neydi?
 
 ## Backend & Cloud × Oyun Geliştirme
 
-- Çok oyunculu bir oyunda sunucu gecikmesini düşürmek için denediğiniz en sıra dışı yöntem neydi?
-- Oyun içi durumları senkronize ederken veritabanı performansını nasıl toparladınız?
-- Liderlik tablosu ya da envanter sisteminin backend altyapısını kurarken neye takıldınız?
+- Online oyunlarda lag yaşadığınızda sizce arka planda neler oluyor?
+- Arkadaşlarınızla oynayacağınız çok oyunculu bir oyun yapsanız nasıl bir oyun olurdu?
+- Bir oyunda liderlik tablosuna girmek için yaptığınız en çılgın şey neydi?
 
 ## Backend & Cloud × Açık Kaynak
 
-- Kullandığınız açık kaynak bir sunucu kütüphanesinde hata keşfedip PR açtığınızda ne oldu?
-- Backend tarafında kapalı kaynak bir servisi açık kaynak bir alternatifle değiştirme hikayeniz neydi?
-- Açık kaynak bir projeye katkı verirken dokümantasyon eksikliğiyle nasıl başa çıktınız?
+- Kullandığınız ücretsiz ve açık kaynak araçlardan hangisini en çok seviyorsunuz?
+- GitHub'da kodunu okuyup bir şey öğrendiğiniz ya da öğrenmek istediğiniz proje hangisi?
+- Yeni bir şey öğrenirken dokümantasyon mu, video mu, deneme yanılma mı size daha çok uyuyor?
 
 ## Backend & Cloud × Ürün & Girişimcilik
 
-- Ürün sahibinin istediği acil bir özelliğin backend maliyeti çok yüksek çıktığında ne yaptınız?
-- MVP'yi yetiştirmek için backend'de bilerek bıraktığınız en büyük teknik borç neydi?
-- Kullanıcı sayısı aniden fırladığında ürünün ayakta kalması için sunucuda aldığınız ilk aksiyon neydi?
+- Bir uygulama fikriniz olsa işe nereden başlardınız, tasarımdan mı koddan mı?
+- Sizce bir uygulamayı milyonlarca kişinin kullanabilmesi için ne gerekir?
+- Yaptığınız bir uygulamayı bir anda çok kişi kullanmaya başlasa ilk ne yapardınız?
 
 ## Backend & Cloud × Siber Güvenlik
 
-- Sunucuda şüpheli bir trafik ya da yetki açığı fark ettiğinizde izini nasıl sürdünüz?
-- Bir API ucunun beklenmedik şekilde kötüye kullanıldığını fark ettiğinizde aldığınız ilk önlem neydi?
-- Kimlik doğrulama sistemini baştan kurgularken güvenlikle geliştirme hızını nasıl dengelediniz?
+- Bir siteye kaydolurken şifrenizin güvende olduğuna nasıl karar veriyorsunuz?
+- Duyduğunuz en büyük veri sızıntısı hangisiydi, sizi nasıl etkiledi?
+- Giriş yaparken en sevdiğiniz ve en sinir olduğunuz yöntem hangisi?
 
 ## Backend & Cloud × Web & Frontend
 
-- Sayfa yükleme hızını düşüren bir backend isteğini frontend tarafında nasıl telafi ettiniz?
-- REST mi GraphQL mi tartışmasında hangi taraftasınız, neden?
-- SSR mimarisine geçerken sunucu yükünü ve tarayıcı performansını nasıl dengelediniz?
+- Bir web sitesine girdiğinizde arka planda neler olduğunu ilk ne zaman merak ettiniz?
+- Frontend mi backend mi, sizi hangisi daha çok çekiyor, neden?
+- Hızlı açılan bir sitenin sırrı sizce ne?
 
 ## Topluluk & Etkinlik × Topluluk & Etkinlik
 
-- Bir etkinlikte tanıştığınız ve kariyerinizi etkileyen biriyle hikâyeniz ne?
-- Bir topluluk etkinliği organize ederken son dakikada çıkan en büyük kriz nasıl çözüldü?
+- Bugün buraya gelmeye nasıl karar verdiniz?
+- Bir etkinlikte yeni biriyle konuşmayı başlatmanın sizce en kolay yolu ne?
 - Katıldığınız bir buluşmada ortamın enerjisini anında yükselten şey neydi?
 
 ## Topluluk & Etkinlik × Veri & Analitik
 
-- Bir etkinliğin başarısını ölçmek için bilet sayısından farklı hangi metriğe bakardınız?
-- Topluluk geri bildirimlerini analiz ederken ortaya çıkan en şaşırtıcı içgörü neydi?
+- Bir etkinliğin iyi geçtiğini sayılardan nasıl anlardınız?
+- Bu salondaki herkes hakkında tek bir şey öğrenebilseniz neyi merak ederdiniz?
 - Katılımcı verilerine bakarak bir sonraki etkinlikte neyi değiştirirdiniz?
 
 ## Topluluk & Etkinlik × UI/UX & Tasarım
 
 - Bir etkinliğin afişi ya da rozeti, oraya gitme isteğinizi nasıl etkiliyor?
-- Fiziksel bir etkinlik alanında katılımcı deneyimini bozan bir tasarım hatasını nasıl fark ettiniz?
-- Topluluk kimliğini ve görsel dilini sıfırdan oluştururken en çok ilham aldığınız kaynak neydi?
+- Gittiğiniz bir etkinlikte tasarımıyla aklınızda kalan şey neydi?
+- Tasarım için en çok nereden ilham alıyorsunuz?
 
 ## Topluluk & Etkinlik × DevOps
 
-- Canlı bir etkinlik anında çöken sunucuyu kurtarmak için aldığınız en yaratıcı önlem neydi?
-- Yüzlerce katılımcının aynı anda yüklendiği bir sistemde ilk kontrol edeceğiniz şey ne olurdu?
-- Bir topluluk projesinde deployment sürecini otomatize ederken yaşadığınız en garip aksilik neydi?
+- İzlediğiniz bir sunumda yaşanan en komik teknik aksilik neydi?
+- Bir işi otomatik yapmak için yazdığınız ya da yazmak istediğiniz ilk küçük kod neydi?
+- Bir hackathon'a katılsanız ekipte hangi rolü üstlenmek isterdiniz?
 
 ## Topluluk & Etkinlik × Flutter & Mobil
 
 - Bu oyun gibi bir etkinlik uygulamasına siz hangi özelliği eklerdiniz?
 - Konuşma sırasında dinleyicilerin sahneyle etkileşime girmesi için nasıl bir mobil özellik yapardınız?
-- Sadece bir günde tamamlanan bir hackathon mobil uygulamasında feda ettiğiniz ilk özellik neydi?
+- Bir günde bir mobil uygulama yapmanız gerekse ne yapardınız?
 
 ## Topluluk & Etkinlik × Oyun Geliştirme
 
-- Bir game jam etkinliğinde kısıtlı zamanda ekiple kriz çözerken aldığınız en radikal karar neydi?
+- Arkadaşlarınızla en çok oynadığınız oyun hangisi, neden o?
 - Bir topluluğu saatlerce ekrana kitleyecek çok oyunculu mini bir oyun tasarlasanız mekaniği ne olurdu?
 - Oyuncuların bir araya gelip ürettiği en şaşırtıcı topluluk içeriği ya da mod neydi?
 
 ## Topluluk & Etkinlik × Açık Kaynak
 
-- İlk açık kaynak katkınızı yaparken ya da ilk pull request'i kabul ederken ne hissetmiştiniz?
-- Bir projeye gelen en kaotik issue'yu toplulukla birlikte nasıl çözdünüz?
-- Açık kaynak bir projeyi canlı tutmak için uyguladığınız en etkili motivasyon yöntemi nedir?
+- Açık kaynak dendiğinde aklınıza ilk ne geliyor?
+- Herkesin katkı verebileceği bir projeye ilk adımı atmak için sizi ne cesaretlendirirdi?
+- Wikipedia gibi gönüllülerle yürüyen projeler sizce neden işe yarıyor?
 
 ## Topluluk & Etkinlik × Ürün & Girişimcilik
 
-- Topluluk geri bildirimleriyle tamamen yön değiştiren en ilginç ürün kararı neydi?
-- Sıfır bütçeli bir fikir için ilk yüz aktif kullanıcıyı çekerken kullandığınız strateji neydi?
-- Kullanıcıların en çok talep ettiği ama ürüne eklemeyi reddettiğiniz özellik neydi?
+- Bir uygulamaya geri bildirim gönderdiğiniz ya da göndermek istediğiniz son şey neydi?
+- Sıfır bütçeyle bir uygulama yapsanız ilk 100 kullanıcıyı nasıl bulurdunuz?
+- En sevdiğiniz uygulamaya tek bir özellik ekleyebilseniz ne eklerdiniz?
 
 ## Topluluk & Etkinlik × Siber Güvenlik
 
 - Etkinliklerdeki açık Wi-Fi ağlarında nelere dikkat ediyorsunuz?
-- Bir topluluk platformunda kullanıcı verilerini korurken aldığınız en sıkı önlem neydi?
-- Bir topluluğu sosyal mühendisliğe karşı bilinçlendirmek için ilk ne yapardınız?
+- Sosyal medyada paylaşmadan önce iki kez düşündüğünüz şeyler neler?
+- Arkadaşlarınızı internet dolandırıcılığına karşı uyarmak için ne söylerdiniz?
 
 ## Topluluk & Etkinlik × Web & Frontend
 
-- Bir etkinlik sitesinde son dakika çıkan bir hatayı nasıl çözdünüz?
-- Topluluğun ilgisini anında çeken en yaratıcı web animasyonu ya da etkileşimi neydi?
-- Kayıtların açıldığı ilk dakikada trafiği kaldıramayan bir açılış sayfasını nasıl toparlardınız?
+- Bir etkinlik için web sitesi yapsanız sayfada mutlaka ne olurdu?
+- Gördüğünüz en yaratıcı ya da en eğlenceli web sitesi hangisiydi?
+- Bilet ya da kayıt sırasında çöken bir siteyle karşılaştığınızda ne yaptınız?
 
 ## Veri & Analitik × Veri & Analitik
 
-- Bir veri setini temizlerken karşınıza çıkan en tuhaf kayıt neydi?
-- Bir modelin tahminleri gerçekle tamamen çeliştiğinde ne yaptınız?
-- Büyük bir veri yığınında saatlerce aradıktan sonra bulduğunuz en değerli içgörü neydi?
+- Veriye ve analize ilginiz nasıl başladı?
+- Kendi hayatınızla ilgili hangi verileri takip ediyorsunuz ya da etmek isterdiniz?
+- Fikrinizi değiştiren bir grafik ya da istatistik hangisiydi?
 
 ## Veri & Analitik × UI/UX & Tasarım
 
 - İlk bakışta anlaşılan, gördüğünüz en etkileyici veri görselleştirmesi hangisi?
-- Karmaşık bir analiz tablosunu sadeleştirirken vazgeçmekte en çok zorlandığınız öge neydi?
-- A/B testi sonucunda tasarım sezgilerinizi tamamen yıkan en sürpriz kullanıcı davranışı neydi?
+- Sıkıcı bir tabloyu ilgi çekici hale getirmek için ne yapardınız?
+- Spotify Wrapped gibi kişisel veri özetleri sizce neden bu kadar seviliyor?
 
 ## Veri & Analitik × DevOps
 
-- Bir veri pipeline'ı patladığında ilk nereye bakarsınız?
-- Sürekli büyüyen bir veri tabanını sıfır kesintiyle taşırken yaşadığınız en büyük stres neydi?
-- Analitik modelleri canlıya alırken kaynak tüketimini optimize ettiğiniz en zekice hamle neydi?
+- Dosyalarınızı nasıl yedekliyorsunuz, kaybettiğiniz en değerli dosya neydi?
+- Tekrarlayan bir işi otomatik hale getirmek için ilk hangi aracı öğrenmek isterdiniz?
+- Bir uygulamayı kaç kişinin kullandığını sizce nasıl takip ediyorlar?
 
 ## Veri & Analitik × Flutter & Mobil
 
-- Mobilde binlerce satırlık bir listeyi arayüzü dondurmadan göstermek için ne yaptınız?
-- Kullanıcı davranış verilerini analiz ederek mobil uygulamada değiştirdiğiniz ilk ekran neydi?
-- Cihazda yerel saklanan verileri uzaktaki analiz sunucusuyla senkronize ederken ne zorladı?
+- Telefonunuzdaki ekran süresi verisine baktığınızda sizi en çok ne şaşırttı?
+- Bir uygulamanın sizin hakkınızda en çok neyi bildiğini düşünüyorsunuz?
+- Verilerle çalışan bir mobil uygulama yapsanız neyi takip ederdi?
 
 ## Veri & Analitik × Oyun Geliştirme
 
-- Oyuncuların bir bölümü geçemediğini oyun analitiğinde fark edince seviyeyi nasıl güncellediniz?
-- Oyun içi ekonomiyi dengelerken veri simülasyonlarının yetersiz kaldığı an neydi?
-- Oyun motorunda harita optimizasyonu yaparken veri yükünü azaltmak için uyguladığınız yöntem neydi?
+- Oyunlarda istatistik ekranına ne kadar bakarsınız, en çok hangi sayıyı takip edersiniz?
+- Oynadığınız bir oyunun dengesinde ya da ekonomisinde sizce bozuk olan ne?
+- Oyun şirketleri oyuncuların verileriyle sizce neler yapıyor?
 
 ## Veri & Analitik × Açık Kaynak
 
-- Analiz yaparken kullandığınız açık kaynak bir kütüphanede bulduğunuz en kritik hata neydi?
-- Kamuya açık bir veri setini GitHub üzerinde paylaşırken yaşadığınız en büyük teknik sorun neydi?
-- Açık kaynak veri araçları içinde işinizi kökten değiştiren ilk paket hangisiydi?
+- Herkese açık bir veri setini inceleyebilseniz hangi konuyu seçerdiniz?
+- Belediyeler ya da devlet hangi verileri herkese açık paylaşmalı sizce?
+- Veriyle uğraşmak için ilk denediğiniz araç hangisiydi, Excel mi, Python mı, başka bir şey mi?
 
 ## Veri & Analitik × Ürün & Girişimcilik
 
-- Kullanıcı verisine bakıp ürünün tüm yol haritasını değiştirdiğiniz o an nasıldı?
-- Metrikler harika görünürken ürünün aslında tutmadığını nasıl fark ettiniz?
-- Yeni bir özellik çıkarırken sezgilerinizle verilerin çeliştiği durumlarda nasıl uzlaşırsınız?
+- Bir uygulamanın sizi fazla iyi tanıdığını hissettiğiniz an neydi?
+- Bir uygulamayı indirmeden önce puanlara mı, yorumlara mı, indirme sayısına mı bakarsınız?
+- Karar verirken içgüdünüze mi güvenirsiniz, verilere mi?
 
 ## Veri & Analitik × Siber Güvenlik
 
-- Veriyle çalışırken karşılaştığınız en tedirgin edici gizlilik sorunu neydi?
-- Büyük bir veri setini korurken veya anonimleştirirken yaşadığınız en ilginç zorluk neydi?
-- Veri erişim izinleri ile analitik ekiplerin hız baskısı çatıştığında dengeyi nasıl kurarsınız?
+- Bir uygulamanın sizden istediği en gereksiz izin hangisiydi?
+- İnternette hakkınızda en çok bilgiyi sizce hangi şirket tutuyor?
+- Kişisel verilerinizi korumak için yaptığınız en basit şey ne?
 
 ## Veri & Analitik × Web & Frontend
 
-- Arayüzde devasa bir veri setini kasmadan görselleştirmeye çalışırken başınıza gelen en zor an neydi?
-- Dashboard yaparken kullanıcıların gerçekte hiç bakmadığını fark ettiğiniz metrik hangisiydi?
-- Frontend'den gelen kirli kullanıcı verilerini ayıklarken karşılaştığınız en tuhaf durum neydi?
+- Web sitelerindeki çerez uyarılarında genelde ne yapıyorsunuz, neden?
+- Sık kullandığınız bir site size hangi istatistiği göstersin isterdiniz?
+- Web sitelerindeki formları doldururken sizi en çok ne sinir ediyor?
 
 ## UI/UX & Tasarım × UI/UX & Tasarım
 
-- İçinize çok sinip kullanıcı testinde çuvallayan bir tasarımınızın hikâyesi ne?
+- Tasarıma ilginiz nasıl başladı?
 - Kullanırken tasarım detaylarına hayran kalıp 'Bunu ben yapmalıydım' dediğiniz uygulama hangisi?
-- Tasarım sisteminde bir bileşeni baştan kurgularken yaşadığınız en büyük fikir ayrılığı neydi?
+- Tasarım yaparken en sevdiğiniz araç hangisi, neden?
 
 ## UI/UX & Tasarım × DevOps
 
-- Tasarımın canlıda Figma'dakinden farklı göründüğü en tuhaf durum neydi?
-- Bozuk bir deploy yüzünden kullanıcıların gördüğü en garip ekran neydi?
-- Tasarım varlıklarının CDN veya sunucu tarafında optimize edilmesinde yaşadığınız en büyük dert neydi?
+- Kafanızda hayal ettiğiniz bir tasarımı ekrana dökerken en çok ne zorluyor?
+- Sevdiğiniz bir uygulamanın güncellemeden sonra tamamen değişmesi size ne hissettiriyor?
+- Yavaş yüklenen bir sitede sabrınız kaç saniye dayanıyor?
 
 ## UI/UX & Tasarım × Flutter & Mobil
 
-- Figma'daki bir mikro etkileşimi Flutter'da birebir yaparken nerede zorlandınız?
-- Farklı ekran boyutlarında patlayan ve baştan çizmek zorunda kaldığınız arayüz hangisiydi?
-- Kod tarafındaki kısıtlar yüzünden tasarımdan en çok ödün verdiğiniz ekran hangisiydi?
+- Telefonunuzdaki en güzel tasarlanmış uygulama hangisi?
+- Bir uygulama tasarlasanız ilk hangi ekranı çizerdiniz?
+- Bir uygulamada sizi en çok sinir eden tasarım hatası ne?
 
 ## UI/UX & Tasarım × Oyun Geliştirme
 
-- Bir oyunda atmosferi bozmadan arayüzü görünmez kılmak için bulduğunuz en yaratıcı çözüm neydi?
-- Oyuncuların arayüzü yanlış anlayıp bambaşka bir şey yaptığı en komik örnek neydi?
-- Oyun içi HUD tasarlarken estetik ve okunabilirlik arasında kaldığınız en zor an hangisiydi?
+- Görsel tarzıyla aklınızda kalan oyun hangisi?
+- Bir oyunda menüleri ya da kontrolleri anlamakta en çok zorlandığınız an hangisiydi?
+- Bir oyun karakteri tasarlasanız nasıl görünürdü?
 
 ## UI/UX & Tasarım × Açık Kaynak
 
-- Açık kaynak dünyasında dokümantasyonu veya tasarımı rezalet ama işlevi harika olan araç hangisi?
-- Topluluktan gelen bir tasarım katkısını projeye entegre ederken yaşadığınız en ilginç durum neydi?
-- Bir tasarım kütüphanesini açık kaynak yapsanız en çok neyden çekinirdiniz?
+- Herkesin ücretsiz kullanabileceği bir tasarım kaynağı hazırlasanız ne olurdu?
+- Ücretsiz font, ikon ya da görsel bulmak için en sevdiğiniz site hangisi?
+- Tasarımlarınızı başkalarıyla paylaşmak için hangi yeri tercih edersiniz?
 
 ## UI/UX & Tasarım × Ürün & Girişimcilik
 
-- Kullanıcı deneyimi ile gelir hedefleri çatıştığında hangi tarafı seçtiniz?
+- Sadece tasarımı yüzünden indirdiğiniz ya da sildiğiniz uygulama hangisi?
 - Kullanıcıların önce nefret edip sonra vazgeçemediği bir tasarım kararı hangisi?
-- Pazara hızlı çıkmak için tasarımdan verdiğiniz en acı taviz ne olmuştu?
+- Bir ürün fikriniz olsa adını ve logosunu nasıl seçerdiniz?
 
 ## UI/UX & Tasarım × Siber Güvenlik
 
-- Kullanıcıyı bezdirmeden iki adımlı doğrulamayı arayüze entegre etmek için ne yapardınız?
+- İki adımlı doğrulamayı daha az sinir bozucu yapmak için ne değiştirirdiniz?
 - Kullanıcılar güvenlik uyarılarını okumadan geçiyor; sizce onlara nasıl okutabiliriz?
-- Kolaylık uğruna güvenliği zayıflatan en tanıdık tasarım kararı hangisi?
+- Şifre oluştururken karşılaştığınız en saçma kural neydi?
 
 ## UI/UX & Tasarım × Web & Frontend
 
-- Tasarımdaki '1 piksel boşluk' yüzünden CSS tarafında verdiğiniz en uzun mesai neydi?
-- Tarayıcı uyumsuzluğu yüzünden çöpe giden en havalı arayüz fikriniz hangisiydi?
-- Responsive yaparken mobilde tamamen dağılıp sizi çıldırtan o karmaşık bileşen neydi?
+- İlk yaptığınız ya da yapmak istediğiniz web sitesi neye benziyordu?
+- Gezdiğiniz sitelerden hangisinin tasarımına hayran kaldınız?
+- Telefonda kullanması en zor olan site hangisi, neyi düzeltirdiniz?
 
 ## DevOps × DevOps
 
-- Gece yarısı tetiklenen ve canlı ortamı yerle bir eden en unutulmaz CI/CD patlaması neydi?
-- Tüm mimariyi kurtaran ama arkasında sıfır dokümantasyon bıraktığınız o geçici yama neydi?
-- Sunucu maliyetlerini düşürmek için yaptığınız ama sistemi kitleyen en cesur hamleniz neydi?
+- DevOps ile ilk nerede karşılaştınız, sizi ne çekti?
+- Bilgisayarınızda tekrar tekrar yaptığınız ve otomatik hale getirmek istediğiniz iş ne?
+- Linux, Docker, bulut... Öğrenmeye ilk nereden başladınız ya da başlardınız?
 
 ## DevOps × Flutter & Mobil
 
-- Mobil uygulamanın derleme süresini dakikalardan saniyelere indirmek için denediğiniz en çılgın yol neydi?
-- Store'a sürüm gönderirken pipeline son anda patladığında ne yaptınız?
-- Farklı ortamlar için mobil sürüm alırken konfigürasyon yüzünden saç baş yolduran hata neydi?
+- Kodunuzun derlenmesini beklerken genelde ne yaparsınız?
+- Yaptığınız bir uygulama Play Store'da olsa ilk kime gönderirdiniz?
+- Telefon uygulamalarının bu kadar sık güncellenmesi size ne düşündürüyor?
 
 ## DevOps × Oyun Geliştirme
 
-- Canlı bir oyun sunucusunda ya da dağıtımında yaşanan en büyük kriz anı nasıldı?
-- Büyük bir güncelleme gecesinde işlerin ters gittiği anı nasıl toparladınız?
-- Oyuncuların beklemediği bir sunucu çöküşünü çözmek için ilk adımınız ne oldu?
+- Oyun sunucuları çöktüğünde oyuncu olarak ne yaparsınız?
+- Bir oyunun güncellemesini beklerken yaşadığınız en uzun indirme hangisiydi?
+- Sevdiğiniz bir şeyi bozan oyun güncellemesi hangisiydi?
 
 ## DevOps × Açık Kaynak
 
-- Kullandığınız bir açık kaynak altyapı aracında bulduğunuz en garip hata neydi?
-- Kendi yazdığınız bir CI/CD betiğini ya da aracı toplulukla paylaşma deneyiminiz nasıldı?
-- Desteği kesilen kritik bir açık kaynak aracın yerine ne koydunuz?
+- Linux ile ilk tanışmanız nasıl oldu, ya da sizi denemekten ne alıkoyuyor?
+- Kurulumda takıldığınızda en çok hangi siteden ya da forumdan yardım alıyorsunuz?
+- Ücretsiz açık kaynak yazılımlar sizce nasıl ayakta kalıyor?
 
 ## DevOps × Ürün & Girişimcilik
 
-- Kullanıcıya değer katmak ile altyapı maliyetini düşürmek arasında kaldığınızda neyi seçtiniz?
-- Ürün hızla büyüdüğünde altyapıda ilk neyi değiştirmek zorunda kaldınız?
-- Müşteriye hissettirmeden yaptığınız en kritik mimari dönüşüm neydi?
+- Bir uygulamanın hiç çökmemesi mi, sürekli yeni özellik gelmesi mi daha önemli sizce?
+- Bir uygulamanın çöktüğünü ilk nereden öğreniyorsunuz?
+- Hayalinizdeki projeyi herkesin kullanımına açmak için sizce neler gerekir?
 
 ## DevOps × Siber Güvenlik
 
-- Canlı ortamda fark edilen bir güvenlik açığı için aldığınız en hızlı aksiyon neydi?
-- Sızan bir API anahtarı ya da yetki hatasıyla ilgili yaşadığınız en öğretici olay neydi?
-- Güvenlik kısıtlamaları ile geliştirme hızı arasındaki dengeyi nasıl kuruyorsunuz?
+- Telefonunuzun ve bilgisayarınızın güncellemelerini hemen mi yaparsınız, erteler misiniz?
+- Onlarca şifreyi aklınızda tutmak için nasıl bir yöntem kullanıyorsunuz?
+- Kendi sunucunuzu kursanız güvenliği için ilk neyi öğrenmek isterdiniz?
 
 ## DevOps × Web & Frontend
 
-- Arayüzde görünen ama sebebi build sürecinde çıkan en ilginç hata neydi?
-- Statik dosyaların önbelleğe alınmasıyla ilgili yaşadığınız en komik sürpriz neydi?
-- Dağıtım sonrası çöken bir frontend uygulamasını ayağa kaldırırken ne hissettiniz?
+- Kendi web siteniz olsa alan adı ne olurdu?
+- Bir web sitesini internete koymakla ilgili en çok neyi merak ediyorsunuz?
+- Web sitesi yaparken en çok neyi öğrenmek istiyorsunuz, tasarımı mı, yayına almayı mı?
 
 ## Flutter & Mobil × Flutter & Mobil
 
-- App Store ya da Play Store incelemesinden aldığınız en şaşırtıcı ret gerekçesi neydi?
-- Bir animasyonu veya widget ağacını optimize ederken harcadığınız en uzun gece nasıldı?
-- Hangi üçüncü parti Flutter paketinin azizliğine uğrayıp kendi çözümünüzü yazdınız?
+- Flutter'a ya da mobil geliştirmeye nasıl başladınız?
+- Yaptığınız ya da yapmak istediğiniz ilk mobil uygulama neydi?
+- Mobil geliştirme öğrenirken takıldığınızda nereden yardım alıyorsunuz?
 
 ## Flutter & Mobil × Oyun Geliştirme
 
-- Mobilde fizik motoru veya kare hızıyla mücadele ederken aldığınız en radikal karar neydi?
-- Sıkıcı bir ekranı oyunlaştırıp eğlenceli hale getirmek için neler denediniz?
-- Mobil cihazın aşırı ısınmasına yol açan o sinsi performans sorununu nasıl buldunuz?
+- Telefonunuzda en uzun süre oynadığınız oyun hangisi?
+- Sıkıcı bir uygulamayı oyunlaştırsanız nasıl eğlenceli hale getirirdiniz?
+- Telefonda oynanacak basit bir oyun yapsanız ne olurdu?
 
 ## Flutter & Mobil × Açık Kaynak
 
-- İşinizi kurtaran bir açık kaynak Flutter kütüphanesine ilk katkınız nasıl oldu?
-- Projelerinizde açık kaynak bir aracın kaynak koduna inmek zorunda kaldığınız o an neydi?
-- Açık kaynak bir paketin aniden bozulması projede nasıl bir yangın çıkardı?
+- Ücretsiz bir uygulamanın kodunu inceleyebilseniz hangisini merak ederdiniz?
+- Başkalarının ücretsiz paylaştığı hazır kodları kullanmayı nasıl buluyorsunuz?
+- Bir uygulamayı herkesin kullanımına ücretsiz açsanız hangisi olurdu?
 
 ## Flutter & Mobil × Ürün & Girişimcilik
 
-- Kullanıcılardan gelen geri bildirimle tamamen çöpe attığınız en havalı mobil özellik neydi?
-- Mağazadaki ilk 100 kullanıcıya ulaşırken denediğiniz en sıra dışı yöntem neydi?
-- Tasarımcının çizdiğiyle kullanıcının beklediği mobil deneyim nerede çatıştı?
+- Telefonunuzda olmasını istediğiniz ama henüz kimsenin yapmadığı uygulama ne?
+- Bir uygulamayı indirmeye karar verirken sizi en çok ne ikna ediyor?
+- En son sildiğiniz uygulama hangisiydi, neden?
 
 ## Flutter & Mobil × Siber Güvenlik
 
-- Mobil tarafta saklanan hassas bir verinin açıkta kaldığını fark ettiğinizde ne yaptınız?
-- Tersine mühendislik veya sahte API çağrılarına karşı aldığınız ilk önlem neydi?
-- Uygulamanız rootlu ya da jailbreak'li cihazlarda nasıl davranıyor, buna karşı ne yaptınız?
+- Telefonunuza uygulama yüklerken istenen izinlere ne kadar dikkat ediyorsunuz?
+- Telefonunuzu kaybetseniz en çok hangi uygulamadaki verileriniz için endişelenirdiniz?
+- Bir uygulamaya güvenip güvenmeyeceğinize nasıl karar veriyorsunuz?
 
 ## Flutter & Mobil × Web & Frontend
 
-- Aynı tasarımı hem mobilde hem tarayıcıda pikseli pikseline tutturma savaşınız nasıldı?
-- Tarayıcı kısıtlamaları yüzünden mobildeki kadar akıcı çalışmayan o özellik neydi?
-- Mobilden web'e taşırken baştan yazmak zorunda kaldığınız ekran hangisiydi?
+- Hangi işleri telefondan, hangilerini bilgisayardan yapmayı tercih ediyorsunuz?
+- Hem web hem mobilde kullandığınız bir uygulamanın hangi sürümünü daha çok seviyorsunuz?
+- Tek bir kodla hem telefon hem web için uygulama yapmak size nasıl geliyor?
 
 ## Oyun Geliştirme × Oyun Geliştirme
 
-- Oyunun ana mekaniğini çalıştırırken karşınıza çıkan en saçma fizik hatası neydi?
-- Oyunculardan gelen beklenmedik bir taktiğin oyunun tüm dengesini bozduğu an nasıldı?
-- Kendi oynarken bile bitirmekte zorlandığınız en çetrefilli bölüm hangisiydi?
+- Oyun geliştirmeye ilginiz nasıl başladı?
+- Oynadığınız oyunlarda karşılaştığınız en komik bug neydi?
+- Bitirmekte en çok zorlandığınız oyun bölümü hangisiydi?
 
 ## Oyun Geliştirme × Açık Kaynak
 
-- Açık kaynaklı bir oyun motorunu ya da aracını projeye uydururken nerede tıkandınız?
-- Kendi oyun projelerinizden hangi parçayı açık kaynak yapmak isterdiniz?
-- Topluluğun ücretsiz paylaştığı bir asset'in projenizi kurtardığı an neydi?
+- Oyun yapmak için hangi araçla başladınız ya da başlamak isterdiniz?
+- En sevdiğiniz oyun modu hangisi, sizce neden bu kadar tuttu?
+- Ücretsiz bir oyun yapıp herkesle paylaşsanız nasıl bir oyun olurdu?
 
 ## Oyun Geliştirme × Ürün & Girişimcilik
 
-- Gelir modeli yüzünden oyuncuları kaçıran bir oyunu siz olsanız nasıl kurtarırdınız?
-- Kullanıcı testlerinde fark edip baştan değiştirmek zorunda kaldığınız en şaşırtıcı detay neydi?
-- Bir oyunun çıkış günündeki en büyük pazarlama ya da dağıtım krizinde ilk müdahaleniz ne olurdu?
+- Bir oyunda para harcamaya değer bulduğunuz ya da hiç harcamadığınız şey ne?
+- Bir oyunu arkadaşlarınıza önermeniz için o oyunda ne olması gerekir?
+- Kendi oyununuzu yapsanız ücretsiz mi verirdiniz, satar mıydınız, neden?
 
 ## Oyun Geliştirme × Siber Güvenlik
 
-- Online bir oyunda karşılaştığınız en yaratıcı hile ya da güvenlik açığı nasıl kapatıldı?
-- Kullanıcı deneyimini hiç bozmadan bir oyuna anti-cheat sistemi entegre etmenin en kritik adımı nedir?
-- Oyuncuların istemci tarafındaki verileri değiştirip hile yapmasını nasıl engellersiniz?
+- Online bir oyunda gördüğünüz en yaratıcı hile neydi?
+- Oyun hesabınızın çalınmaması için neler yapıyorsunuz?
+- Bir oyunda hile yapanlarla sizce nasıl başa çıkılmalı?
 
 ## Oyun Geliştirme × Web & Frontend
 
-- Tarayıcıda 60 FPS'i tutturmak için yaptığınız en zor optimizasyon neydi?
-- WebGL ya da WebGPU ile tarayıcıda yapılmış, gördüğünüz en etkileyici iş hangisi?
-- Tarayıcıda oyun akıcılığı ile arayüz animasyonlarını birlikte nasıl dengelersiniz?
+- Tarayıcıda oynadığınız en sevdiğiniz oyun hangisiydi?
+- Bir web sitesine gizli bir mini oyun ekleseniz ne olurdu?
+- Tarayıcı oyunları mı, indirilen oyunlar mı, sizce hangisi daha eğlenceli?
 
 ## Açık Kaynak × Açık Kaynak
 
-- Bir projeye ilk PR'ınızı gönderirken sizi en çok ne tedirgin etti?
-- Topluluktan gelen tuhaf bir issue bildirimi sonucunda keşfettiğiniz en ilginç hata neydi?
-- Bir açık kaynak projeyi yıllarca yaşatmanın sırrı sizce ne?
+- Açık kaynak kavramıyla ilk nerede karşılaştınız?
+- Her gün kullandığınız ama açık kaynak olduğunu sonradan öğrendiğiniz araç hangisi?
+- İnsanlar sizce neden hiçbir karşılık beklemeden kod paylaşıyor?
 
 ## Açık Kaynak × Ürün & Girişimcilik
 
-- Tamamen ücretsiz bir açık kaynak aracı gelir üreten bir girişime dönüştürürken nereden başlarsınız?
-- Topluluğun ısrarla istediği ama ürün vizyonuna uymayan bir özelliği geri çevirirken tavrınız ne olurdu?
-- Açık kaynak bir proje geliştiricilerin güvenini nasıl kazanır?
+- Ücretsiz dağıtılan bir yazılım sizce nasıl para kazanabilir?
+- Ücretli bir uygulama yerine kullandığınız ücretsiz alternatif hangisi?
+- Bir ürüne güvenmeniz için neyi görmeniz gerekir?
 
 ## Açık Kaynak × Siber Güvenlik
 
-- Bakımını yaptığınız popüler bir pakette zero-day çıksa ilk ne yapardınız?
-- Üçüncü parti bağımlılıkları denetlerken karşınıza çıkan en beklenmedik güvenlik açığı neydi?
-- Açık kaynak bir projeye kötü niyetli kod sızmasını önlemek için katkı sürecini nasıl sıkılaştırırsınız?
+- Kodu herkese açık bir yazılım sizce daha mı güvenli, daha mı riskli?
+- İnternetten indirdiğiniz bir programın güvenli olduğuna nasıl karar verirsiniz?
+- Bir yazılımda güvenlik açığı bulsanız ilk ne yapardınız?
 
 ## Açık Kaynak × Web & Frontend
 
-- Kullandığınız bir frontend kütüphanesinin kaynak kodunu okurken öğrendiğiniz en parlak fikir neydi?
-- Kendi yazdığınız bir UI bileşenini paket haline getirip yayınlarken en çok nerede zorlandınız?
-- Bir frontend aracının dokümantasyonunda sizi en çok sinir eden eksik neydi?
+- Web sitesi yaparken başkalarının ücretsiz paylaştığı hangi kaynakları kullanırsınız?
+- Beğendiğiniz bir sitenin nasıl yapıldığını merak ettiğinizde ne yaparsınız?
+- Web geliştirmeyi öğrenmek için en çok hangi ücretsiz kaynağı önerirsiniz?
 
 ## Ürün & Girişimcilik × Ürün & Girişimcilik
 
-- Kullanıcıların çok sevdiği ama şirkete hiçbir fayda sağlamayan bir özelliği yayından nasıl kaldırırsınız?
-- MVP aşamasında kullanıcıdan gelen ilk sert geri bildirimi duyduğunuzda stratejinizi nasıl güncellediniz?
-- Doğru olduğunu düşündüğünüz bir hipotezin kullanıcı analitiğiyle tamamen çöktüğü an ne hissettiniz?
+- Bir girişim kursanız hangi sorunu çözmek isterdiniz?
+- Hangi uygulamayı görünce "bunu ben yapmak isterdim" dediniz?
+- Sevdiğiniz bir ürünün başarılı olmasının sırrı sizce ne?
 
 ## Ürün & Girişimcilik × Siber Güvenlik
 
-- İki adımlı doğrulama gibi güvenliği artıran ama dönüşüm oranını düşüren adımlarda dengeyi nasıl kurarsınız?
-- Kullanıcı onay adımlarını sıkıcı hale getirmeden KVKK veya güvenlik gereksinimlerini nasıl tasarlarsınız?
-- Ürünün hızla pazara çıkması ile sızma testlerinin tamamlanması çatıştığında önceliğiniz ne olurdu?
+- Hangi uygulamanın güvenlik adımları size güven veriyor, hangisininki yoruyor?
+- Gizlilik sözleşmelerini okumadan kabul etmek size nasıl geliyor?
+- Bir uygulamaya kişisel bilgilerinizi verirken neye dikkat ediyorsunuz?
 
 ## Ürün & Girişimcilik × Web & Frontend
 
-- Sayfayı hızlandırmanın satışları ya da dönüşümü artırdığını gördüğünüz bir örnek neydi?
-- Tasarımcının çizdiği bir arayüz teknik olarak imkânsız çıktığında ne yaptınız?
-- Kullanıcıları kaybetmeden baştan sona yeniden yazılan bir frontend projesinde en büyük risk neydi?
+- İnternetten alışveriş yaparken bir siteyi terk etmenize ne sebep olur?
+- Hayalinizdeki web sitesi ya da internet girişimi ne olurdu?
+- En sık kullandığınız web sitesinde neyi değiştirirdiniz?
 
 ## Siber Güvenlik × Siber Güvenlik
 
-- Sosyal mühendislik testlerinde insanların kanmasına en çok şaşırdığınız basit senaryo neydi?
-- Logları incelerken tesadüfen yakaladığınız en ciddi saldırı girişimi neydi?
-- CTF çözerken günlerce uğraşıp sonunda çok basit bir mantık hatası olduğunu anladığınız an ne hissettiniz?
+- Siber güvenliğe ilginiz nasıl başladı?
+- Film ve dizilerdeki hacker sahneleri size ne kadar gerçekçi geliyor?
+- Güvenlik öğrenmeye ilk nereden başladınız ya da başlardınız?
 
 ## Siber Güvenlik × Web & Frontend
 
-- Karşılaştığınız ya da bulduğunuz en ilginç XSS veya CSRF açığı neydi?
-- Content Security Policy ayarlarını yaparken kırılan frontend özelliklerini nasıl toparladınız?
-- Kullanıcı oturum yönetimini güvenli tutarken sayfalar arası geçişi akıcı yapmanın püf noktası nedir?
+- Bir sitenin güvenli olup olmadığını nasıl anlıyorsunuz?
+- Size gelen en inandırıcı sahte site ya da dolandırıcılık mesajı neydi?
+- Şifrelerinizi tarayıcıya kaydetmek size güvenli geliyor mu, neden?
 
 ## Web & Frontend × Web & Frontend
 
-- CSS ile merkezleme yaparken veya z-index karmaşasında kaybolup saatlerinizi harcadığınız en absürt an neydi?
-- Tüm tarayıcılarda sorunsuz çalışıp tek bir cihazda patlayan bir frontend hatasını nasıl avladınız?
-- Performans ölçümünde Lighthouse skorunu tavan yaptırmak için feda ettiğiniz en radikal şey neydi?
+- Web geliştirmeye nasıl başladınız, ilk yaptığınız sayfa neydi?
+- HTML ya da CSS öğrenirken sizi en çok uğraştıran şey neydi?
+- Bir web sitesi yapsanız ilk hangi özelliği eklerdiniz?
 
 ## Genel
 
 - Çalışırken odaklanmak için hangi müziği ya da şarkıyı açarsınız?
 - Teknolojiyle uğraşırken yaptığınız ve sonradan çok güldüğünüz en saçma hata neydi?
 - İşlerinizi hızlandırmak için kurup vazgeçemediğiniz en pratik klavye kısayolu hangisi?
-- Sizi ilk kez büyüleyen ve bu sektöre adım atmanızı sağlayan cihaz ya da yazılım neydi?
+- Sizi teknolojiye ilk kez bağlayan cihaz, oyun ya da yazılım neydi?
 - Günlerce arayıp saç baş yolduktan sonra aşırı basit çıkan o unutamadığınız hata neydi?
 - Çalışma masanızda dikkatinizi toplayan ya da dağıtan en ilginç eşya nedir?
 - Başkalarının gereksiz bulduğu ama elinizin sürekli gittiği favori dijital araç nedir?
@@ -522,8 +545,8 @@ Bulunan hata türleri:
 - Gece yarısına kadar uğraşıp sonunda çözdüğünüz en inatçı sorun neydi?
 - Yapay zekâya yaptırıp sonucuna en çok şaşırdığınız görev neydi?
 - Ekran başında tıkanıp kaldığınızda zihninizi açmak için genelde ne yaparsınız?
-- Bir günlüğüne tamamen internetsiz kalsanız projenizi geliştirmeye nasıl devam edersiniz?
-- Hayatı kolaylaştırsın diye başlayıp kendisi devasa bir işe dönüşen otomasyon denemeniz neydi?
+- Bir gün tamamen internetsiz kalsanız gününüzü nasıl geçirirdiniz?
+- Bir teknolojiyi kendi başınıza öğrenmeye çalışırken en çok neye takıldınız?
 - Henüz kimse konuşmazken keşfedip erkenden benimsediğiniz teknoloji hangisiydi?
 - Eski bir projenize dönüp baktığınızda 'bunu gerçekten ben mi yapmışım' dediğiniz detay nedir?
 - Çalışırken kahve veya çay dışında masanızdan asla eksik etmediğiniz o şey nedir?
@@ -537,7 +560,7 @@ Bulunan hata türleri:
 - Sırf merakınızı gidermek için hafta sonunuzu feda ettiğiniz en tuhaf konu neydi?
 - Karanlık mod mu aydınlık mod mu tercih edersiniz ve bunun arkasındaki asıl sebep nedir?
 - Bir teknik sorunu çözmek için arama motoruna yazdığınız en absürt cümle neydi?
-- Bu alana sıfırdan başlayan birine vereceğiniz en samimi tavsiye ne olurdu?
+- Şu sıralar ne öğreniyorsunuz, nereden öğreniyorsunuz?
 - Kendi günlük hayatınızı kolaylaştırmak için yazmak isteyip ertelediğiniz o ufak araç nedir?
 - Resmi bir dokümantasyonu okurken kendinizi en çok çaresiz hissettiğiniz an neydi?
 - Masaüstünüzde veya indirmeler klasörünüzde temizlemeye bir türlü elinizin gitmediği dosya nedir?
