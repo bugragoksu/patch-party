@@ -7,7 +7,7 @@
     'Her bağlantı ikinize de +10 puan kazandırır.',
     'Ortak ilgi alanınız yoksa +5 bonus var.',
     'Bağlantı kurulunca ikinize ortak bir soru gelir.',
-    'Liderlik tablosu projeksiyonda.',
+    'Sıralama projeksiyonda.',
   ];
   var tip = document.getElementById('splash-tip');
   var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;

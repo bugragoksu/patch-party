@@ -8,8 +8,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 const badgeLabels = {
   'first_connection': 'İlk Bağlantı',
-  'bridge': 'Köprü',
-  'explorer': 'Kaşif',
+  'bridge': 'Zıt Kutuplar',
+  'explorer': 'Her Telden',
   'social_butterfly': 'Sosyal Kelebek',
 };
 

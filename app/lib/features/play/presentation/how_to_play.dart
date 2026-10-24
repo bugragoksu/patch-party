@@ -65,7 +65,7 @@ const _steps = [
     body:
         'Ortak ilgi alanınız yoksa +5 bonus. '
         'Ne kadar çok yeni insan, o kadar puan. '
-        'Liderlik tablosu projeksiyonda.',
+        'Sıralama projeksiyonda.',
   ),
 ];
 

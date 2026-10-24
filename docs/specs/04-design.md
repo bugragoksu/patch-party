@@ -10,7 +10,7 @@
 1. **Oyun, web sitesi değil.** Kaydırma yok, her ekran tek bir sahne. Oyuncunun iki ana durumu var: **QR'ım** ve **Tara**. Altta iki büyük buton, sekme çubuğu yok.
 2. **Bir bakışta anlaşılır.** Ekran başına tek ana eylem, en fazla iki satır açıklama. Gürültülü salonda telefona birkaç saniye bakılacak.
 3. **Çıkartma kuralı.** Öne çıkan her nesne bir çıkartmadır: kâğıt beyazı veya GDG rengi dolgu, 3 px koyu kontur, sert ofset gölge, hafif eğim. Kural tutarlılık sağlar ve jenerik görünümü engeller.
-4. **Hareketin amacı var.** Yalnızca geri bildirim (istek gönderildi), ödül (bağlandınız, rozet) ve ortak an (projeksiyonda yeni köprü) için.
+4. **Hareketin amacı var.** Yalnızca geri bildirim (istek gönderildi), ödül (bağlandınız, rozet) ve ortak an (projeksiyonda yeni bağlantı) için.
 5. **Dürüst metin.** Canlı AI iddiası yok, uydurma metrik yok. "Gemini ile hazırlanmış soru".
 
 ## 2. Tokenlar
@@ -65,7 +65,7 @@
 | `pop` | 300 ms, 120 ms aralıkla sıralı | ease-out, 12 px yukarı | Puan çıkartmaları |
 | `sweep` | 1,6 sn, gidip gelen | ease-in-out | Tarama çizgisi |
 | `pulse` | 1,2 sn döngü | ease-in-out | "Onay bekleniyor", canlı göstergesi |
-| `ring` | 1,6 sn döngü | ease-out | Projeksiyonda yeni köprü |
+| `ring` | 1,6 sn döngü | ease-out | Projeksiyonda yeni bağlantı |
 
 `prefers-reduced-motion` (Flutter: `MediaQuery.disableAnimations`) açıkken döngüsel animasyonlar durur, giriş animasyonları anında son haline geçer.
 

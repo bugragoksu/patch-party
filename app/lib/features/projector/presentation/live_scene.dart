@@ -1,5 +1,6 @@
 import 'package:baglanti_agi/app/theme/tokens.dart';
 import 'package:baglanti_agi/core/domain/models.dart';
+import 'package:baglanti_agi/core/ui/brand_mark.dart';
 import 'package:baglanti_agi/core/ui/sticker.dart';
 import 'package:baglanti_agi/features/projector/application/projector_providers.dart';
 import 'package:baglanti_agi/features/projector/graph/network_graph.dart';
@@ -45,6 +46,8 @@ class LiveScene extends ConsumerWidget {
             height: 76,
             child: Row(
               children: [
+                const BrandMark(size: 64),
+                const SizedBox(width: 16),
                 Flexible(
                   child: Text(
                     event.settings.displayName,
@@ -208,7 +211,7 @@ class _NewBridge extends StatelessWidget {
           textBaseline: TextBaseline.alphabetic,
           children: [
             Text(
-              'YENİ KÖPRÜ',
+              'YENİ BAĞLANTI',
               style: TextStyles.ui.copyWith(
                 fontSize: 20,
                 fontWeight: FontWeight.w800,
