@@ -25,8 +25,15 @@ class SuccessView extends ConsumerWidget {
     required this.newBadges,
     required this.onScanNext,
     required this.onDone,
+    required this.holdUntil,
+    required this.nowMs,
     super.key,
   });
+
+  /// Until then the screen stays: time to actually talk (same as the
+  /// server cooldown, so a new scan would be refused anyway).
+  final int holdUntil;
+  final int nowMs;
 
   final Connection connection;
   final String otherName;
@@ -161,11 +168,18 @@ class SuccessView extends ConsumerWidget {
           ),
         ],
         const SizedBox(height: 22),
-        PrimaryButton(label: 'Yeni birini tara', onPressed: onScanNext),
-        const SizedBox(height: 6),
-        Center(
-          child: LinkButton(label: "QR'ıma dön", onPressed: onDone),
-        ),
+        if (nowMs < holdUntil)
+          PrimaryButton(
+            label: 'Sohbet edin · ${((holdUntil - nowMs) / 1000).ceil()} sn',
+            onPressed: null,
+          )
+        else ...[
+          PrimaryButton(label: 'Yeni birini tara', onPressed: onScanNext),
+          const SizedBox(height: 6),
+          Center(
+            child: LinkButton(label: "QR'ıma dön", onPressed: onDone),
+          ),
+        ],
       ],
     );
   }

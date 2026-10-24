@@ -18,7 +18,7 @@ export interface EventSettings {
 }
 
 export const DEFAULT_SETTINGS: EventSettings = {
-  cooldownSec: 15,
+  cooldownSec: 60,
   tokenWindowSec: 30,
   joinWindowSec: 300,
   requestTtlSec: 45,
@@ -37,6 +37,8 @@ export interface EventDoc {
   liveStartAt: number | null;
   liveEndAt: number | null;
   settings: EventSettings;
+  /** Results shown so far after the game ends: 0 none, 1 third, 2 second, 3 first. */
+  reveal: number;
   updatedAt: number;
 }
 

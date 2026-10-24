@@ -185,7 +185,8 @@ class _StatePanelState extends ConsumerState<StatePanel> {
     (EventState.live, EventState.lobby) =>
       'Oyun duraklar; bağlantı kurulamaz, katılım açık kalır.',
     (EventState.live, EventState.ended) =>
-      'Oyun biter, sıralama hesaplanır ve kazananlar ekrana gelir.',
+      'Oyun biter ve sıralama hesaplanır. Kazananları sonra '
+          '"Sonuçları açıkla" ile tek tek duyurursun.',
     (EventState.ended, EventState.live) =>
       'Bitmiş oyun yeniden açılır. Emin misin?',
     _ => '${stateLabel(to)} durumuna geçilecek.',

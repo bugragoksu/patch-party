@@ -45,7 +45,6 @@ class _QrViewState extends ConsumerState<QrView> {
         ref.watch(nowProvider).value ?? DateTime.now().millisecondsSinceEpoch;
     final windowSec = widget.event.settings.tokenWindowSec;
     final window = windowOf(now, windowSec);
-    final secondsLeft = windowSec - (now ~/ 1000) % windowSec;
     final token = session == null
         ? null
         : tokenFor(session.seed, widget.event.id, window);
@@ -112,34 +111,16 @@ class _QrViewState extends ConsumerState<QrView> {
                       ),
                     ),
                     const SizedBox(height: 14),
-                    _CountdownBar(fraction: secondsLeft / windowSec),
-                    const SizedBox(height: 12),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.baseline,
-                      textBaseline: TextBaseline.alphabetic,
-                      children: [
-                        Expanded(
-                          child: Text(
-                            token == null
-                                ? '---'
-                                : shortCode(
-                                    widget.player.playerCode,
-                                    token.digits,
-                                  ),
-                            style: TextStyles.code.copyWith(
-                              fontSize: 22,
-                              color: Palette.ink,
-                            ),
-                          ),
-                        ),
-                        Text(
-                          '$secondsLeft sn',
-                          style: TextStyles.code.copyWith(
-                            fontSize: 13,
-                            color: Palette.inkMuted,
-                          ),
-                        ),
-                      ],
+                    // No countdown on purpose: a ticking timer made people
+                    // rush. The code just rotates; the server accepts the
+                    // neighbouring windows too.
+                    Text(
+                      code,
+                      textAlign: TextAlign.center,
+                      style: TextStyles.code.copyWith(
+                        fontSize: 22,
+                        color: Palette.ink,
+                      ),
                     ),
                   ],
                 ),
@@ -147,8 +128,7 @@ class _QrViewState extends ConsumerState<QrView> {
             ),
             const SizedBox(height: 18),
             Text(
-              'Kod $windowSec saniyede bir değişir. '
-              'Ekran görüntüsü işe yaramaz.',
+              'Kod kendiliğinden yenilenir, ekran görüntüsü işe yaramaz.',
               textAlign: TextAlign.center,
               style: TextStyles.ui.copyWith(
                 fontSize: 13,
@@ -158,34 +138,6 @@ class _QrViewState extends ConsumerState<QrView> {
           ],
         );
       },
-    );
-  }
-}
-
-class _CountdownBar extends StatelessWidget {
-  const new({required this.fraction});
-
-  final double fraction;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 10,
-      decoration: BoxDecoration(
-        color: const Color(0xFFE1DCD0),
-        borderRadius: BorderRadius.circular(999),
-        border: Border.all(color: Palette.ink, width: 2),
-      ),
-      alignment: Alignment.centerLeft,
-      child: FractionallySizedBox(
-        widthFactor: fraction.clamp(0, 1),
-        child: Container(
-          decoration: BoxDecoration(
-            color: Palette.green,
-            borderRadius: BorderRadius.circular(999),
-          ),
-        ),
-      ),
     );
   }
 }

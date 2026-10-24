@@ -47,12 +47,36 @@ export async function setEventState(request: CallableRequest<unknown>): Promise<
       }
     }
     if (data.state === 'ended') patch.liveEndAt = Math.min(event.liveEndAt ?? now, now);
+    // Each time the game ends, results are announced from scratch.
+    if (data.state === 'ended' || data.state === 'live') patch.reveal = 0;
     tx.update(ref, patch);
   });
   if (data.state === 'ended') await rankEvent(data.eventId, now);
   const action = data.state === 'live' && data.liveDurationMin ? `state:live:${data.liveDurationMin}m` : `state:${data.state}`;
   await audit(data.eventId, uid, action, null);
   return { state: data.state };
+}
+
+const revealInput = z.object({ eventId: eventIdSchema, step: z.number().int().min(0).max(3) });
+
+/**
+ * Announces the results one place at a time (third, second, first) so the
+ * host can read them out; step 0 hides them again. Only after the game ended.
+ */
+export async function revealResults(request: CallableRequest<unknown>): Promise<{ reveal: number }> {
+  const data = parse(revealInput, request.data);
+  const uid = requireAdmin(request);
+  await db.runTransaction(async (tx) => {
+    const ref = paths.event(data.eventId);
+    const event = readEvent((await tx.get(ref)).data());
+    if (event.state !== 'ended') throw new GameError('invalid_transition', { from: event.state });
+    if (data.step !== 0 && data.step !== event.reveal + 1) {
+      throw new GameError('invalid_transition', { reveal: event.reveal });
+    }
+    tx.update(ref, { reveal: data.step, updatedAt: Date.now() });
+  });
+  await audit(data.eventId, uid, `reveal:${data.step}`, null);
+  return { reveal: data.step };
 }
 
 const settingsInput = z.object({

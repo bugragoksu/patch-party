@@ -38,7 +38,7 @@ const num = (k, d) => (env[k] ? Number(env[k]) : d);
 const eventRef = db.doc(`events/${eventId}`);
 const existing = await eventRef.get();
 const settings = {
-  cooldownSec: num('GAME_COOLDOWN_SEC', 15),
+  cooldownSec: num('GAME_COOLDOWN_SEC', 60),
   tokenWindowSec: num('GAME_TOKEN_WINDOW_SEC', 30),
   joinWindowSec: 300,
   requestTtlSec: num('GAME_REQUEST_TTL_SEC', 45),

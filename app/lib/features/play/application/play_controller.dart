@@ -62,6 +62,18 @@ class PlayController extends Notifier<PlayState> {
   @override
   PlayState build() => const PlayState();
 
+  /// A scanned QR stays in front of the camera after a rejection; the same
+  /// player's code is ignored for this long so it is not resent every frame.
+  static const rejectedHold = Duration(seconds: 10);
+  ({String key, DateTime at})? _rejected;
+
+  bool _recentlyRejected(String key) {
+    final r = _rejected;
+    return r != null &&
+        r.key == key &&
+        DateTime.now().difference(r.at) < rejectedHold;
+  }
+
   GameRepository get _repo => ref.read(gameRepositoryProvider);
   ErrorReporter get _reporter => ref.read(errorReporterProvider);
   String get _eventId => ref.read(eventIdProvider);
@@ -81,10 +93,13 @@ class PlayController extends Notifier<PlayState> {
   void clearFailure() => state = state.copyWith(clearFailure: true);
 
   /// Handles both a scanned QR payload and a typed short code.
-  Future<void> submitCode(String raw) async {
+  Future<void> submitCode(String raw, {bool typed = false}) async {
     if (state.busy) return;
     final input = ScanInput.parse(raw);
+    final key = input?.playerCode ?? raw.trim();
+    if (!typed && _recentlyRejected(key)) return;
     if (input == null) {
+      _rejected = (key: key, at: DateTime.now());
       state = state.copyWith(failure: const CodeInvalid());
       return;
     }
@@ -109,6 +124,7 @@ class PlayController extends Notifier<PlayState> {
           );
         }
       case Err(:final failure):
+        _rejected = (key: key, at: DateTime.now());
         _reporter.breadcrumb(
           AppEvent.scanRejected,
           detail: failure.runtimeType.toString(),

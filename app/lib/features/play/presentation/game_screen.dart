@@ -167,7 +167,15 @@ class _GameScreenState extends ConsumerState<GameScreen> {
     final Widget scene;
     var showDock = false;
     if (ended) {
-      scene = SummaryView(me: me);
+      scene = SummaryView(me: me, event: event);
+    } else if (incoming.isNotEmpty) {
+      // Shown over the success screen: whoever scanned you is standing
+      // right there; the conversation screen comes back afterwards.
+      scene = IncomingRequestCard(
+        key: ValueKey(incoming.first.id),
+        request: incoming.first,
+        me: me,
+      );
     } else if (success != null) {
       scene = SuccessView(
         connection: success,
@@ -181,12 +189,8 @@ class _GameScreenState extends ConsumerState<GameScreen> {
           setState(() => _success = null);
           controller.showQr();
         },
-      );
-    } else if (incoming.isNotEmpty) {
-      scene = IncomingRequestCard(
-        key: ValueKey(incoming.first.id),
-        request: incoming.first,
-        me: me,
+        holdUntil: success.createdAt + event.settings.cooldownSec * 1000,
+        nowMs: now,
       );
     } else if (play.mode == PlayMode.waiting && waiting != null) {
       scene = WaitingView(waiting: waiting);
@@ -211,7 +215,10 @@ class _GameScreenState extends ConsumerState<GameScreen> {
               children: [
                 PlayerTopBar(
                   player: me,
-                  showRank: event.settings.playerRank,
+                  // No rank in the corner while the winners are announced.
+                  showRank:
+                      event.settings.playerRank &&
+                      (!ended || event.resultsRevealed),
                   nowMs: now,
                   onConnections: () =>
                       unawaited(showConnectionsSheet(context, me)),

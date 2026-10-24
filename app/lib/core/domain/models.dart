@@ -20,7 +20,7 @@ class EventSettings {
     this.tokenWindowSec = 30,
     this.joinWindowSec = 300,
     this.requestTtlSec = 45,
-    this.cooldownSec = 15,
+    this.cooldownSec = 60,
     this.maxConnPerPlayer = 60,
     this.maxPlayers = 200,
     this.appCheckEnforce = false,
@@ -37,7 +37,7 @@ class EventSettings {
       tokenWindowSec: _int(j['tokenWindowSec'], 30),
       joinWindowSec: _int(j['joinWindowSec'], 300),
       requestTtlSec: _int(j['requestTtlSec'], 45),
-      cooldownSec: _int(j['cooldownSec'], 15),
+      cooldownSec: _int(j['cooldownSec'], 60),
       maxConnPerPlayer: _int(j['maxConnPerPlayer'], 60),
       maxPlayers: _int(j['maxPlayers'], 200),
       appCheckEnforce: j['appCheckEnforce'] as bool? ?? false,
@@ -69,6 +69,7 @@ class EventInfo {
     this.liveStartAt,
     this.liveEndAt,
     this.summary,
+    this.reveal = 0,
   });
 
   factory fromJson(String id, Map<String, Object?> j) => EventInfo(
@@ -81,6 +82,7 @@ class EventInfo {
       (j['settings'] as Map?)?.cast<String, Object?>() ?? {},
     ),
     summary: (j['summary'] as Map?)?.cast<String, Object?>(),
+    reveal: _int(j['reveal'], 0),
   );
 
   final String id;
@@ -90,6 +92,11 @@ class EventInfo {
   final int? liveEndAt;
   final EventSettings settings;
   final Map<String, Object?>? summary;
+
+  /// Places announced after the end: 0 none, 1 third, 2 second, 3 first.
+  final int reveal;
+
+  bool get resultsRevealed => reveal >= 3;
 
   bool isLiveAt(int nowMs) =>
       state == EventState.live &&

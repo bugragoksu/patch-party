@@ -40,13 +40,15 @@ describe('verifyToken', () => {
   const t0 = 1792900800000;
   const current = tokenFor(seed, 'e', windowOf(t0, 30));
 
-  it('accepts the current and the previous window', () => {
+  it('accepts the current, the previous and the next window', () => {
     expect(verifyToken(seed, 'e', current.qr, 'qr', t0, 30)).toBe(true);
     expect(verifyToken(seed, 'e', current.qr, 'qr', t0 + 30_000, 30)).toBe(true);
+    expect(verifyToken(seed, 'e', current.qr, 'qr', t0 - 30_000, 30)).toBe(true);
   });
 
-  it('rejects a token two windows old, from another event, or of the wrong kind', () => {
+  it('rejects a token two windows off, from another event, or of the wrong kind', () => {
     expect(verifyToken(seed, 'e', current.qr, 'qr', t0 + 60_000, 30)).toBe(false);
+    expect(verifyToken(seed, 'e', current.qr, 'qr', t0 - 60_000, 30)).toBe(false);
     expect(verifyToken(seed, 'other', current.qr, 'qr', t0, 30)).toBe(false);
     expect(verifyToken(seed, 'e', current.digits, 'qr', t0, 30)).toBe(false);
   });

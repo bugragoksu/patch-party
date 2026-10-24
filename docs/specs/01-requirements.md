@@ -60,7 +60,7 @@ draft ──▶ lobby ──▶ live ──▶ ended ──▶ archived
 | FR-01 | P0 | Katılım: isim (2-24 karakter) ve sabit listeden (§6.1) 2-3 ilgi alanı seçimi. Serbest metinle ilgi alanı girilemez | Kurulum veya hesap gerekmez. Katılım akışı ≤ 30 sn. Listede olmayan değer sunucuda reddedilir |
 | FR-17 | P0 | Görünen ad etkinlik içinde benzersiz. Karşılaştırma büyük/küçük harf, Türkçe harf (İ/i, I/ı) ve boşluk farklarından bağımsız. Ad alınmışsa katılım engellenmez, ayırt edici bir öneri sunulur ("Deniz K.") | Eşzamanlı iki katılımda bile aynı ad iki kişiye verilmez (sunucu transaction'ı, testle kanıtlı). Öneri kabul edilebilir veya başka ad yazılabilir |
 | FR-02 | P0 | Oturum sayfa yenilense de korunur | Yenileme, sekme kapatıp açma sonrası aynı oyuncu ve puan |
-| FR-03 | P0 | Kişisel QR, belirli aralıklarla (varsayılan 30 sn) değişir. Altında aynı jetonun kısa kodu görünür | Süresi geçmiş jeton (bir önceki pencere hariç) reddedilir |
+| FR-03 | P0 | Kişisel QR, belirli aralıklarla (varsayılan 30 sn) değişir. Altında aynı jetonun kısa kodu görünür | Bir önceki ve bir sonraki pencere dışındaki jeton reddedilir (okuma anı ve saat kayması için pay). Arayüzde geri sayım yok |
 | FR-04 | P0 | Kamera ile başka oyuncunun QR'ını okutma | Kamera izni reddedilirse kullanıcı FR-05'e yönlendirilir |
 | FR-05 | P0 | Kısa kodu elle girerek bağlantı kurma | FR-04 ile aynı doğrulama kuralları |
 | FR-06 | P0 | Bağlantı kuralları: kendinle bağlantı yok, aynı ikili için tek bağlantı, yalnızca `live` durumunda, geçerli jetonla, karşı tarafın onayıyla (FR-15) | Kurallar sunucuda zorlanır, istemci atlatamaz (testle kanıtlı) |

@@ -32,6 +32,7 @@ export function readEvent(data: FirebaseFirestore.DocumentData | undefined): Eve
     liveStartAt: data.liveStartAt ?? null,
     liveEndAt: data.liveEndAt ?? null,
     settings: { ...DEFAULT_SETTINGS, ...(data.settings ?? {}), features: { ...DEFAULT_SETTINGS.features, ...(data.settings?.features ?? {}) } },
+    reveal: data.reveal ?? 0,
     updatedAt: data.updatedAt ?? 0,
   };
 }

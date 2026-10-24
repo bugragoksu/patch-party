@@ -50,7 +50,10 @@ export function verifyJoinCode(joinSeed: string, eventId: string, raw: string, n
 
 export type TokenKind = 'qr' | 'digits';
 
-/** Accepts the current and the immediately previous window (FR-03). */
+/**
+ * Accepts the current window, the previous one (a code read just as it
+ * rotated) and the next one (a phone clock slightly ahead) (FR-03).
+ */
 export function verifyToken(
   seed: string,
   eventId: string,
@@ -60,7 +63,7 @@ export function verifyToken(
   windowSec: number,
 ): boolean {
   const current = windowOf(nowMs, windowSec);
-  for (const w of [current, current - 1]) {
+  for (const w of [current, current - 1, current + 1]) {
     const expected = tokenFor(seed, eventId, w)[kind];
     if (expected === token) return true;
   }

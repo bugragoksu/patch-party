@@ -157,7 +157,7 @@ void main() {
       String displayName = 'Patch Party',
       String subtitle = '',
       List<String> prizes = const ['Kulaklık', '', ''],
-      String cooldownSec = '15',
+      String cooldownSec = '60',
       String requestTtlSec = '45',
       String maxConnPerPlayer = '60',
       String maxPlayers = '200',

@@ -186,6 +186,15 @@ class AdminRepository {
     return EventState.parse(d['state']);
   });
 
+  Future<Result<int>> revealResults(String eventId, int step) =>
+      _guard(() async {
+        final d = await _call('revealResults', {
+          'eventId': eventId,
+          'step': step,
+        });
+        return (d['reveal'] as num?)?.toInt() ?? step;
+      });
+
   Future<Result<void>> updateEventConfig(
     String eventId,
     Map<String, Object?> settings,

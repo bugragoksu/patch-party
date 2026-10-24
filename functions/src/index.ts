@@ -26,6 +26,7 @@ export const cancelRequest = onCall({ cors: true, invoker: 'public' }, guarded('
 export const setEventState = onCall(staff, guarded('setEventState', adminHandlers.setEventState));
 export const updateEventConfig = onCall(staff, guarded('updateEventConfig', adminHandlers.updateEventConfig));
 export const moderatePlayer = onCall(staff, guarded('moderatePlayer', adminHandlers.moderatePlayer));
+export const revealResults = onCall(staff, guarded('revealResults', adminHandlers.revealResults));
 export const purgeEvent = onCall(
   { ...staff, timeoutSeconds: 300, memory: '512MiB' },
   guarded('purgeEvent', adminHandlers.purgeEvent),

@@ -5,7 +5,7 @@ import {
   respondToRequest,
 } from '../../src/handlers/connections.js';
 import { join } from '../../src/handlers/join.js';
-import { moderatePlayer, purgeEvent, setEventState } from '../../src/handlers/admin.js';
+import { moderatePlayer, purgeEvent, revealResults, setEventState } from '../../src/handlers/admin.js';
 import { rankEvent } from '../../src/handlers/ranks.js';
 import type { ConnectionDoc, PlayerDoc } from '../../src/data/model.js';
 import { as, joinAs, joinCode, manualOf, paths, qrOf, reasonOf, req, seedEvent, uniqueEventId } from './helpers.js';
@@ -309,5 +309,24 @@ describe('reopening', () => {
     expect(event.liveEndAt).toBeGreaterThan(Date.now() + 9 * 60_000);
     expect(event.liveStartAt).toBeLessThan(Date.now() - 100_000);
     expect((await requestConnection(req({ eventId, code: qrOf(eventId, b) }, as(eventId, a)))).status).toBe('pending');
+  });
+});
+
+describe('results reveal', () => {
+  it('goes third, second, first, one step at a time, only after the end', async () => {
+    const boss = { uid: 'boss', admin: true };
+    const reveal = (step: number) => revealResults(req({ eventId, step }, boss));
+    expect(await reasonOf(reveal(1))).toBe('invalid_transition');
+    await setEventState(req({ eventId, state: 'ended' }, boss));
+    expect(await reasonOf(reveal(2))).toBe('invalid_transition');
+    await reveal(1);
+    await reveal(2);
+    expect(await reasonOf(reveal(2))).toBe('invalid_transition');
+    await reveal(3);
+    expect((await paths.event(eventId).get()).get('reveal')).toBe(3);
+    expect(await reasonOf(revealResults(req({ eventId, step: 1 }, { uid: 'p1' })))).toBe('permission_denied');
+    await setEventState(req({ eventId, state: 'live' }, boss));
+    await setEventState(req({ eventId, state: 'ended' }, boss));
+    expect((await paths.event(eventId).get()).get('reveal')).toBe(0);
   });
 });

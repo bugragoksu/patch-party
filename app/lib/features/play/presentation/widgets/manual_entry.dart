@@ -37,7 +37,9 @@ class _ManualEntryState extends ConsumerState<ManualEntry> {
   void _submit() {
     if (_valid) {
       unawaited(
-        ref.read(playControllerProvider.notifier).submitCode(_code.text),
+        ref
+            .read(playControllerProvider.notifier)
+            .submitCode(_code.text, typed: true),
       );
     }
   }
