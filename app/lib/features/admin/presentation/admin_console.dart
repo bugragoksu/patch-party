@@ -6,6 +6,7 @@ import 'package:baglanti_agi/features/admin/application/admin_providers.dart';
 import 'package:baglanti_agi/features/admin/presentation/audit_panel.dart';
 import 'package:baglanti_agi/features/admin/presentation/danger_panel.dart';
 import 'package:baglanti_agi/features/admin/presentation/health_card.dart';
+import 'package:baglanti_agi/features/admin/presentation/join_code_card.dart';
 import 'package:baglanti_agi/features/admin/presentation/players_panel.dart';
 import 'package:baglanti_agi/features/admin/presentation/settings_panel.dart';
 import 'package:baglanti_agi/features/admin/presentation/state_panel.dart';
@@ -52,6 +53,7 @@ class AdminConsole extends ConsumerWidget {
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: [
                                   StatePanel(event: event),
+                                  JoinCodeCard(event: event),
                                   const HealthCard(),
                                   SettingsPanel(event: event),
                                   DangerPanel(event: event),
@@ -73,6 +75,7 @@ class AdminConsole extends ConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             StatePanel(event: event),
+                            JoinCodeCard(event: event),
                             const HealthCard(),
                             const PlayersPanel(),
                             SettingsPanel(event: event),

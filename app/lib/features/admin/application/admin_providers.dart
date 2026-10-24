@@ -33,3 +33,9 @@ final auditLogProvider = StreamProvider<List<AuditEntry>>(
   (ref) =>
       ref.watch(adminRepositoryProvider).watchAudit(ref.watch(eventIdProvider)),
 );
+
+final adminJoinSeedProvider = FutureProvider<String?>(
+  (ref) => ref
+      .watch(adminRepositoryProvider)
+      .readJoinSeed(ref.watch(eventIdProvider)),
+);

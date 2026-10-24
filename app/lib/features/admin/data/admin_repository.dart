@@ -103,6 +103,12 @@ class AdminRepository {
 
   // ---- reads ---------------------------------------------------------------
 
+  /// Staff may read it (rules); the join code is derived from it locally.
+  Future<String?> readJoinSeed(String eventId) async {
+    final snap = await _db.doc('events/$eventId/private/joinSecret').get();
+    return snap.data()?['joinSeed'] as String?;
+  }
+
   Future<ReviewData> readReview(String eventId) async {
     final results = await Future.wait([
       _col(eventId, 'players').get(),

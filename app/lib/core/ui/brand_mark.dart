@@ -9,10 +9,6 @@ class BrandMark extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ExcludeSemantics(
-    child: Image.asset(
-      'assets/brand/mark.png',
-      width: size,
-      height: size,
-    ),
+    child: Image.asset('assets/brand/mark.png', width: size, height: size),
   );
 }
