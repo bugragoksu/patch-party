@@ -61,6 +61,8 @@ class LiveScene extends ConsumerWidget {
                 ),
                 const SizedBox(width: 22),
                 const LivePill(),
+                const SizedBox(width: 28),
+                const GdgAdanaLogo(height: 44),
                 const Spacer(),
                 if (counts != null) ...[
                   CountSticker(value: '${counts.players}', label: 'oyuncu'),

@@ -96,7 +96,11 @@ class EventTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final subtitle = event.settings.subtitle;
+    // The logo already says "GDG Adana"; don't repeat it in the subtitle.
+    final subtitle = event.settings.subtitle
+        .replaceFirst(RegExp(r'^GDG Adana\s*', caseSensitive: false), '')
+        .trim();
+    final subSize = size * 0.42 < 22 ? 22.0 : size * 0.42;
     final title = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
@@ -110,18 +114,27 @@ class EventTitle extends StatelessWidget {
             color: Palette.paper,
           ),
         ),
-        if (subtitle.isNotEmpty) ...[
-          const SizedBox(height: 8),
-          Text(
-            subtitle,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyles.ui.copyWith(
-              fontSize: size * 0.42 < 22 ? 22 : size * 0.42,
-              color: Palette.textMuted,
-            ),
-          ),
-        ],
+        SizedBox(height: size * 0.18),
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            GdgAdanaLogo(height: subSize * 1.5),
+            if (subtitle.isNotEmpty) ...[
+              SizedBox(width: subSize * 0.6),
+              Flexible(
+                child: Text(
+                  subtitle,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyles.ui.copyWith(
+                    fontSize: subSize,
+                    color: Palette.textMuted,
+                  ),
+                ),
+              ),
+            ],
+          ],
+        ),
       ],
     );
     return Row(

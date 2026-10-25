@@ -12,3 +12,18 @@ class BrandMark extends StatelessWidget {
     child: Image.asset('assets/brand/mark.png', width: size, height: size),
   );
 }
+
+/// The organiser's logo (GDG Adana, white text for the dark stage).
+/// Source: `web/brand/gdg-adana-dark.svg`.
+class GdgAdanaLogo extends StatelessWidget {
+  const new({super.key, this.height = 40});
+
+  final double height;
+
+  @override
+  Widget build(BuildContext context) => Image.asset(
+    'assets/brand/gdg-adana.png',
+    height: height,
+    semanticLabel: 'GDG Adana',
+  );
+}
