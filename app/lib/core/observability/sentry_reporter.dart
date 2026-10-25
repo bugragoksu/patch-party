@@ -83,6 +83,9 @@ Future<void> initSentry(AppRunner appRunner) async {
       ..release = 'baglanti-agi@${Env.version}'
       ..sendDefaultPii = false
       ..tracesSampleRate = 0
+      // The package list comes from the 1.3 MB NOTICES asset: a download per
+      // reported error, and a second error when it fails to load.
+      ..reportPackages = false
       ..beforeSend = scrubEvent;
   }, appRunner: appRunner);
 }
