@@ -49,13 +49,28 @@ String hashUid(String uid) => sha256
     .substring(0, 16);
 
 final _fragment = RegExp('#.*');
+final _codePath = RegExp(r'/([jc])/[^/?#\s]+');
 final _code = RegExp(r'\b[A-Z2-9]{3}[-.][0-9A-Z]{4,10}\b');
+final _transient = RegExp(
+  'code=unavailable|code=deadline-exceeded|network-request-failed|'
+  'Failed to fetch|Connection failed',
+  caseSensitive: false,
+);
 
-/// Strips URL fragments (join codes, QR payloads) and anything shaped like a
+/// A dropped connection (venue Wi-Fi, a sleeping laptop). The screens already
+/// say so and retry; reporting each one would bury real errors.
+bool isTransientNetworkError(Object? error) =>
+    error != null && _transient.hasMatch('$error');
+
+/// Drops transient network errors and strips join codes and QR payloads
+/// (`/j/CODE`, `/c/CODE.TOKEN`, old `#` routes) plus anything shaped like a
 /// player code before an event leaves the device.
 SentryEvent? scrubEvent(SentryEvent event, Hint hint) {
-  String? clean(String? s) =>
-      s?.replaceAll(_fragment, '#…').replaceAll(_code, '[code]');
+  if (isTransientNetworkError(event.throwable)) return null;
+  String? clean(String? s) => s
+      ?.replaceAll(_fragment, '#…')
+      .replaceAllMapped(_codePath, (m) => '/${m[1]}/[code]')
+      .replaceAll(_code, '[code]');
   final request = event.request;
   return event
     ..request = request == null
@@ -66,6 +81,7 @@ SentryEvent? scrubEvent(SentryEvent event, Hint hint) {
     ..breadcrumbs = event.breadcrumbs
         ?.map((b) => b..message = clean(b.message))
         .toList()
+    ..transaction = clean(event.transaction)
     ..message = event.message == null
         ? null
         : SentryMessage(clean(event.message!.formatted) ?? '');
