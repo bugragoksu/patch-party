@@ -13,7 +13,7 @@ import 'package:qr_flutter/qr_flutter.dart';
 
 /// Spike S2 (ADR-0006): checks the camera layer on real phones without the
 /// backend. One phone shows a rotating QR, the other scans it and reports
-/// how long the first read took. Route: /#/kamera
+/// how long the first read took. Route: /kamera
 class CameraTestPage extends ConsumerStatefulWidget {
   const new({super.key});
 

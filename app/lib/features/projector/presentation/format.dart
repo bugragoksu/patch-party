@@ -10,7 +10,7 @@ String webOrigin() {
 String formatJoinCode(String code) =>
     code.length == 6 ? '${code.substring(0, 3)}-${code.substring(3)}' : code;
 
-String joinLink(String origin, String code) => '$origin/#/j/$code';
+String joinLink(String origin, String code) => '$origin/j/$code';
 
 /// "mm:ss" (or "h:mm:ss") left until [endMs]; never negative.
 String formatRemaining(int endMs, int nowMs) {

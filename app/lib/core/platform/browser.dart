@@ -16,8 +16,24 @@ abstract final class Browser {
 
   /// Opens an app route such as `/screen` in a new tab.
   static void openRoute(String route) {
-    final l = web.window.location;
-    web.window.open('${l.origin}${l.pathname}#$route', '_blank', 'noopener');
+    web.window.open(
+      '${web.window.location.origin}$route',
+      '_blank',
+      'noopener',
+    );
+  }
+
+  /// Links printed before the switch to path URLs (`/#/j/CODE`) still work:
+  /// the fragment route becomes the path before the router starts.
+  static void moveHashRouteToPath() {
+    try {
+      final hash = web.window.location.hash;
+      if (hash.startsWith('#/')) {
+        web.window.history.replaceState(null, '', hash.substring(1));
+      }
+    } on Object {
+      // Not fatal: the app then opens on its start screen.
+    }
   }
 
   static bool get canFullscreen => web.document.fullscreenEnabled;

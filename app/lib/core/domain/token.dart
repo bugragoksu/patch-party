@@ -47,6 +47,6 @@ String joinCodeFor(String joinSeed, String eventId, int window) =>
 
 /// QR payload: a URL, so a phone's built-in camera also opens the game.
 String qrPayload(String origin, String playerCode, String token) =>
-    '$origin/#/c/$playerCode.$token';
+    '$origin/c/$playerCode.$token';
 
 String shortCode(String playerCode, String digits) => '$playerCode-$digits';

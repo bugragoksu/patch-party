@@ -26,7 +26,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class GameScreen extends ConsumerStatefulWidget {
   const new({super.key, this.scannedPayload});
 
-  /// A QR payload opened with the phone's own camera (/#/c/...).
+  /// A QR payload opened with the phone's own camera (/c/...).
   final String? scannedPayload;
 
   @override

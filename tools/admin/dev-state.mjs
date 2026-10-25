@@ -26,4 +26,4 @@ if (state === 'live') {
 await db.doc(`events/${eventId}`).update(patch);
 const seed = (await db.doc(`events/${eventId}/private/joinSecret`).get()).get('joinSeed');
 const code = joinCodeFor(seed, eventId, windowOf(now, 300));
-console.log(`state=${state} joinCode=${code} url=/#/j/${code}`);
+console.log(`state=${state} joinCode=${code} url=/j/${code}`);

@@ -6,7 +6,7 @@ void main() {
     expect(formatJoinCode('7QK2PX'), '7QK-2PX');
     expect(
       joinLink('https://x.web.app', '7QK2PX'),
-      'https://x.web.app/#/j/7QK2PX',
+      'https://x.web.app/j/7QK2PX',
     );
     expect(webOrigin(), isEmpty, reason: 'VM tests run from file://');
   });

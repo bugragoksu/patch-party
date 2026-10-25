@@ -18,7 +18,7 @@ cd app && fvm flutter build web --release --no-web-resources-cdn --dart-define-f
 python3 -m http.server 5173 --bind 127.0.0.1 -d app/build/web
 ```
 
-`dev-state` çıktısındaki `url`'i (`/#/j/XXXXXX`) aç. İki ayrı oyuncu için `localhost:5173` ve `127.0.0.1:5173` adreslerini kullan: farklı origin, farklı oturum.
+`dev-state` çıktısındaki `url`'i (`/j/XXXXXX`) aç. İki ayrı oyuncu için `localhost:5173` ve `127.0.0.1:5173` adreslerini kullan: farklı origin, farklı oturum.
 
 ## Staging'e ilk kurulum (bir kez)
 
