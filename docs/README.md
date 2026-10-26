@@ -1,4 +1,4 @@
-# Bağlantı Ağı: Dokümantasyon
+# Patch Party (çalışma adı: Bağlantı Ağı): Dokümantasyon
 
 Bu proje **spec-driven** geliştiriliyor: kod, onaylanmış bir dokümana dayanmadan yazılmaz.
 
