@@ -29,5 +29,16 @@ abstract final class Env {
   );
   static const firebaseAppId = String.fromEnvironment('APP_FIREBASE_APP_ID');
 
-  static const functionsRegion = 'europe-west3';
+  /// Must match the Cloud Functions region (FUNCTIONS_REGION in
+  /// functions/.env) and ideally the Firestore location.
+  static const functionsRegion = String.fromEnvironment(
+    'APP_FUNCTIONS_REGION',
+    defaultValue: 'europe-west3',
+  );
+
+  /// Organiser shown on the projector and the join screen, e.g. "GDG Adana".
+  static const organizerName = String.fromEnvironment('APP_ORGANIZER_NAME');
+
+  /// Shows `assets/brand/organizer.png` (white logo for the dark stage).
+  static const organizerLogo = bool.fromEnvironment('APP_ORGANIZER_LOGO');
 }

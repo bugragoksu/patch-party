@@ -1,3 +1,4 @@
+import 'package:baglanti_agi/app/env.dart';
 import 'package:baglanti_agi/app/theme/tokens.dart';
 import 'package:baglanti_agi/core/domain/models.dart';
 import 'package:baglanti_agi/core/ui/brand_mark.dart';
@@ -96,10 +97,19 @@ class EventTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // The logo already says "GDG Adana"; don't repeat it in the subtitle.
-    final subtitle = event.settings.subtitle
-        .replaceFirst(RegExp(r'^GDG Adana\s*', caseSensitive: false), '')
-        .trim();
+    // The logo already shows the organiser; don't repeat it in the subtitle.
+    const organizer = Env.organizerName;
+    final subtitle = Env.organizerLogo && organizer.isNotEmpty
+        ? event.settings.subtitle
+              .replaceFirst(
+                RegExp(
+                  '^${RegExp.escape(organizer)}\\s*',
+                  caseSensitive: false,
+                ),
+                '',
+              )
+              .trim()
+        : event.settings.subtitle;
     final subSize = size * 0.42 < 22 ? 22.0 : size * 0.42;
     final title = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -118,7 +128,7 @@ class EventTitle extends StatelessWidget {
         Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            GdgAdanaLogo(height: subSize * 1.5),
+            OrganizerLogo(height: subSize * 1.5),
             if (subtitle.isNotEmpty) ...[
               SizedBox(width: subSize * 0.6),
               Flexible(

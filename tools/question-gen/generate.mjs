@@ -70,13 +70,16 @@ async function pickModel() {
   throw new Error('no usable Gemini model for this key');
 }
 
-const STYLE = `Sen bir teknoloji topluluğu etkinliği (GDG Adana) için tanışma sorusu yazan bir editörsün.
+const organizer = env.APP_ORGANIZER_NAME ? ` (${env.APP_ORGANIZER_NAME})` : '';
+const STYLE = `Sen bir teknoloji topluluğu etkinliği${organizer} için tanışma sorusu yazan bir editörsün.
+Katılımcıların çoğu öğrenci ya da yeni başlayan; iş deneyimi varsayma.
 Kurallar:
 - Türkçe, samimi ama saygılı, "siz" değil "ikiniz/siz ikiniz" hitabı yok; soru iki kişiye birlikte sorulur ("...neydi?", "...ne yapardınız?").
 - Her soru en fazla 110 karakter, tek cümle, sonunda soru işareti.
 - Evet/hayır ile cevaplanmayan, kişisel bir deneyim ya da hikâye anlattıran sorular.
 - Kişisel/hassas konular yok (din, siyaset, sağlık, maaş, ilişkiler, yaş). Alay ya da iğneleme yok.
-- Klişe ve jenerik değil: alanın gerçek pratiğine dokunan, somut detay içeren sorular.
+- Klişe ve jenerik değil, ama giriş seviyesinde: PR, deploy, prod, ekip, müşteri, sprint gibi iş kavramları yok; hiç yapmamış biri de cevaplayabilmeli.
+- Net Türkçe: çeviri kokan kalıp yok, cümle bağlamını kendi taşısın.
 - Emoji yok.`;
 
 async function generate(model, items, count) {

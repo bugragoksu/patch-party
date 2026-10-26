@@ -1,4 +1,4 @@
-import { defineInt } from 'firebase-functions/params';
+import { defineInt, defineString } from 'firebase-functions/params';
 import { setGlobalOptions } from 'firebase-functions/v2';
 import { onCall } from 'firebase-functions/v2/https';
 import { onSchedule } from 'firebase-functions/v2/scheduler';
@@ -8,8 +8,10 @@ import * as joinHandlers from './handlers/join.js';
 import { rankLiveEvents } from './handlers/ranks.js';
 import { guarded } from './infra/observability.js';
 
-// ADR-0002: every write goes through these functions. Region matches Firestore.
-setGlobalOptions({ region: 'europe-west3', maxInstances: 10, memory: '256MiB', timeoutSeconds: 10, concurrency: 80 });
+// ADR-0002: every write goes through these functions. Region should match the
+// Firestore location; set FUNCTIONS_REGION in functions/.env (and APP_FUNCTIONS_REGION).
+const region = defineString('FUNCTIONS_REGION', { default: 'europe-west3' });
+setGlobalOptions({ region, maxInstances: 10, memory: '256MiB', timeoutSeconds: 10, concurrency: 80 });
 
 // Warm instances only on event day: set HOT_MIN_INSTANCES=1 in functions/.env.<project> (ADR-0002).
 const hotMinInstances = defineInt('HOT_MIN_INSTANCES', { default: 0 });

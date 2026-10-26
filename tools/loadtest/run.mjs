@@ -22,12 +22,15 @@ const args = Object.fromEntries(
 );
 const emulator = args.emulator === 'true';
 const projectId = emulator ? 'demo-baglanti' : args.project;
-const eventId = args.event ?? 'gdg-adana-2026-10';
+const webEnvName = args.env ?? (args.project?.endsWith('-prod') ? 'prod' : 'staging');
 const players = Number(args.players ?? 150);
 const minutes = Number(args.minutes ?? 3);
 const joinSeed = args.joinSeed;
 // Real projects need their web API key; it comes from .env.<env> (not secret).
-const webEnv = emulator ? {} : loadEnv(args.env ?? (projectId?.endsWith('-prod') ? 'prod' : 'staging'));
+const fileEnv = loadEnv(webEnvName);
+const webEnv = emulator ? {} : fileEnv;
+const eventId = args.event ?? fileEnv.APP_EVENT_ID;
+const region = webEnv.APP_FUNCTIONS_REGION || 'europe-west3';
 const apiKey = webEnv.APP_FIREBASE_API_KEY ?? 'demo-key';
 const appId = webEnv.APP_FIREBASE_APP_ID ?? '1:1:web:1';
 if (!projectId) {
@@ -55,7 +58,7 @@ async function readJoinSeed() {
 function client(i) {
   const app = initializeApp({ apiKey, projectId, appId, authDomain: webEnv.APP_FIREBASE_AUTH_DOMAIN }, `p${i}`);
   const auth = getAuth(app);
-  const functions = getFunctions(app, 'europe-west3');
+  const functions = getFunctions(app, region);
   if (emulator) {
     connectAuthEmulator(auth, 'http://127.0.0.1:9099', { disableWarnings: true });
     connectFunctionsEmulator(functions, '127.0.0.1', 5001);

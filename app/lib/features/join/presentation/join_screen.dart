@@ -1,3 +1,4 @@
+import 'package:baglanti_agi/app/env.dart';
 import 'package:baglanti_agi/app/providers.dart';
 import 'package:baglanti_agi/app/theme/tokens.dart';
 import 'package:baglanti_agi/core/domain/avatar.dart';
@@ -137,7 +138,7 @@ class _JoinScreenState extends ConsumerState<JoinScreen> {
                       child: Text(
                         (event?.settings.subtitle.isNotEmpty ?? false)
                             ? event!.settings.subtitle.toUpperCase()
-                            : 'GDG ADANA',
+                            : Env.organizerName.toUpperCase(),
                         style: TextStyles.label.copyWith(
                           color: Palette.textMuted,
                         ),

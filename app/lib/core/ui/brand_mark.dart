@@ -1,3 +1,4 @@
+import 'package:baglanti_agi/app/env.dart';
 import 'package:flutter/material.dart';
 
 /// The Patch Party mark: a stitched sticker patch with connected dots.
@@ -13,17 +14,21 @@ class BrandMark extends StatelessWidget {
   );
 }
 
-/// The organiser's logo (GDG Adana, white text for the dark stage).
-/// Source: `web/brand/gdg-adana-dark.svg`.
-class GdgAdanaLogo extends StatelessWidget {
+/// The organiser's logo (white, for the dark stage). Replace
+/// `assets/brand/organizer.png` with your own and set APP_ORGANIZER_LOGO=true;
+/// the GDG Adana example's source is `web/brand/organizer-example-gdg-adana.svg`.
+class OrganizerLogo extends StatelessWidget {
   const new({super.key, this.height = 40});
 
   final double height;
 
   @override
-  Widget build(BuildContext context) => Image.asset(
-    'assets/brand/gdg-adana.png',
-    height: height,
-    semanticLabel: 'GDG Adana',
-  );
+  Widget build(BuildContext context) {
+    if (!Env.organizerLogo) return const SizedBox.shrink();
+    return Image.asset(
+      'assets/brand/organizer.png',
+      height: height,
+      semanticLabel: Env.organizerName,
+    );
+  }
 }
