@@ -29,7 +29,10 @@ jobs:
           cache: true
       - name: Catalog is generated from shared/
         working-directory: .
-        run: node tools/gen-catalog.mjs && git diff --exit-code app/lib/core/domain/catalog.g.dart
+        run: |
+          node tools/gen-catalog.mjs
+          dart format app/lib/core/domain/catalog.g.dart
+          git diff --exit-code app/lib/core/domain/catalog.g.dart
       - run: flutter pub get
       - run: dart format --output=none --set-exit-if-changed lib test
       - run: flutter analyze --fatal-infos

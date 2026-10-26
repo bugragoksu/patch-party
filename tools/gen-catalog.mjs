@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // Generates app/lib/core/domain/catalog.g.dart from shared/catalog/interests.json.
-// CI runs this and fails if the committed file differs.
+// Run `dart format` on the output afterwards (CI does, then fails if the
+// committed file differs).
 import { readFileSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';

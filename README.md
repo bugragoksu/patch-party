@@ -116,7 +116,7 @@ This creates the event from `.env.staging` and grants the `admin` / `projector` 
 
 - **Name and texts:** `EVENT_DISPLAY_NAME`, `EVENT_SUBTITLE` and the prizes in `.env`. They can also be changed live in the admin panel.
 - **Organiser logo:** replace `app/assets/brand/organizer.png` (white on transparent, about 1440×210) and set `APP_ORGANIZER_NAME` / `APP_ORGANIZER_LOGO`. The GDG Adana logo is the example; set `APP_ORGANIZER_LOGO=false` to show none.
-- **Interests:** edit `shared/catalog/interests.json` (12 interests in 4 colour clusters), then run `node tools/gen-catalog.mjs`.
+- **Interests:** edit `shared/catalog/interests.json` (12 interests in 4 colour clusters), then run `node tools/gen-catalog.mjs && (cd app && fvm dart format lib/core/domain/catalog.g.dart)`.
 - **Questions:** `app/assets/content/questions.json` has one pool per interest pair plus `general`. Regenerate it with your own Gemini key (`GEMINI_API_KEY` in `.env`) using `node tools/question-gen/generate.mjs staging`, then review it by hand.
 - **Game rules:** cooldown between connections, request timeout, connection cap and player cap are in the admin panel.
 - **Look:** colours and fonts are in `app/lib/app/theme/tokens.dart`. The mark and icons are SVGs in `app/web/brand/`.
