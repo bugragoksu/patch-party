@@ -44,7 +44,7 @@ npm --prefix functions ci
 (cd app && fvm flutter pub get)
 ```
 
-Point `.firebaserc` at your projects (`npx --prefix functions firebase use --add`). The aliases are `staging` and `prod`.
+Point Firebase at your projects: `cp .firebaserc.example .firebaserc` and fill in your project ids (aliases `staging` and `prod`), or run `npx --prefix functions firebase use --add`.
 
 ### 3. Configure
 
@@ -66,7 +66,7 @@ cp .env.example .env.staging
 
 Only `APP_*` keys reach the web bundle, so never put a secret under `APP_`. `.env.staging` and `.env.prod` are git-ignored.
 
-Cloud Functions settings live in `functions/.env` (`FUNCTIONS_REGION`). Per-project settings go in `functions/.env.<project-id>`. Use `HOT_MIN_INSTANCES=1` on event day to avoid cold starts and `0` afterwards.
+Cloud Functions settings live in `functions/.env` (`FUNCTIONS_REGION`). Per-project settings go in a local, git-ignored `functions/.env.<project-id>`, e.g. `HOT_MIN_INSTANCES=1` on event day to avoid cold starts and `0` afterwards (the default).
 
 ### 4. Deploy
 

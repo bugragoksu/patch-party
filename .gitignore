@@ -2,9 +2,13 @@
 .env
 .env.*
 !.env.example
-# Non-secret Cloud Functions params (firebase-functions dotenv)
+# Shared Cloud Functions params (firebase-functions dotenv). Per-project
+# files (functions/.env.<project-id>) stay local, like .env.<env>.
 !functions/.env
-!functions/.env.baglanti-agi-*
+# Your Firebase project aliases; template: .firebaserc.example
+.firebaserc
+# Notes that are yours, not the project's
+private/
 # Uygulamaya giden, APP_ anahtarlarından üretilen dosya
 app/.env.app*
 *service-account*.json
@@ -32,6 +36,5 @@ build/
 *.iml
 
 # FVM Version Cache
-.fvm/.claude/
-.claude/
 .fvm/
+.claude/

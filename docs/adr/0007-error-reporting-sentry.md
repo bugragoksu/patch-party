@@ -20,7 +20,7 @@ Etkinlik sırasında bir hata çıkarsa nerede olduğunu dakikalar içinde göre
 
 ## Sonuçlar
 
-- Sentry projesi EU bölgesinde açıldı (2026-10-22). DSN repoda tutulmaz (`../ops/accounts.md`).
+- Sentry projesi EU bölgesinde açıldı (2026-10-22). DSN repoda tutulmaz (`.env.<ortam>` içinde `APP_SENTRY_DSN`).
 - Sağlayıcı değiştirmek tek dosya.
 - Aydınlatma metnine "hata kayıtları yurt dışındaki hizmet sağlayıcıda tutulur" ifadesi eklenir.
 - Release başına source map yükleme CI'da bir adım. S7 spike'ı sembolizasyonu ve paket boyutu etkisini doğrular.

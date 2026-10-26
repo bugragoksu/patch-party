@@ -40,16 +40,9 @@ node tools/env.mjs app staging
 npx --prefix functions firebase deploy --project staging --only firestore,functions,hosting
 ```
 
-Firebase CLI başka bir hesapla giriş yapmışsa (iş bilgisayarı), deploy'u izole kimlikle çalıştır; CLI girişine dokunmaz:
-
-```sh
-XDG_CONFIG_HOME=$HOME/.config/gcloud-baglanti/firebase-xdg \
-  GOOGLE_APPLICATION_CREDENTIALS=$HOME/.config/gcloud-baglanti/application_default_credentials.json \
-  npx --prefix functions firebase deploy --project staging --only firestore,functions,hosting
-```
 
 ## Etkinlik günü
 
-- `functions/.env.baglanti-agi-prod` içine `HOT_MIN_INSTANCES=1` (soğuk başlangıcı önler), etkinlikten sonra `0`. Staging prova için şu an `1` (`functions/.env.baglanti-agi-staging`); etkinlikten sonra `0` yapıp deploy et.
+- `functions/.env.<prod-proje-kimliği>` içine `HOT_MIN_INSTANCES=1` (soğuk başlangıcı önler), etkinlikten sonra `0` yapıp fonksiyonları yeniden deploy et.
 - Kontrol listesi: `../specs/05-security.md` §4 ve R3 §8.
 - Etkinlikten sonra kişisel veri silme: yönetici panelindeki "Verileri sil" (durum `ended` iken).
