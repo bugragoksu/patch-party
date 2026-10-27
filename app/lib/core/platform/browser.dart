@@ -23,6 +23,19 @@ abstract final class Browser {
     );
   }
 
+  /// Opens an outside link (GitHub, docs) in a new tab.
+  static void openExternal(String url) =>
+      web.window.open(url, '_blank', 'noopener');
+
+  /// Browser UI language starts with Turkish.
+  static bool get prefersTurkish {
+    try {
+      return web.window.navigator.language.toLowerCase().startsWith('tr');
+    } on Object {
+      return true;
+    }
+  }
+
   /// Links printed before the switch to path URLs (`/#/j/CODE`) still work:
   /// the fragment route becomes the path before the router starts.
   static void moveHashRouteToPath() {

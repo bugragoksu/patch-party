@@ -74,6 +74,7 @@ Cloud Functions settings live in `functions/.env` (`FUNCTIONS_REGION`). Per-proj
 node tools/env.mjs check staging
 node tools/env.mjs app staging
 (cd app && fvm flutter build web --release --no-web-resources-cdn --dart-define-from-file=.env.app.staging)
+node tools/web-meta.mjs staging
 npx --prefix functions firebase deploy --project staging --only firestore,functions,hosting
 ```
 

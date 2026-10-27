@@ -39,6 +39,12 @@ abstract final class Env {
   /// Organiser shown on the projector and the join screen, e.g. "GDG Adana".
   static const organizerName = String.fromEnvironment('APP_ORGANIZER_NAME');
 
+  /// Source code link on the landing page; forks point it at their repo.
+  static const repoUrl = String.fromEnvironment(
+    'APP_REPO_URL',
+    defaultValue: 'https://github.com/bugragoksu/patch-party',
+  );
+
   /// Shows `assets/brand/organizer.png` (white logo for the dark stage).
   static const organizerLogo = bool.fromEnvironment('APP_ORGANIZER_LOGO');
 }

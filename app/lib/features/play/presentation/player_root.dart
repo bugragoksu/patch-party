@@ -6,6 +6,7 @@ import 'package:baglanti_agi/core/platform/browser.dart';
 import 'package:baglanti_agi/core/ui/chips.dart';
 import 'package:baglanti_agi/core/ui/feedback.dart';
 import 'package:baglanti_agi/features/join/presentation/join_screen.dart';
+import 'package:baglanti_agi/features/landing/landing_page.dart';
 import 'package:baglanti_agi/features/play/application/session.dart';
 import 'package:baglanti_agi/features/play/presentation/game_screen.dart';
 import 'package:baglanti_agi/features/play/presentation/how_to_play.dart';
@@ -13,11 +14,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// Player surface entry: join if this browser has no player yet, else play.
+/// The bare `/` with no open event shows what the game is instead.
 class PlayerRoot extends ConsumerWidget {
   const new({super.key, this.joinCode, this.scannedPayload});
 
   final String? joinCode;
   final String? scannedPayload;
+
+  Widget _entry(WidgetRef ref) {
+    if (joinCode != null || scannedPayload != null) {
+      return JoinScreen(joinCode: joinCode);
+    }
+    // Don't wait for the event: its first snapshot can take seconds on a
+    // fresh browser. The page switches to joining once an event is open.
+    final event = ref.watch(eventProvider).value;
+    return event != null && event.canJoin
+        ? JoinScreen(joinCode: joinCode)
+        : const LandingPage();
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -25,7 +39,7 @@ class PlayerRoot extends ConsumerWidget {
     final seenHowTo = ref.watch(howToPlaySeenProvider);
     final body = session.when(
       data: (s) => s == null
-          ? JoinScreen(joinCode: joinCode)
+          ? _entry(ref)
           : seenHowTo
           ? GameScreen(scannedPayload: scannedPayload)
           : const HowToPlay(),

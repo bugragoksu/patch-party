@@ -37,6 +37,7 @@ node tools/admin/setup-event.mjs staging
 node tools/env.mjs check staging
 node tools/env.mjs app staging
 (cd app && fvm flutter build web --release --no-web-resources-cdn --source-maps --dart-define-from-file=.env.app.staging)
+node tools/web-meta.mjs staging
 npx --prefix functions firebase deploy --project staging --only firestore,functions,hosting
 ```
 
